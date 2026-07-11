@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(start index.html)",
+      "WebFetch(domain:themes.potenzaglobalsolutions.com)",
+      "Bash(curl -s \"https://themes.potenzaglobalsolutions.com/html/cardealer/index-4.html\")"
+    ]
+  }
+}
