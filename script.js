@@ -137,22 +137,197 @@ document.addEventListener('DOMContentLoaded', function () {
     requestAnimationFrame(step);
   }
 
+  // --- Gallery Carousel ---
+  var galleryCarousel = document.querySelector('.gallery-carousel');
+  var galleryTrack = document.getElementById('galleryTrack');
+
+  if (galleryCarousel && galleryTrack) {
+    var originalSlides = Array.prototype.slice.call(galleryTrack.children);
+    var realCount = originalSlides.length;
+    var cloneCount = Math.min(4, realCount);
+
+    for (var ci = 0; ci < cloneCount; ci++) {
+      var cloneEnd = originalSlides[ci].cloneNode(true);
+      cloneEnd.classList.add('clone');
+      galleryTrack.appendChild(cloneEnd);
+      var cloneStart = originalSlides[realCount - 1 - ci].cloneNode(true);
+      cloneStart.classList.add('clone');
+      galleryTrack.insertBefore(cloneStart, galleryTrack.firstChild);
+    }
+
+    var gallerySlides = Array.prototype.slice.call(galleryTrack.children);
+    var galleryCurrent = cloneCount;
+    var galleryAutoplayTimer = null;
+
+    var updateGallery = function (animate) {
+      // Normaliza o índice caso esteja fora da faixa de slides existentes
+      if (!gallerySlides[galleryCurrent]) {
+        galleryCurrent = ((galleryCurrent - cloneCount) % realCount + realCount) % realCount + cloneCount;
+        animate = false;
+      }
+      var slide = gallerySlides[galleryCurrent];
+      var offset = slide.offsetLeft - (galleryCarousel.clientWidth - slide.offsetWidth) / 2;
+      if (!animate) galleryTrack.classList.add('no-anim');
+      galleryTrack.style.transform = 'translateX(' + (-offset) + 'px)';
+      gallerySlides.forEach(function (s) { s.classList.remove('active'); });
+      slide.classList.add('active');
+      if (!animate) {
+        void galleryTrack.offsetWidth;
+        galleryTrack.classList.remove('no-anim');
+      }
+    };
+
+    // Ao alcançar os clones das pontas, salta (sem animação) para o slide real
+    // equivalente — o visual é idêntico, o loop é infinito
+    var normalizeGallery = function () {
+      if (galleryCurrent >= cloneCount + realCount || galleryCurrent < cloneCount) {
+        galleryCurrent = ((galleryCurrent - cloneCount) % realCount + realCount) % realCount + cloneCount;
+        updateGallery(false);
+      }
+    };
+
+    var galleryStep = function (dir) {
+      normalizeGallery();
+      galleryCurrent += dir;
+      updateGallery(true);
+    };
+
+    var stopGalleryAutoplay = function () {
+      if (galleryAutoplayTimer) clearInterval(galleryAutoplayTimer);
+      galleryAutoplayTimer = null;
+    };
+
+    var startGalleryAutoplay = function () {
+      stopGalleryAutoplay();
+      galleryAutoplayTimer = setInterval(function () { galleryStep(1); }, 3500);
+    };
+
+    // --- Setas ---
+    var galleryPrevBtn = document.querySelector('.gallery-prev');
+    var galleryNextBtn = document.querySelector('.gallery-next');
+
+    if (galleryPrevBtn) {
+      galleryPrevBtn.addEventListener('click', function () {
+        galleryStep(-1);
+        startGalleryAutoplay();
+      });
+    }
+    if (galleryNextBtn) {
+      galleryNextBtn.addEventListener('click', function () {
+        galleryStep(1);
+        startGalleryAutoplay();
+      });
+    }
+
+    // --- Arrastar (mouse e touch) ---
+    var galleryDragging = false;
+    var galleryDragMoved = false;
+    var dragStartX = 0;
+    var dragBaseOffset = 0;
+
+    galleryTrack.addEventListener('dragstart', function (e) { e.preventDefault(); });
+
+    galleryTrack.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      stopGalleryAutoplay();
+      normalizeGallery();
+      var slide = gallerySlides[galleryCurrent];
+      dragBaseOffset = slide.offsetLeft - (galleryCarousel.clientWidth - slide.offsetWidth) / 2;
+      dragStartX = e.clientX;
+      galleryDragging = true;
+      galleryDragMoved = false;
+    });
+
+    galleryTrack.addEventListener('pointermove', function (e) {
+      if (!galleryDragging) return;
+      var dx = e.clientX - dragStartX;
+      // Só entra em modo arrasto (e captura o ponteiro) após mover 5px —
+      // capturar no pointerdown desviaria o clique e quebraria o lightbox
+      if (!galleryDragMoved && Math.abs(dx) > 5) {
+        galleryDragMoved = true;
+        galleryTrack.classList.add('no-anim');
+        galleryTrack.classList.add('dragging');
+        if (galleryTrack.setPointerCapture) galleryTrack.setPointerCapture(e.pointerId);
+      }
+      if (galleryDragMoved) {
+        galleryTrack.style.transform = 'translateX(' + (-dragBaseOffset + dx) + 'px)';
+      }
+    });
+
+    var endGalleryDrag = function (e) {
+      if (!galleryDragging) return;
+      galleryDragging = false;
+      if (!galleryDragMoved) {
+        startGalleryAutoplay();
+        return;
+      }
+      galleryTrack.classList.remove('no-anim');
+      galleryTrack.classList.remove('dragging');
+      var dx = e.clientX - dragStartX;
+      var slide = gallerySlides[galleryCurrent];
+      var moved = Math.round(-dx / (slide.offsetWidth + 2));
+      if (moved === 0 && Math.abs(dx) > 50) moved = dx < 0 ? 1 : -1;
+      if (moved > cloneCount) moved = cloneCount;
+      if (moved < -cloneCount) moved = -cloneCount;
+      galleryCurrent += moved;
+      updateGallery(true);
+      startGalleryAutoplay();
+    };
+
+    galleryTrack.addEventListener('pointerup', endGalleryDrag);
+    galleryTrack.addEventListener('pointercancel', endGalleryDrag);
+
+    // Suprime o clique (lightbox) quando houve arrasto
+    galleryTrack.addEventListener('click', function (e) {
+      if (galleryDragMoved) {
+        e.stopPropagation();
+        e.preventDefault();
+        galleryDragMoved = false;
+      }
+    }, true);
+
+    galleryCarousel.addEventListener('mouseenter', stopGalleryAutoplay);
+    galleryCarousel.addEventListener('mouseleave', function () {
+      if (!galleryDragging) startGalleryAutoplay();
+    });
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        stopGalleryAutoplay();
+      } else {
+        updateGallery(false);
+        startGalleryAutoplay();
+      }
+    });
+
+    window.addEventListener('resize', function () { updateGallery(false); });
+
+    updateGallery(false);
+    startGalleryAutoplay();
+  }
+
   // --- Gallery Lightbox ---
   var lightbox = document.getElementById('lightbox');
   var lightboxImg = document.getElementById('lightboxImg');
-  var galleryItems = document.querySelectorAll('.gallery-item');
+  var galleryItems = document.querySelectorAll('.gallery-slide, .gallery-item');
   var currentIndex = 0;
   var images = [];
 
-  galleryItems.forEach(function (item, i) {
+  galleryItems.forEach(function (item) {
     var img = item.querySelector('img');
-    if (img) {
-      images.push(img.src);
-      item.addEventListener('click', function () {
-        currentIndex = i;
-        openLightbox(images[currentIndex]);
-      });
+    var idx = parseInt(item.getAttribute('data-index'), 10);
+    if (img && !isNaN(idx) && !item.classList.contains('clone')) {
+      images[idx] = img.src;
     }
+  });
+
+  galleryItems.forEach(function (item) {
+    var idx = parseInt(item.getAttribute('data-index'), 10);
+    if (isNaN(idx)) return;
+    item.addEventListener('click', function () {
+      currentIndex = idx;
+      openLightbox(images[currentIndex]);
+    });
   });
 
   function openLightbox(src) {
