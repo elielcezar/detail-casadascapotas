@@ -1,0 +1,54 @@
+.wrap {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.wrap h2 {
+  font-size: 2.5rem;
+  color: var(--black);
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.wrap h2 span {
+  color: var(--red);
+}
+
+.wrap p {
+  font-size: 1rem;
+  color: var(--gray);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.line {
+  width: 60px;
+  height: 3px;
+  background: var(--red);
+  margin: 15px auto 0;
+}
+
+/* Variante das páginas de catálogo (category-header do protótipo) */
+.category {
+  margin-bottom: 50px;
+}
+
+.category h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.category p {
+  max-width: 700px;
+}
+
+/* Título branco para fundos escuros */
+.light h2 {
+  color: var(--white);
+}
+
+@media (max-width: 768px) {
+  .wrap h2 {
+    font-size: 1.8rem;
+  }
+}

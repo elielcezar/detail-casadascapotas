@@ -1,0 +1,63 @@
+.lightbox {
+  background: transparent;
+  border: none;
+  padding: 0;
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow: visible;
+}
+
+.lightbox::backdrop {
+  background: rgba(0, 0, 0, 0.95);
+}
+
+.image {
+  max-width: 90vw;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 5px;
+}
+
+.close {
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  color: var(--white);
+  cursor: pointer;
+  background: none;
+  border: none;
+  z-index: 2;
+  transition: var(--transition);
+}
+
+.close:hover {
+  color: var(--red);
+  transform: rotate(90deg);
+}
+
+.nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--white);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 20px;
+  transition: var(--transition);
+  z-index: 2;
+}
+
+.nav:hover {
+  color: var(--red);
+}
+
+.navPrev {
+  left: 10px;
+}
+
+.navNext {
+  right: 10px;
+}

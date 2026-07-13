@@ -1,0 +1,22 @@
+/* O estado "escondido" só se aplica quando há JavaScript ativo —
+   sem JS o conteúdo permanece visível (acessibilidade / SEO). */
+@media (scripting: enabled) {
+  .fadeIn {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fadeIn.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fadeIn {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

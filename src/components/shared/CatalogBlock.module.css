@@ -1,0 +1,19 @@
+.section {
+  padding: 80px 0;
+}
+
+.alt {
+  background: var(--gray-light);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
