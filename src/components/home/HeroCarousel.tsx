@@ -6,6 +6,7 @@ import Button from "@/components/shared/Button";
 import WhatsAppIcon from "@/components/shared/WhatsAppIcon";
 import { heroSlides } from "@/data/home";
 import { whatsappLink } from "@/data/site";
+import { withBasePath } from "@/lib/basePath";
 import styles from "./HeroCarousel.module.css";
 
 const icons = { tools: Wrench, film: Film };
@@ -58,7 +59,7 @@ export default function HeroCarousel() {
             >
               <div
                 className={styles.bg}
-                style={{ backgroundImage: `url('${slide.background}')` }}
+                style={{ backgroundImage: `url('${withBasePath(slide.background)}')` }}
                 aria-hidden="true"
               />
               <div className="container">
@@ -122,7 +123,11 @@ export default function HeroCarousel() {
         ))}
       </div>
 
-      <div className={styles.stripe} aria-hidden="true" />
+      <div
+        className={styles.stripe}
+        style={{ backgroundImage: `url('${withBasePath("/img/bg-stripe.png")}')` }}
+        aria-hidden="true"
+      />
     </section>
   );
 }

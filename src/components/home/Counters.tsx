@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import FadeIn from "@/components/shared/FadeIn";
 import { counters } from "@/data/home";
+import { withBasePath } from "@/lib/basePath";
 import styles from "./Counters.module.css";
 
 const DURATION_MS = 2000;
@@ -62,21 +63,27 @@ export default function Counters() {
     <section className={styles.counters} ref={sectionRef}>
       <div
         className={styles.bg}
-        style={{ backgroundImage: "url('/img/ferrari-oficina.jpg')" }}
+        style={{ backgroundImage: `url('${withBasePath("/img/ferrari-oficina.jpg")}')` }}
         aria-hidden="true"
       />
       <div className="container">
         <div className={styles.grid}>
-          {counters.map((counter, i) => (
-            <FadeIn key={counter.label} className={styles.item}>
-              <div className={styles.number} aria-hidden="true">
-                {values[i].toLocaleString("pt-BR")}
-                <span>+</span>
-              </div>
-              <span className="sr-only">{counter.target.toLocaleString("pt-BR")}+</span>
-              <div className={styles.label}>{counter.label}</div>
-            </FadeIn>
-          ))}
+          {counters.map((counter, i) => {
+            const suffix = counter.suffix ?? "+";
+            return (
+              <FadeIn key={counter.label} className={styles.item}>
+                <div className={styles.number} aria-hidden="true">
+                  {values[i].toLocaleString("pt-BR")}
+                  <span>{suffix}</span>
+                </div>
+                <span className="sr-only">
+                  Mais de {counter.target.toLocaleString("pt-BR")}
+                  {suffix} {counter.label}
+                </span>
+                <div className={styles.label}>{counter.label}</div>
+              </FadeIn>
+            );
+          })}
         </div>
       </div>
     </section>

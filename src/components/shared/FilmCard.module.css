@@ -1,5 +1,5 @@
 .card {
-  background: var(--white);
+  background: var(--cream);
   border-radius: 8px;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -14,7 +14,7 @@
 }
 
 .header {
-  background: var(--black);
+  background: var(--blue);
   padding: 25px 30px;
   display: flex;
   justify-content: space-between;
@@ -22,7 +22,7 @@
 }
 
 .header h3 {
-  color: var(--white);
+  color: var(--cream);
   font-size: 1.2rem;
 }
 
@@ -35,8 +35,8 @@
 }
 
 .badge {
-  background: var(--red);
-  color: var(--white);
+  background: var(--orange);
+  color: var(--cream);
   padding: 8px 16px;
   border-radius: 20px;
   font-size: 0.75rem;
@@ -75,7 +75,7 @@
   position: absolute;
   left: 0;
   top: 10px;
-  color: var(--red);
+  color: var(--orange);
 }
 
 /* --- Grupos (Exterior / Interior / Acabamentos) --- */
@@ -88,7 +88,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--red);
+  color: var(--orange);
   padding-bottom: 6px;
   margin-bottom: 8px;
   border-bottom: 1px solid #eee;

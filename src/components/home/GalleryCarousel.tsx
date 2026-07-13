@@ -8,8 +8,8 @@ import {
   type MouseEvent as ReactMouseEvent,
   type PointerEvent as ReactPointerEvent,
 } from "react";
-import Image from "next/image";
 import { ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
+import AppImage from "@/components/shared/AppImage";
 import Lightbox from "@/components/shared/Lightbox";
 import { galleryImages } from "@/data/home";
 import styles from "./GalleryCarousel.module.css";
@@ -214,7 +214,7 @@ export default function GalleryCarousel() {
                 aria-hidden="true"
                 onClick={() => setLightboxIndex(slide.realIndex)}
               >
-                <Image
+                <AppImage
                   src={slide.image.src}
                   width={slide.image.width}
                   height={slide.image.height}
@@ -233,7 +233,7 @@ export default function GalleryCarousel() {
                 onClick={() => setLightboxIndex(slide.realIndex)}
                 aria-label={`Ampliar foto: ${slide.image.alt}`}
               >
-                <Image
+                <AppImage
                   src={slide.image.src}
                   width={slide.image.width}
                   height={slide.image.height}

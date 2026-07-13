@@ -56,11 +56,11 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(227, 30, 36, 0.7);
+  background: rgba(234, 89, 28, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--white);
+  color: var(--cream);
   opacity: 0;
   transition: var(--transition);
 }
@@ -76,10 +76,10 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 5;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(215, 214, 202, 0.12);
   backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: var(--white);
+  border: 1px solid rgba(215, 214, 202, 0.2);
+  color: var(--cream);
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -91,8 +91,8 @@
 }
 
 .arrow:hover {
-  background: var(--red);
-  border-color: var(--red);
+  background: var(--orange);
+  border-color: var(--orange);
 }
 
 .arrowPrev {

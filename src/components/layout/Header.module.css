@@ -6,7 +6,11 @@
   z-index: 1000;
   padding: 20px 0;
   transition: var(--transition);
-  background: #333 url("/img/bg-header.png") center no-repeat;
+  /* A imagem de fundo é aplicada via style inline em Header.tsx, para
+     poder receber o basePath (ver src/lib/basePath.ts) */
+  background-color: #333;
+  background-position: center;
+  background-repeat: no-repeat;
   backdrop-filter: blur(10px);
 }
 
@@ -58,7 +62,7 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--red);
+  background: var(--orange);
   transition: var(--transition);
 }
 
@@ -68,7 +72,7 @@
 }
 
 .nav a:hover {
-  color: var(--red);
+  color: var(--orange);
   background: var(--white);
 }
 
@@ -86,7 +90,7 @@
 .toggle span {
   width: 28px;
   height: 2px;
-  background: var(--white);
+  background: var(--cream);
   transition: var(--transition);
 }
 
@@ -109,7 +113,7 @@
     right: -100%;
     width: 280px;
     height: 100vh;
-    background: var(--black);
+    background: var(--blue);
     flex-direction: column;
     align-items: stretch;
     padding: 80px 30px 30px;
@@ -125,7 +129,7 @@
   .nav a {
     display: block;
     padding: 15px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(215, 214, 202, 0.05);
     font-size: 1rem;
   }
 

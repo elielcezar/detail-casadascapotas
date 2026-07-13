@@ -89,8 +89,7 @@ export default function Footer() {
         <div className={styles.bottom}>
           <span>
             &copy; {new Date().getFullYear()} {site.name}. Todos os direitos reservados.
-          </span>
-          <span>Desenvolvido com ❤</span>
+          </span>          
         </div>
       </div>
     </footer>

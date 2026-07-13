@@ -19,8 +19,8 @@ export const site = {
   /** Telefone em formato de link (tel:) */
   phoneHref: "+554133337490",
 
-  /** [PLACEHOLDER] Número do WhatsApp com DDI+DDD, só dígitos */
-  whatsapp: "5541999999999",
+  /** Número do WhatsApp com DDI+DDD, só dígitos */
+  whatsapp: "554133337490",
 
   /** [PLACEHOLDER] E-mail de contato */
   email: "contato@detail.com.br",

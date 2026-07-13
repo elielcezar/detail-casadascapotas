@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check, Gem, Phone, Star } from "lucide-react";
+import AppImage from "@/components/shared/AppImage";
 import Button from "@/components/shared/Button";
 import FadeIn from "@/components/shared/FadeIn";
 import WhatsAppIcon from "@/components/shared/WhatsAppIcon";
@@ -19,7 +19,7 @@ export default function ServiceShowcase({ service }: { service: ServiceSection }
       <div className="container">
         <div className={rowCls}>
           <FadeIn className={styles.image}>
-            <Image
+            <AppImage
               src={service.image.src}
               width={service.image.width}
               height={service.image.height}

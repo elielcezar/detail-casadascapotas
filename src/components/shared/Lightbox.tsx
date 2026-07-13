@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import type { GalleryImage } from "@/data/home";
+import AppImage from "./AppImage";
 import styles from "./Lightbox.module.css";
 
 interface LightboxProps {
@@ -64,7 +64,7 @@ export default function Lightbox({ images, index, onClose, onNavigate }: Lightbo
       >
         <ChevronLeft size={32} aria-hidden="true" />
       </button>
-      <Image
+      <AppImage
         src={image.src}
         width={image.width}
         height={image.height}

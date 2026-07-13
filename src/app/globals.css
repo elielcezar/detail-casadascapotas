@@ -5,9 +5,10 @@
    ======================================== */
 
 :root {
-  --black: #1a1a1a;
-  --red: #e31e24;
-  --red-dark: #c41119;
+  --blue: #1d3245;
+  --orange: #ea591c;
+  --orange-dark: #c84813;
+  --cream: #d7d6ca;
   --white: #ffffff;
   --gray-light: #f5f5f5;
   --gray: #999999;
@@ -75,7 +76,7 @@ h6 {
 }
 
 :focus-visible {
-  outline: 2px solid var(--red);
+  outline: 2px solid var(--orange);
   outline-offset: 2px;
 }
 
@@ -105,8 +106,8 @@ h6 {
   top: -100px;
   left: 20px;
   z-index: 2000;
-  background: var(--red);
-  color: var(--white);
+  background: var(--orange);
+  color: var(--cream);
   padding: 10px 20px;
   border-radius: 3px;
   font-weight: 600;

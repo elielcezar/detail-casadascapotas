@@ -38,8 +38,8 @@
   position: absolute;
   bottom: 30px;
   left: 30px;
-  background: var(--red);
-  color: var(--white);
+  background: var(--orange);
+  color: var(--cream);
   padding: 20px 25px;
   max-width: 200px;
   border-radius: 3px;
@@ -54,12 +54,12 @@
 
 .content h2 {
   font-size: 2.2rem;
-  color: var(--black);
+  color: var(--blue);
   margin-bottom: 15px;
 }
 
 .content h2 span {
-  color: var(--red);
+  color: var(--orange);
 }
 
 .description {
@@ -82,7 +82,7 @@
 }
 
 .checklist li svg {
-  color: var(--red);
+  color: var(--orange);
   margin-top: 4px;
   flex-shrink: 0;
 }
@@ -94,7 +94,7 @@
 
 .sub h3 {
   font-size: 1.1rem;
-  color: var(--black);
+  color: var(--blue);
   margin-bottom: 8px;
   display: flex;
   align-items: center;
@@ -102,7 +102,7 @@
 }
 
 .sub h3 svg {
-  color: var(--red);
+  color: var(--orange);
 }
 
 .subItems {
@@ -126,7 +126,7 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--red);
+  background: var(--orange);
 }
 
 .actions {
@@ -142,18 +142,18 @@
   gap: 8px;
   font-family: var(--font-heading);
   font-weight: 600;
-  color: var(--black);
+  color: var(--blue);
 }
 
 .phone svg {
-  color: var(--red);
+  color: var(--orange);
 }
 
 .link {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--red);
+  color: var(--orange);
   font-weight: 600;
   font-size: 0.9rem;
   margin-top: 25px;

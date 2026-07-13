@@ -2,7 +2,7 @@
   position: relative;
   z-index: 5;
   padding-bottom: 40px;
-  background: var(--black);
+  background: var(--blue);
 }
 
 .grid {
@@ -30,18 +30,18 @@
   width: 70px;
   height: 70px;
   margin: 0 auto 20px;
-  background: var(--red);
+  background: var(--orange);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--white);
+  color: var(--cream);
 }
 
 .card h2 {
   font-size: 1.2rem;
   margin-bottom: 10px;
-  color: var(--black);
+  color: var(--blue);
 }
 
 .card p {

@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import AppImage from "@/components/shared/AppImage";
 import { navItems } from "@/data/navigation";
+import { withBasePath } from "@/lib/basePath";
 import styles from "./Header.module.css";
 
 /**
@@ -37,10 +38,13 @@ export default function Header() {
     .join(" ");
 
   return (
-    <header className={headerCls}>
+    <header
+      className={headerCls}
+      style={{ backgroundImage: `url('${withBasePath("/img/bg-header.png")}')` }}
+    >
       <div className={`container ${styles.inner}`}>
         <Link href="/" className={styles.logo}>
-          <Image
+          <AppImage
             src="/img/logo.png"
             alt="Detail Estética Automotiva — página inicial"
             width={413}

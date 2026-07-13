@@ -216,14 +216,16 @@ export const serviceSections: ServiceSection[] = [
 
 export interface Counter {
   target: number;
+  /** Exibido após o número animado (padrão: "+") */
+  suffix?: string;
   label: string;
 }
 
 export const counters: Counter[] = [
-  { target: 2500, label: "Clientes Atendidos" },
-  { target: 15, label: "Anos de Experiência" },
-  { target: 5000, label: "Serviços Realizados" },
-  { target: 10, label: "Marcas Parceiras" },
+  { target: 200000, label: "Clientes" },
+  { target: 56, label: "Anos de Experiência" },
+  { target: 200000, label: "Serviços Realizados" },
+  { target: 28, label: "Parceiros" },
 ];
 
 export interface TeamMember {
@@ -245,11 +247,14 @@ export interface GalleryImage {
 }
 
 export const galleryImages: GalleryImage[] = [
-  { src: "/img/ferrari-oficina.jpg", width: 1920, height: 1279, alt: "Ferrari vermelha na oficina Detail" },
-  { src: "/img/farol-ferrari.jpg", width: 1920, height: 1279, alt: "Detalhe do farol da Ferrari" },
-  { src: "/img/portfolio-pelicula-3.jpg", width: 1081, height: 525, alt: "Aplicação de película" },
-  { src: "/img/portfolio-pelicula-4.jpg", width: 1090, height: 596, alt: "Mercedes em movimento" },
-  { src: "/img/portfolio-pelicula-1.jpg", width: 1092, height: 728, alt: "Carro na estrada" },
-  { src: "/img/portfolio-pelicula-2.jpg", width: 1080, height: 629, alt: "Carro ao pôr do sol" },
-  { src: "/img/portfolio-pelicula-7.jpg", width: 1089, height: 491, alt: "Vidro com película" },
+  { src: "/img/galeria/galeria-01.jpg", width: 1080, height: 1920, alt: "Detalhe da grade frontal com emblema R/T de picape preta" },
+  { src: "/img/galeria/galeria-02.jpg", width: 1920, height: 1280, alt: "Profissional da Detail aplicando proteção na lateral de uma Ford Ranger Storm cinza" },
+  { src: "/img/galeria/galeria-03.jpg", width: 1280, height: 1920, alt: "Profissional instalando acessório no retrovisor de um veículo" },
+  { src: "/img/galeria/galeria-04.jpg", width: 1280, height: 1920, alt: "Frente de Land Rover preta polida, com placa personalizada Detail Casa das Capotas" },
+  { src: "/img/galeria/galeria-05.jpg", width: 1920, height: 1280, alt: "Land Rover Defender preta finalizada na oficina, com rolos de película ao fundo" },
+  { src: "/img/galeria/galeria-06.jpg", width: 1920, height: 1280, alt: "Volkswagen Jetta cinza com o para-choque removido durante serviço de proteção" },
+  { src: "/img/galeria/galeria-07.jpg", width: 1280, height: 1920, alt: "Profissional aplicando película de proteção de pintura no farol de um veículo preto" },
+  { src: "/img/galeria/galeria-08.jpg", width: 1440, height: 1920, alt: "Detalhe do emblema BMW no capô de um veículo preto recém-polido" },
+  { src: "/img/galeria/galeria-09.jpg", width: 1440, height: 1920, alt: "Interior de couro caramelo com acabamento em diamante de um veículo detalhado" },
+  { src: "/img/galeria/galeria-10.jpg", width: 1440, height: 1920, alt: "BMW preta finalizada em box iluminado da oficina Detail" },
 ];

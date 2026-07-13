@@ -5,13 +5,13 @@
 
 .wrap h2 {
   font-size: 2.5rem;
-  color: var(--black);
+  color: var(--blue);
   margin-bottom: 15px;
   text-transform: uppercase;
 }
 
 .wrap h2 span {
-  color: var(--red);
+  color: var(--orange);
 }
 
 .wrap p {
@@ -24,7 +24,7 @@
 .line {
   width: 60px;
   height: 3px;
-  background: var(--red);
+  background: var(--orange);
   margin: 15px auto 0;
 }
 
@@ -44,7 +44,7 @@
 
 /* Título branco para fundos escuros */
 .light h2 {
-  color: var(--white);
+  color: var(--cream);
 }
 
 @media (max-width: 768px) {

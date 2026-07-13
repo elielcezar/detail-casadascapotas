@@ -1,6 +1,6 @@
 .team {
   padding: 100px 0;
-  background: var(--white);
+  background: var(--cream);
 }
 
 .grid {
@@ -31,12 +31,12 @@
   align-items: center;
   justify-content: center;
   color: var(--gray);
-  border: 4px solid var(--red);
+  border: 4px solid var(--orange);
 }
 
 .card h3 {
   font-size: 1.2rem;
-  color: var(--black);
+  color: var(--blue);
   margin-bottom: 5px;
 }
 

@@ -15,14 +15,14 @@
 }
 
 .primary {
-  background: var(--red);
+  background: var(--orange);
   color: var(--white);
 }
 
 .primary:hover {
-  background: var(--red-dark);
+  background: var(--orange-dark);
   transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(227, 30, 36, 0.4);
+  box-shadow: 0 5px 20px rgba(234, 89, 28, 0.4);
 }
 
 .outline {
@@ -33,12 +33,12 @@
 
 .outline:hover {
   background: var(--white);
-  color: var(--black);
+  color: var(--blue);
   transform: translateY(-2px);
 }
 
 .dark {
-  background: var(--black);
+  background: var(--blue);
   color: var(--white);
 }
 
