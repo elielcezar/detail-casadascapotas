@@ -1,0 +1,5 @@
+/* O reset global zera margens de <p> — reintroduz o espaçamento apenas
+   entre parágrafos consecutivos gerados por texto com linha em branco */
+.paragraph + .paragraph {
+  margin-top: 1em;
+}

@@ -1,5 +1,5 @@
-import { User } from "lucide-react";
 import { team } from "@/data/home";
+import AppImage from "./AppImage";
 import FadeIn from "./FadeIn";
 import SectionTitle from "./SectionTitle";
 import styles from "./TeamSection.module.css";
@@ -17,9 +17,14 @@ export default function TeamSection({ id }: { id?: string }) {
         <div className={styles.grid}>
           {team.map((member) => (
             <FadeIn key={member.name} className={styles.card}>
-              <div className={styles.avatar} aria-hidden="true">
-                <User size={48} />
-              </div>
+              <AppImage
+                src={member.photo.src}
+                width={member.photo.width}
+                height={member.photo.height}
+                alt={`Foto de ${member.name}, ${member.role} da Detail`}
+                className={styles.avatar}
+                sizes="200px"
+              />
               <h3>{member.name}</h3>
               <p>{member.role}</p>
             </FadeIn>

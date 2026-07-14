@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Film, Wrench } from "lucide-react";
 import Button from "@/components/shared/Button";
+import RichText from "@/components/shared/RichText";
 import WhatsAppIcon from "@/components/shared/WhatsAppIcon";
 import { heroSlides } from "@/data/home";
 import { whatsappLink } from "@/data/site";
@@ -68,7 +69,10 @@ export default function HeroCarousel() {
                     {slide.titleStart} <span>{slide.titleHighlight}</span>
                     {slide.titleEnd ? ` ${slide.titleEnd}` : ""}
                   </TitleTag>
-                  <p className={`${styles.subtitle} ${styles.layerSubtitle}`}>{slide.subtitle}</p>
+                  <RichText
+                    text={slide.subtitle}
+                    className={`${styles.subtitle} ${styles.layerSubtitle}`}
+                  />
                   <div className={`${styles.buttons} ${styles.layerButtons}`}>
                     {slide.buttons.map((btn) => {
                       const isWhatsApp = btn.whatsappMessage !== undefined;

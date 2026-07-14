@@ -1,5 +1,6 @@
 import { Award, Shield, Users } from "lucide-react";
 import FadeIn from "@/components/shared/FadeIn";
+import RichText from "@/components/shared/RichText";
 import { features, type Feature } from "@/data/home";
 import styles from "./Features.module.css";
 
@@ -23,7 +24,7 @@ export default function Features() {
                   <Icon size={28} />
                 </div>
                 <h2>{feature.title}</h2>
-                <p>{feature.text}</p>
+                <RichText text={feature.text} />
               </FadeIn>
             );
           })}

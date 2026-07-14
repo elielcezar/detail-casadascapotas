@@ -1,5 +1,5 @@
 .card {
-  background: var(--cream);
+  background: var(--blue);
   border-radius: 8px;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -14,7 +14,7 @@
 }
 
 .header {
-  background: var(--blue);
+  background: var(--orange);
   padding: 25px 30px;
   display: flex;
   justify-content: space-between;
@@ -22,12 +22,12 @@
 }
 
 .header h3 {
-  color: var(--cream);
+  color: var(--white);
   font-size: 1.2rem;
 }
 
 .subtitle {
-  color: var(--gray);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 0.8rem;
   display: block;
   margin-top: 3px;
@@ -35,8 +35,8 @@
 }
 
 .badge {
-  background: var(--orange);
-  color: var(--cream);
+  background: var(--blue);
+  color: var(--white);
   padding: 8px 16px;
   border-radius: 20px;
   font-size: 0.75rem;
@@ -48,6 +48,8 @@
 }
 
 .body {
+  background: var(--blue);
+  color: var(--white);
   padding: 25px 30px;
   flex: 1;
   display: flex;
@@ -65,7 +67,7 @@
 
 .benefits li {
   font-size: 0.9rem;
-  color: var(--gray-dark);
+  color: var(--white);
   padding: 5px 0;
   padding-left: 20px;
   position: relative;
@@ -91,7 +93,7 @@
   color: var(--orange);
   padding-bottom: 6px;
   margin-bottom: 8px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .group .benefits {
@@ -108,11 +110,11 @@
 }
 
 .table thead th {
-  background: var(--gray-light);
+  background: rgba(255, 255, 255, 0.08);
   padding: 8px 10px;
   text-align: center;
   font-weight: 600;
-  color: var(--gray-dark);
+  color: var(--white);
   font-size: 0.75rem;
   text-transform: uppercase;
 }
@@ -124,8 +126,8 @@
 .table tbody td {
   padding: 8px 10px;
   text-align: center;
-  border-bottom: 1px solid #eee;
-  color: var(--gray-dark);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--white);
 }
 
 .table tbody td:first-child {
@@ -144,20 +146,20 @@
   gap: 8px;
   margin-top: 15px;
   padding-top: 15px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .shadeDot {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  border: 2px solid #ddd;
+  border: 2px solid rgba(255, 255, 255, 0.4);
 }
 
 /* --- Nota --- */
 .note {
   font-size: 0.8rem;
   font-style: italic;
-  color: var(--gray);
+  color: var(--white);
   margin-bottom: 20px;
 }

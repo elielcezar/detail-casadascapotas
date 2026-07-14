@@ -1,4 +1,10 @@
-/** Tipos compartilhados pelos catálogos (películas, limpeza, PPF). */
+/**
+ * Tipos compartilhados pelos catálogos (películas, limpeza, PPF).
+ *
+ * Campos marcados como "rich text" aceitam <strong>/<b> para negrito, linha
+ * em branco para novo parágrafo e quebra de linha simples para <br>
+ * (renderizados por src/components/shared/RichText.tsx).
+ */
 
 /** Tabela de especificações técnicas de um card. */
 export interface SpecTable {
@@ -41,7 +47,7 @@ export interface CatalogCard {
   groups?: ItemGroup[];
   table?: SpecTable;
   shades?: Shade[];
-  /** Nota em itálico ao final do card */
+  /** Nota em itálico ao final do card (rich text) */
   note?: string;
   /** Botão de WhatsApp ao final do card */
   cta?: {
@@ -55,6 +61,7 @@ export interface CatalogCard {
 export interface CatalogSection {
   titleStart: string;
   titleHighlight: string;
+  /** Rich text — ver nota no topo do arquivo */
   description: string;
   cards: CatalogCard[];
 }

@@ -11,9 +11,11 @@ import styles from "./FadeIn.module.css";
 export default function FadeIn({
   children,
   className,
+  style,
 }: {
   children: ReactNode;
   className?: string;
+  style?: React.CSSProperties;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -48,7 +50,7 @@ export default function FadeIn({
     .join(" ");
 
   return (
-    <div ref={ref} className={cls}>
+    <div ref={ref} className={cls} style={style}>
       {children}
     </div>
   );

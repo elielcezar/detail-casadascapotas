@@ -4,6 +4,7 @@
       "Bash",
       "PowerShell",
       "WebFetch(domain:themes.potenzaglobalsolutions.com)"
-    ]
+    ],
+    "defaultMode": "bypassPermissions"
   }
 }

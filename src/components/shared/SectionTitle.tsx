@@ -1,4 +1,5 @@
 import FadeIn from "./FadeIn";
+import RichText from "./RichText";
 import styles from "./SectionTitle.module.css";
 
 interface SectionTitleProps {
@@ -32,7 +33,7 @@ export default function SectionTitle({
       <h2>
         {start} <span>{highlight}</span>
       </h2>
-      {text && <p>{text}</p>}
+      {text && <RichText text={text} />}
       <div className={styles.line} aria-hidden="true" />
     </FadeIn>
   );

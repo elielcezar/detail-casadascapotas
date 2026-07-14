@@ -1,6 +1,7 @@
 import { Globe, Instagram, Phone } from "lucide-react";
 import { site, whatsappLink } from "@/data/site";
 import Button from "./Button";
+import RichText from "./RichText";
 import WhatsAppIcon from "./WhatsAppIcon";
 import styles from "./CtaSection.module.css";
 
@@ -8,6 +9,7 @@ interface CtaSectionProps {
   id?: string;
   titleStart: string;
   titleStrong: string;
+  /** Rich text — ver RichText.tsx */
   text: string;
   whatsappLabel: string;
   whatsappMessage: string;
@@ -34,7 +36,7 @@ export default function CtaSection({
         <h2>
           {titleStart} <strong>{titleStrong}</strong>
         </h2>
-        <p>{text}</p>
+        <RichText text={text} />
         <div className={styles.buttons}>
           <Button href={whatsappLink(whatsappMessage)} variant="dark" external>
             <WhatsAppIcon size={18} /> {whatsappLabel}

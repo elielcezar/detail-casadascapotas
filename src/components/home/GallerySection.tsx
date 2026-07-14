@@ -1,8 +1,18 @@
 import SectionTitle from "@/components/shared/SectionTitle";
-import GalleryCarousel from "./GalleryCarousel";
+import Gallery2 from "./Gallery2";
 import styles from "./GallerySection.module.css";
 
-/** Seção "Nosso Portfólio": título + carrossel full-width sobre fundo preto. */
+// import GalleryCarousel from "./GalleryCarousel";
+
+/**
+ * Seção "Nosso Portfólio": título + galeria full-width sobre fundo azul.
+ *
+ * Há dois modelos de galeria em teste, para o cliente comparar e escolher:
+ * Gallery2 (grade filtrável por categoria, em uso agora) e GalleryCarousel
+ * (carrossel com autoplay/arrasto, código preservado, import comentado
+ * acima). Para voltar ao carrossel, troque `<Gallery2 />` por
+ * `<GalleryCarousel />` abaixo e descomente o import.
+ */
 export default function GallerySection() {
   return (
     <section className={styles.gallery} id="galeria">
@@ -14,7 +24,7 @@ export default function GallerySection() {
           text="Confira alguns dos nossos trabalhos realizados com excelência e atenção aos detalhes."
         />
       </div>
-      <GalleryCarousel />
+      <Gallery2 />
     </section>
   );
 }

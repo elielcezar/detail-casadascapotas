@@ -3,6 +3,7 @@ import type { CatalogCard, BadgeIcon } from "@/data/types";
 import { whatsappLink } from "@/data/site";
 import Button from "./Button";
 import FadeIn from "./FadeIn";
+import RichText from "./RichText";
 import WhatsAppIcon from "./WhatsAppIcon";
 import styles from "./FilmCard.module.css";
 
@@ -94,7 +95,7 @@ export default function FilmCard({ card }: { card: CatalogCard }) {
           </div>
         )}
 
-        {card.note && <p className={styles.note}>{card.note}</p>}
+        {card.note && <RichText text={card.note} className={styles.note} />}
 
         {card.cta && (
           <Button href={whatsappLink(card.cta.message)} external block>

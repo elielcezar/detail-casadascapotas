@@ -23,7 +23,7 @@ export const site = {
   whatsapp: "554133337490",
 
   /** [PLACEHOLDER] E-mail de contato */
-  email: "contato@detail.com.br",
+  email: "contato@casadascapotas.com",
 
   instagramHandle: "@casadascapotascuritiba",
   parentWebsite: "www.casadascapotas.com",

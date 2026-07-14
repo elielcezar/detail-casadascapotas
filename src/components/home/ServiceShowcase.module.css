@@ -27,11 +27,33 @@
   overflow: hidden;
 }
 
-.image img {
+.photo {
   width: 100%;
   height: 400px;
   object-fit: cover;
   border-radius: 5px;
+}
+
+/* Mantém a proporção vertical original da foto em vez do recorte 400px */
+.portrait .photo {
+  height: auto;
+  aspect-ratio: 9 / 16;
+  max-height: 600px;
+}
+
+/* Altura customizada por seção (--photo-desktop-height, definida via
+   ServiceSection.image.desktopHeight), só a partir do breakpoint desktop —
+   no mobile a foto mantém o comportamento padrão acima */
+@media (min-width: 769px) {
+  .photo {
+    height: var(--photo-desktop-height, 400px);
+  }
+
+  .portrait .photo {
+    height: var(--photo-desktop-height, 600px);
+    aspect-ratio: unset;
+    max-height: none;
+  }
 }
 
 .imageBadge {
@@ -43,6 +65,13 @@
   padding: 20px 25px;
   max-width: 200px;
   border-radius: 3px;
+  display: flex;
+  align-items: center;
+}
+
+.imageBadgeLogo {
+  height: 34px;
+  width: auto;
 }
 
 .imageBadge p {
@@ -112,6 +141,7 @@
 }
 
 .subItems li {
+  width: 100%;
   font-size: 0.85rem;
   color: var(--gray);
   position: relative;

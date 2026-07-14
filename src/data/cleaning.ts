@@ -75,6 +75,36 @@ export const cleaningSections: CatalogSection[] = [
           message: "Olá! Gostaria de agendar uma Limpeza Técnica.",
         },
       },
+      {
+        title: "Limpeza Técnica para Motos",
+        subtitle: "Revitalização para Motocicletas",
+        badgeIcon: "shield",
+        groups: [
+          {
+            title: "Processos",
+            items: [
+              "Pré-lavagem em espuma",
+              "Lavagem com luva de microfibra",
+              "Limpeza da corrente / coroa",
+              "Limpeza da parte debaixo do assento",
+              "Limpeza do sistema de exaustão",
+              "Secagem com toalhas + jato de ar",
+            ],
+          },
+          {
+            title: "Acabamentos",
+            items: [
+              "Revitalizador de pneus",
+              "Revitalização de plásticos",
+              "Selante de quadro e motor (verniz de motor)",
+            ],
+          },
+        ],
+        cta: {
+          label: "Agendar Limpeza para Motos",
+          message: "Olá! Gostaria de agendar uma Limpeza Técnica para Motos.",
+        },
+      },
     ],
   },
 ];

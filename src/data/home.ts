@@ -1,6 +1,10 @@
 /**
  * Conteúdo da página inicial: hero, diferenciais, seções de serviço,
  * contadores, equipe e galeria.
+ *
+ * Campos marcados como "rich text" aceitam <strong>/<b> para negrito, linha
+ * em branco para novo parágrafo e quebra de linha simples para <br>
+ * (renderizados por src/components/shared/RichText.tsx).
  */
 
 export interface HeroSlide {
@@ -10,6 +14,7 @@ export interface HeroSlide {
   titleHighlight: string;
   /** Texto após o destaque (opcional) */
   titleEnd?: string;
+  /** Rich text */
   subtitle: string;
   buttons: {
     label: string;
@@ -50,6 +55,7 @@ export const heroSlides: HeroSlide[] = [
 export interface Feature {
   icon: "award" | "users" | "shield";
   title: string;
+  /** Rich text */
   text: string;
 }
 
@@ -83,10 +89,16 @@ export interface ServiceSection {
     width: number;
     height: number;
     alt: string;
+    /** "portrait" mantém a proporção vertical da foto em vez do recorte padrão 400px */
+    orientation?: "landscape" | "portrait";
+    /** Altura da foto em telas desktop (>=769px); no mobile usa o padrão da orientação */
+    desktopHeight?: number;
   };
-  imageBadge: string;
+  /** Selo sobre a foto: texto (padrão) ou logo (ex.: 3M) */
+  imageBadge: string | { src: string; width: number; height: number; alt: string };
   titleStart: string;
   titleHighlight: string;
+  /** Rich text */
   description: string;
   checklist?: string[];
   subSections?: {
@@ -119,8 +131,8 @@ export const serviceSections: ServiceSection[] = [
       alt: "Aplicação de película automotiva",
     },
     imageBadge: "Proteção e Conforto para seu Veículo",
-    titleStart: "Películas",
-    titleHighlight: "Automotivas",
+    titleStart: "Películas de",
+    titleHighlight: "Controle Solar",
     description:
       "Amplo portfólio de películas das melhores marcas do mercado. Da linha de entrada até a super premium, temos a solução ideal para cada necessidade e orçamento.",
     checklist: [
@@ -138,10 +150,12 @@ export const serviceSections: ServiceSection[] = [
     altBackground: false,
     reversed: true,
     image: {
-      src: "/img/farol-ferrari.jpg",
-      width: 1920,
-      height: 1279,
-      alt: "Detalhe de limpeza automotiva",
+      src: "/img/limpeza-profissional.jpg",
+      width: 1080,
+      height: 1920,
+      alt: "Detalhamento do painel interno com pincel e espuma de limpeza",
+      orientation: "portrait",
+      desktopHeight: 650,
     },
     imageBadge: "Cuidado em Cada Detalhe",
     titleStart: "Limpeza",
@@ -187,16 +201,17 @@ export const serviceSections: ServiceSection[] = [
     altBackground: true,
     reversed: false,
     image: {
-      src: "/img/portfolio-pelicula-4.jpg",
-      width: 1090,
-      height: 596,
-      alt: "PPF - Paint Protection Film",
+      src: "/img/ppf.jpg",
+      width: 1200,
+      height: 800,
+      alt: "Profissional aplicando película PPF no farol do veículo",
+      desktopHeight: 450,
     },
-    imageBadge: "Proteção Invisível para sua Pintura",
+    imageBadge: { src: "/img/3m-white.png", width: 346, height: 183, alt: "Logo 3M" },
     titleStart: "PPF —",
     titleHighlight: "Paint Protection Film",
     description:
-      "Película de proteção de pintura transparente que preserva a estética original do veículo contra riscos, pedras, insetos e intempéries do dia a dia.",
+      "Película de proteção de pintura transparente <strong>3M</strong> que preserva a estética original do veículo contra riscos, pedras, insetos e intempéries do dia a dia. Nossos técnicos possuem <strong>certificação da 3M do Brasil.</strong>",  
     checklist: [
       "Proteção contra riscos, pedras e detritos da estrada",
       "Película transparente que não altera a cor original",
@@ -222,21 +237,26 @@ export interface Counter {
 }
 
 export const counters: Counter[] = [
-  { target: 200000, label: "Clientes" },
+  { target: 200000, label: "Clientes Atendidos" },
   { target: 56, label: "Anos de Experiência" },
   { target: 200000, label: "Serviços Realizados" },
-  { target: 28, label: "Parceiros" },
+  { target: 28, label: "Fornecedores Parceiros" },
 ];
 
 export interface TeamMember {
   name: string;
   role: string;
+  photo: {
+    src: string;
+    width: number;
+    height: number;
+  };
 }
 
 export const team: TeamMember[] = [
-  { name: "Josoé", role: "Especialista" },
-  { name: "Lorran", role: "Especialista" },
-  { name: "Matheus", role: "Especialista" },
+  { name: "Josoé", role: "Especialista", photo: { src: "/img/josoe.jpg", width: 630, height: 631 } },
+  { name: "Lorran", role: "Especialista", photo: { src: "/img/lorran.jpg", width: 630, height: 631 } },
+  { name: "Matheus", role: "Especialista", photo: { src: "/img/matheus.jpg", width: 630, height: 631 } },
 ];
 
 export interface GalleryImage {

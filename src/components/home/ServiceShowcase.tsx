@@ -3,6 +3,7 @@ import { ArrowRight, Check, Gem, Phone, Star } from "lucide-react";
 import AppImage from "@/components/shared/AppImage";
 import Button from "@/components/shared/Button";
 import FadeIn from "@/components/shared/FadeIn";
+import RichText from "@/components/shared/RichText";
 import WhatsAppIcon from "@/components/shared/WhatsAppIcon";
 import { type ServiceSection } from "@/data/home";
 import { site, whatsappLink } from "@/data/site";
@@ -13,21 +14,37 @@ export default function ServiceShowcase({ service }: { service: ServiceSection }
   const sectionCls = service.altBackground ? `${styles.section} ${styles.alt}` : styles.section;
   const rowCls = service.reversed ? `${styles.row} ${styles.reversed}` : styles.row;
   const ctaHref = service.primaryCta.href ?? whatsappLink(service.primaryCta.whatsappMessage);
+  const imageCls =
+    service.image.orientation === "portrait" ? `${styles.image} ${styles.portrait}` : styles.image;
+  const imageStyle = service.image.desktopHeight
+    ? ({ "--photo-desktop-height": `${service.image.desktopHeight}px` } as React.CSSProperties)
+    : undefined;
 
   return (
     <section className={sectionCls} id={service.id}>
       <div className="container">
         <div className={rowCls}>
-          <FadeIn className={styles.image}>
+          <FadeIn className={imageCls} style={imageStyle}>
             <AppImage
               src={service.image.src}
               width={service.image.width}
               height={service.image.height}
               alt={service.image.alt}
               sizes="(max-width: 768px) 100vw, 50vw"
+              className={styles.photo}
             />
             <div className={styles.imageBadge}>
-              <p>{service.imageBadge}</p>
+              {typeof service.imageBadge === "string" ? (
+                <p>{service.imageBadge}</p>
+              ) : (
+                <AppImage
+                  src={service.imageBadge.src}
+                  width={service.imageBadge.width}
+                  height={service.imageBadge.height}
+                  alt={service.imageBadge.alt}
+                  className={styles.imageBadgeLogo}
+                />
+              )}
             </div>
           </FadeIn>
 
@@ -35,7 +52,7 @@ export default function ServiceShowcase({ service }: { service: ServiceSection }
             <h2>
               {service.titleStart} <span>{service.titleHighlight}</span>
             </h2>
-            <p className={styles.description}>{service.description}</p>
+            <RichText text={service.description} className={styles.description} />
 
             {service.checklist && (
               <ul className={styles.checklist}>
