@@ -9,6 +9,7 @@ const serviceLinks = [
   { label: "Limpeza Profissional", href: "/limpeza" },
   { label: "PPF - Proteção de Pintura", href: "/ppf" },
   { label: "Catálogo de Películas", href: "/peliculas" },
+  { label: "Proteção Premium", href: "/protecao-premium" },
 ];
 
 const usefulLinks = [

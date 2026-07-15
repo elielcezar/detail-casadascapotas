@@ -9,12 +9,17 @@ export default function CatalogBlock({
   section,
   alt = false,
   wide = false,
+  columns,
 }: {
   section: CatalogSection;
   alt?: boolean;
   /** Container mais largo (1380px em vez do padrão de 1300px) */
   wide?: boolean;
+  /** Fixa o número de colunas da grade (padrão: auto-fit a partir de 350px) */
+  columns?: 2;
 }) {
+  const cardsCls = columns === 2 ? `${styles.cards} ${styles.cardsTwoCol}` : styles.cards;
+
   return (
     <section className={alt ? `${styles.section} ${styles.alt}` : styles.section}>
       <div className={wide ? styles.wideContainer : "container"}>
@@ -33,7 +38,7 @@ export default function CatalogBlock({
           highlight={section.titleHighlight}
           text={section.description}
         />
-        <div className={styles.cards}>
+        <div className={cardsCls}>
           {section.cards.map((card) => (
             <FilmCard key={card.title} card={card} />
           ))}

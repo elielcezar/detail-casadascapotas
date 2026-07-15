@@ -8,7 +8,7 @@ export const navItems: NavItem[] = [
   { label: "PPF", href: "/ppf" },
   { label: "Limpeza", href: "/limpeza" },
   { label: "Películas", href: "/peliculas" },
-  { label: "Serviços", href: "/#servicos" },
+  { label: "Proteção Premium", href: "/protecao-premium" },
   { label: "Galeria", href: "/#galeria" },
   { label: "Contato", href: "/#contato" },
 ];
