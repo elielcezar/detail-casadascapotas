@@ -150,7 +150,7 @@ export const serviceSections: ServiceSection[] = [
     altBackground: false,
     reversed: true,
     image: {
-      src: "/img/limpeza-profissional.jpg",
+      src: "/img/limpeza2.jpg",
       width: 1080,
       height: 1920,
       alt: "Detalhamento do painel interno com pincel e espuma de limpeza",
@@ -255,7 +255,7 @@ export interface TeamMember {
 
 export const team: TeamMember[] = [
   { name: "Josoé", role: "Especialista", photo: { src: "/img/josoe.jpg", width: 630, height: 631 } },
-  { name: "Lorran", role: "Especialista", photo: { src: "/img/lorran.jpg", width: 630, height: 631 } },
+  { name: "Everson", role: "Especialista", photo: { src: "/img/lorran.jpg", width: 630, height: 631 } },
   { name: "Matheus", role: "Especialista", photo: { src: "/img/matheus.jpg", width: 630, height: 631 } },
 ];
 

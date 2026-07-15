@@ -16,10 +16,16 @@ export default function PeliculasPage() {
       <PageHero
         start="Catálogo de"
         highlight="Películas"
-        text="Conheça todas as linhas de películas que trabalhamos. Da entrada à super premium, temos a solução ideal para você."
+        image={{
+          src: "/img/3m-header.jpg",
+          width: 2498,
+          height: 310,
+          alt: "3M — Tecnologia, Proteção e Performance",
+          mobileSrc: "/img/3m-header-mob.jpg",
+        }}
       />
       {filmSections.map((section, i) => (
-        <CatalogBlock key={section.titleHighlight} section={section} alt={i % 2 === 1} />
+        <CatalogBlock key={section.titleHighlight} section={section} alt={i % 2 === 1} wide />
       ))}
       <CtaSection
         titleStart="Ficou com"

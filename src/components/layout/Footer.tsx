@@ -30,13 +30,28 @@ export default function Footer() {
               PPF e limpeza profissional com produtos premium e garantia de qualidade.
             </p>
             <div className={styles.social}>
-              <a href={site.social.instagram} aria-label="Instagram">
+              <a
+                href={site.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+              >
                 <Instagram size={16} aria-hidden="true" />
               </a>
-              <a href={site.social.facebook} aria-label="Facebook">
+              <a
+                href={site.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+              >
                 <Facebook size={16} aria-hidden="true" />
               </a>
-              <a href={site.social.youtube} aria-label="YouTube">
+              <a
+                href={site.social.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+              >
                 <Youtube size={16} aria-hidden="true" />
               </a>
               <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">

@@ -1,6 +1,7 @@
 import { Check, Gem, Layers, Shield, Star, Tablet } from "lucide-react";
-import type { CatalogCard, BadgeIcon } from "@/data/types";
+import type { BadgeIcon, CatalogCard, SpecTable } from "@/data/types";
 import { whatsappLink } from "@/data/site";
+import AppImage from "./AppImage";
 import Button from "./Button";
 import FadeIn from "./FadeIn";
 import RichText from "./RichText";
@@ -28,6 +29,36 @@ function BenefitList({ items }: { items: string[] }) {
   );
 }
 
+function SpecTableEl({ table, label }: { table: SpecTable; label?: string }) {
+  return (
+    <>
+      {label && <h4 className={styles.tableLabel}>{label}</h4>}
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th scope="col">Spec</th>
+            {table.columns.map((col, i) => (
+              <th scope="col" key={`${col}-${i}`}>
+                {col}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {table.rows.map((row) => (
+            <tr key={row.label}>
+              <td>{row.label}</td>
+              {row.values.map((value, i) => (
+                <td key={i}>{value}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  );
+}
+
 /** Card de catálogo usado nas páginas de películas, limpeza e PPF. */
 export default function FilmCard({ card }: { card: CatalogCard }) {
   const Icon = card.badgeIcon ? badgeIcons[card.badgeIcon] : null;
@@ -39,41 +70,31 @@ export default function FilmCard({ card }: { card: CatalogCard }) {
           <h3>{card.title}</h3>
           <span className={styles.subtitle}>{card.subtitle}</span>
         </div>
-        {card.badge && <span className={styles.badge}>{card.badge}</span>}
-        {Icon && (
-          <span className={styles.badge}>
-            <Icon size={14} aria-hidden="true" />
-          </span>
-        )}
+        <div className={styles.headerSide}>
+          {card.brandLogo && (
+            <AppImage
+              src={card.brandLogo.src}
+              width={card.brandLogo.width}
+              height={card.brandLogo.height}
+              alt={card.brandLogo.alt}
+              className={styles.brandLogo}
+            />
+          )}
+          {card.badge && <span className={styles.badge}>{card.badge}</span>}
+          {Icon && (
+            <span className={styles.badge}>
+              <Icon size={14} aria-hidden="true" />
+            </span>
+          )}
+        </div>
       </header>
 
       <div className={styles.body}>
         {card.benefits && <BenefitList items={card.benefits} />}
 
-        {card.table && (
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th scope="col">Spec</th>
-                {card.table.columns.map((col, i) => (
-                  <th scope="col" key={`${col}-${i}`}>
-                    {col}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {card.table.rows.map((row) => (
-                <tr key={row.label}>
-                  <td>{row.label}</td>
-                  {row.values.map((value, i) => (
-                    <td key={i}>{value}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
+        {card.table && <SpecTableEl table={card.table} />}
+
+        {card.tables?.map((t) => <SpecTableEl key={t.label} table={t.table} label={t.label} />)}
 
         {card.groups?.map((group) => (
           <div className={styles.group} key={group.title}>

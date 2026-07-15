@@ -2,3 +2,7 @@
   padding: 100px 0;
   background: var(--blue);
 }
+
+.gallery p {
+  color: var(--white);  
+}

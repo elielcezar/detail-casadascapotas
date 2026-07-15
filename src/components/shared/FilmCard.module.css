@@ -34,6 +34,19 @@
   font-weight: 400;
 }
 
+.headerSide {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.brandLogo {
+  height: 22px;
+  width: auto;
+}
+
 .badge {
   background: var(--blue);
   color: var(--white);
@@ -101,6 +114,15 @@
 }
 
 /* --- Tabela de especificações --- */
+.tableLabel {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--orange);
+  margin-top: 15px;
+}
+
 .table {
   width: 100%;
   border-collapse: collapse;

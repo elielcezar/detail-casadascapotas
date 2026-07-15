@@ -1,5 +1,7 @@
 import type { CatalogSection } from "./types";
 
+const logo3M = { src: "/img/3m-white.png", width: 346, height: 183, alt: "Logo 3M" };
+
 /**
  * Catálogo de películas (página /peliculas).
  * Para alterar specs, garantias ou benefícios, edite apenas este arquivo.
@@ -9,18 +11,19 @@ export const filmSections: CatalogSection[] = [
     titleStart: "Linha",
     titleHighlight: "3M",
     description:
-      "Referência mundial em películas automotivas. Tecnologia, durabilidade e garantia de fábrica.",
+      "Há mais de 100 anos, a 3M é referência mundial em inovação, qualidade e proteção. Suas películas automotivas oferecem controle solar, proteção contra raios UV, conforto térmico e acabamento premium.\n\nA Casa das Capotas é Revendedor e Aplicador Autorizado 3M, unindo produtos originais à experiência de uma equipe especializada para garantir uma instalação precisa e o máximo desempenho em cada projeto.",
     cards: [
       {
         title: "Linha FX",
         subtitle: "Linha de Entrada",
-        badge: "3 anos",
+        brandLogo: logo3M,
         benefits: [
           "Película de controle solar",
           "Melhora o conforto térmico",
           "Redução de ofuscamento",
           "Proteção UV",
           "Excelente custo-benefício dentro da 3M",
+          "Cor fundo marrom",
         ],
         table: {
           columns: ["FX 5", "FX 20", "FX 35", "FX 50", "FX 70"],
@@ -42,12 +45,13 @@ export const filmSections: CatalogSection[] = [
       {
         title: "Linha SAS",
         subtitle: "Película de Segurança",
-        badge: "3 anos",
+        brandLogo: logo3M,
         benefits: [
           "Película de segurança e proteção",
           "Aumenta a resistência do vidro",
           "Ajuda a segurar estilhaços em caso de quebra",
           "Pode ser usada em veículos, residências e lojas",
+          "Cor fundo grafite",
         ],
         table: {
           columns: ["SAS 5", "SAS 20", "SAS 35"],
@@ -67,7 +71,7 @@ export const filmSections: CatalogSection[] = [
       {
         title: "Color Stable",
         subtitle: "Premium — Nano Cerâmica",
-        badge: "10 anos",
+        brandLogo: logo3M,
         benefits: [
           "Película nano cerâmica",
           "Alta rejeição de calor",
@@ -75,6 +79,7 @@ export const filmSections: CatalogSection[] = [
           "Não desbota / não fica roxa",
           "Excelente equilíbrio entre performance e custo",
           "Melhor visibilidade interna",
+          "Cor fundo grafite",
         ],
         table: {
           columns: ["CS IR 5", "CS IR 15", "CS IR 35", "CS IR 50", "CS IR 70"],
@@ -96,13 +101,14 @@ export const filmSections: CatalogSection[] = [
       {
         title: "Ceramic IR",
         subtitle: "Premium — Nano Cerâmica",
-        badge: "12 anos",
+        brandLogo: logo3M,
         benefits: [
           "Película nano cerâmica de alta performance",
           "Rejeição de calor superior",
           "Alta transparência",
           "Proteção UV",
           "Indicada para quem quer máximo conforto térmico",
+          "Cor fundo grafite",
         ],
         table: {
           columns: ["CIR 5", "CIR 15", "CIR 35", "CIR 50"],
@@ -123,7 +129,7 @@ export const filmSections: CatalogSection[] = [
       {
         title: "Crystalline",
         subtitle: "Super Premium — Nano Cerâmica",
-        badge: "15 anos",
+        brandLogo: logo3M,
         benefits: [
           "Linha topo de mercado da 3M",
           "Máxima rejeição de calor com altíssima transparência",
@@ -151,15 +157,32 @@ export const filmSections: CatalogSection[] = [
     ],
   },
   {
-    titleStart: "Outras",
-    titleHighlight: "Linhas",
+    titleStart: "Solarium Film e",
+    titleHighlight: "Antishock",
     description:
-      "Películas de alta qualidade de marcas selecionadas para diferentes necessidades e orçamentos.",
+      "A Solarium Film e a Antishock oferecem soluções em películas e proteção de superfícies com tecnologia, inovação e alta performance. Seus produtos garantem conforto térmico, proteção contra raios UV, rejeição de calor e preservação da estética, além de alta resistência contra riscos, impactos e agentes externos, proporcionando durabilidade, segurança e qualidade.",
     cards: [
+      {
+        title: "Sunblue Nano Ceramic",
+        subtitle: "Nano Cerâmica",
+        benefits: ["Tecnologia nano cerâmica", "Visibilidade de 75%", "Cor fundo azul"],
+      },
+      {
+        title: "Sunblue Nano com PS 4mil",
+        subtitle: "Nano Carbono",
+        benefits: ["Tecnologia nano carbono", "Cor fundo azul"],
+        table: {
+          columns: ["PS 4mil"],
+          rows: [
+            { label: "Visibilidade", values: ["73%"] },
+            { label: "Bloqueio UV", values: ["99%"] },
+            { label: "Bloq. Infravermelho", values: ["87%"] },
+          ],
+        },
+      },
       {
         title: "Sunblack Nano Ceramic",
         subtitle: "Nano Cerâmica",
-        badge: "6 anos",
         benefits: [
           "Tecnologia nano cerâmica",
           "Bloqueio UV de 99,9%",
@@ -180,28 +203,8 @@ export const filmSections: CatalogSection[] = [
         ],
       },
       {
-        title: "Sunblur Nano Ceramic",
-        subtitle: "Nano Cerâmica",
-        badge: "10 anos",
-        benefits: [
-          "Tecnologia nano cerâmica",
-          "Bloqueio UV de 99,9%",
-          "Bloqueio infravermelho de 95%",
-        ],
-        table: {
-          columns: ["5%"],
-          rows: [
-            { label: "Visibilidade", values: ["5%"] },
-            { label: "Bloqueio UV", values: ["99,9%"] },
-            { label: "Bloq. Infravermelho", values: ["95%"] },
-          ],
-        },
-        shades: [{ color: "#111", label: "5%" }],
-      },
-      {
         title: "Sunblock Nano",
         subtitle: "Nano Carbono",
-        badge: "5 anos",
         benefits: [
           "Tecnologia nano carbono",
           "Bloqueio UV de 100%",
@@ -212,7 +215,7 @@ export const filmSections: CatalogSection[] = [
           rows: [
             { label: "Visibilidade", values: ["5%", "20%", "35%"] },
             { label: "Bloqueio UV", values: ["100%", "100%", "100%"] },
-            { label: "Bloq. Infravermelho", values: ["65%", "55%", "10%"] },
+            { label: "Bloq. Infravermelho", values: ["60%", "55%", "40%"] },
           ],
         },
         shades: [
@@ -224,7 +227,6 @@ export const filmSections: CatalogSection[] = [
       {
         title: "PS Clean",
         subtitle: "Anti Vandalismo",
-        badge: "5 anos",
         benefits: [
           "Película de segurança anti-vandalismo",
           "Diversas espessuras disponíveis",
@@ -238,12 +240,36 @@ export const filmSections: CatalogSection[] = [
       {
         title: "Película Diamond",
         subtitle: "Linha Profissional",
-        badge: "1 ano",
         benefits: [
           "Boa qualidade e ótimo custo-benefício",
           "Estética bonita",
           "Redução de calor moderada",
           "Opção mais acessível",
+          "Cor fundo verde e grafite",
+        ],
+        tables: [
+          {
+            label: "Fundo Verde",
+            table: {
+              columns: ["5%", "20%", "35%", "50%"],
+              rows: [
+                { label: "Visibilidade", values: ["5%", "20%", "35%", "50%"] },
+                { label: "Bloqueio UV", values: ["100%", "99%", "99%", "99%"] },
+                { label: "Bloq. Infravermelho", values: ["30%", "22%", "18%", "0%"] },
+              ],
+            },
+          },
+          {
+            label: "Fundo Grafite",
+            table: {
+              columns: ["5%", "20%", "35%", "50%"],
+              rows: [
+                { label: "Visibilidade", values: ["5%", "20%", "35%", "50%"] },
+                { label: "Bloqueio UV", values: ["99%", "99%", "99%", "99%"] },
+                { label: "Bloq. Infravermelho", values: ["76%", "58%", "42%", "0%"] },
+              ],
+            },
+          },
         ],
       },
     ],

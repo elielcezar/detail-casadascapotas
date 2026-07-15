@@ -1,15 +1,17 @@
 import type { CatalogSection } from "./types";
 
+const logo3M = { src: "/img/3m-white.png", width: 346, height: 183, alt: "Logo 3M" };
+
 /**
  * Portfólio de PPF — Paint Protection Film (página /ppf).
  * Para alterar marcas, coberturas ou acabamentos, edite apenas este arquivo.
  */
 export const ppfSections: CatalogSection[] = [
   {
-    titleStart: "Proteção de",
-    titleHighlight: "Pintura",
+    titleStart: "Superfícies",
+    titleHighlight: "Protegidas",
     description:
-      "Película transparente que protege a pintura contra riscos, pedras e detritos, preservando a estética original do veículo.",
+      "Aplicação em todas as superfícies externas pintadas do veículo, exceto em peças plásticas sem pintura, superfícies porosas e acabamentos cromados.\n\nAplicação nas superfícies internas de alto contato, como tela multimídia, painel de instrumentos, quadro de instrumentos e console central (exceto acabamentos plásticos texturizados ou porosos).",
     cards: [
       {
         title: "PPF Frontal",
@@ -40,6 +42,7 @@ export const ppfSections: CatalogSection[] = [
         title: "Marcas e Acabamentos",
         subtitle: "Linhas de PPF",
         badgeIcon: "layers",
+        brandLogo: logo3M,
         table: {
           columns: ["New X", "Anti Shock"],
           rows: [
@@ -48,6 +51,10 @@ export const ppfSections: CatalogSection[] = [
           ],
         },
         groups: [
+          {
+            title: "Marcas",
+            items: ["New X — Linha Premium", "Anti Shock — Linha Standard"],
+          },
           {
             title: "Acabamentos",
             items: ["Fosco", "Auto brilho", "Black piano"],
@@ -73,7 +80,7 @@ export const ppfSections: CatalogSection[] = [
         benefits: [
           "Aumenta a resistência do vidro",
           "Ajuda contra estilhaçamento",
-          "Uso residencial, comercial e automotivo",
+          "Uso automotivo",
         ],
         cta: {
           label: "Solicitar Orçamento",
@@ -88,7 +95,9 @@ export const ppfSections: CatalogSection[] = [
           "Película protetora para multimídia, console e painel",
           "Aumenta a proteção contra riscos e danos do dia a dia",
           "Ajuda contra o desgaste natural",
+          "Cliente pode escolher o PPF Gloss ou Fosco",
         ],
+        note: "*Necessário análise de viabilidade em áreas em Black piano — não é possível aplicar em partes plásticas.",
         cta: {
           label: "Solicitar Orçamento",
           message: "Olá! Gostaria de um orçamento do PPF Kit Interno.",

@@ -6,6 +6,27 @@
   background: var(--gray-light);
 }
 
+/* Variante mais larga do .container global (1300px), usada só onde a
+   página passa wide={true} — não depende de sobrescrever a classe
+   global, evitando qualquer disputa de ordem no CSS */
+.wideContainer {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Fundo escuro atrás do logo (ex.: 3M), que é branco e ficaria invisível
+   sobre o fundo claro da seção */
+.logo {
+  display: block;
+  height: 40px;
+  width: auto;
+  margin: 0 auto 25px;
+  background: var(--blue);
+  padding: 12px 24px;
+  border-radius: 8px;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));

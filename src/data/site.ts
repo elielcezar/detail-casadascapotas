@@ -35,11 +35,10 @@ export const site = {
 
   hours: "Seg-Sex: 8h às 18h",
 
-  /** [PLACEHOLDER] Links das redes sociais */
   social: {
-    instagram: "#",
-    facebook: "#",
-    youtube: "#",
+    instagram: "https://www.instagram.com/casadascapotascuritiba/",
+    facebook: "https://www.facebook.com/casadascapotascuritiba",
+    youtube: "https://www.youtube.com/@casadascapotascuritiba/videos",
   },
 };
 

@@ -33,6 +33,14 @@ export interface ItemGroup {
 /** Ícones disponíveis para o selo do card (mapeados em FilmCard.tsx). */
 export type BadgeIcon = "star" | "gem" | "layers" | "shield" | "tablet";
 
+/** Logo de marca (ex.: 3M) exibido em um card ou no topo de uma seção. */
+export interface BrandLogo {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+}
+
 /** Um card de catálogo (película, pacote de limpeza ou serviço de PPF). */
 export interface CatalogCard {
   title: string;
@@ -41,11 +49,16 @@ export interface CatalogCard {
   badge?: string;
   /** Selo com ícone, alternativa ao texto */
   badgeIcon?: BadgeIcon;
+  /** Logo de marca exibido no header do card (ex.: logo 3M) */
+  brandLogo?: BrandLogo;
   /** Lista simples de benefícios (com check vermelho) */
   benefits?: string[];
   /** Grupos de itens com título (Exterior / Interior / Acabamentos...) */
   groups?: ItemGroup[];
+  /** Tabela única de especificações */
   table?: SpecTable;
+  /** Múltiplas tabelas rotuladas (ex.: variantes "Fundo Verde" / "Fundo Grafite") */
+  tables?: { label: string; table: SpecTable }[];
   shades?: Shade[];
   /** Nota em itálico ao final do card (rich text) */
   note?: string;
@@ -63,5 +76,7 @@ export interface CatalogSection {
   titleHighlight: string;
   /** Rich text — ver nota no topo do arquivo */
   description: string;
+  /** Logo de marca exibido acima do título da seção (ex.: logo 3M) */
+  logo?: BrandLogo;
   cards: CatalogCard[];
 }
