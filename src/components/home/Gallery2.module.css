@@ -36,7 +36,6 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-auto-rows: 260px;
-  grid-auto-flow: dense;
   gap: 3px;
 }
 
@@ -48,16 +47,6 @@
   cursor: pointer;
   display: block;
   background: none;
-}
-
-/* Duas variações de proporção, alternadas por índice, para não formar
-   uma grade de quadrados idênticos */
-.wide {
-  grid-column: span 2;
-}
-
-.tall {
-  grid-row: span 2;
 }
 
 .photo {
@@ -106,9 +95,5 @@
   .grid {
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: 130px;
-  }
-
-  .wide {
-    grid-column: span 2;
   }
 }

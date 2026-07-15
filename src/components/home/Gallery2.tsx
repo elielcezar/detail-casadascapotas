@@ -8,20 +8,6 @@ import { galleryCategories, type GalleryPhoto } from "@/data/gallery2";
 import styles from "./Gallery2.module.css";
 
 /**
- * Define a forma da célula a partir da proporção real da foto — fotos
- * nitidamente horizontais ganham uma célula "wide" (2 colunas, altura
- * normal); nitidamente verticais ganham "tall" (2 linhas, largura normal).
- * Assim o recorte do object-fit:cover acompanha a orientação da imagem em
- * vez de forçar um padrão fixo por posição.
- */
-function shapeFor(photo: GalleryPhoto): "" | "wide" | "tall" {
-  const ratio = photo.width / photo.height;
-  if (ratio >= 1.3) return "wide";
-  if (ratio <= 0.77) return "tall";
-  return "";
-}
-
-/**
  * Modelo alternativo de galeria em teste: grade filtrável por categoria,
  * largura total (sem .container). Convive com o GalleryCarousel — nenhum
  * dos dois foi removido, apenas este é o exibido na página no momento.
@@ -59,30 +45,27 @@ export default function Gallery2() {
       </div>
 
       <div className={styles.grid}>
-        {photos.map((photo, i) => {
-          const shape = shapeFor(photo);
-          return (
-            <button
-              key={photo.src}
-              type="button"
-              className={shape ? `${styles.cell} ${styles[shape]}` : styles.cell}
-              onClick={() => setLightboxIndex(i)}
-              aria-label={`Ampliar foto: ${photo.alt}`}
-            >
-              <AppImage
-                src={photo.src}
-                width={photo.width}
-                height={photo.height}
-                alt=""
-                sizes="(max-width: 768px) 50vw, 25vw"
-                className={styles.photo}
-              />
-              <span className={styles.overlay} aria-hidden="true">
-                <ZoomIn size={26} />
-              </span>
-            </button>
-          );
-        })}
+        {photos.map((photo, i) => (
+          <button
+            key={photo.src}
+            type="button"
+            className={styles.cell}
+            onClick={() => setLightboxIndex(i)}
+            aria-label={`Ampliar foto: ${photo.alt}`}
+          >
+            <AppImage
+              src={photo.src}
+              width={photo.width}
+              height={photo.height}
+              alt=""
+              sizes="(max-width: 768px) 33vw, 16vw"
+              className={styles.photo}
+            />
+            <span className={styles.overlay} aria-hidden="true">
+              <ZoomIn size={26} />
+            </span>
+          </button>
+        ))}
       </div>
 
       {lightboxIndex !== null && (

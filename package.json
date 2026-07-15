@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "build:preview": "cross-env NEXT_PUBLIC_BASE_PATH=/detail next build",
     "lint": "next lint"
   },
   "dependencies": {
@@ -18,6 +19,7 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "^15.3.0",
     "typescript": "^5"
