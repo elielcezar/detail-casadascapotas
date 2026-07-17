@@ -19,6 +19,10 @@ export default function ServiceShowcase({ service }: { service: ServiceSection }
   const imageStyle = service.image.desktopHeight
     ? ({ "--photo-desktop-height": `${service.image.desktopHeight}px` } as React.CSSProperties)
     : undefined;
+  const descriptionCls =
+    service.descriptionColor === "blue"
+      ? `${styles.description} ${styles.descriptionBlue}`
+      : styles.description;
 
   return (
     <section className={sectionCls} id={service.id}>
@@ -33,26 +37,30 @@ export default function ServiceShowcase({ service }: { service: ServiceSection }
               sizes="(max-width: 768px) 100vw, 50vw"
               className={styles.photo}
             />
-            <div className={styles.imageBadge}>
-              {typeof service.imageBadge === "string" ? (
-                <p>{service.imageBadge}</p>
-              ) : (
-                <AppImage
-                  src={service.imageBadge.src}
-                  width={service.imageBadge.width}
-                  height={service.imageBadge.height}
-                  alt={service.imageBadge.alt}
-                  className={styles.imageBadgeLogo}
-                />
-              )}
-            </div>
+            {service.imageBadge && (
+              <div className={styles.imageBadge}>
+                {typeof service.imageBadge === "string" ? (
+                  <p>{service.imageBadge}</p>
+                ) : (
+                  <AppImage
+                    src={service.imageBadge.src}
+                    width={service.imageBadge.width}
+                    height={service.imageBadge.height}
+                    alt={service.imageBadge.alt}
+                    className={styles.imageBadgeLogo}
+                  />
+                )}
+              </div>
+            )}
           </FadeIn>
 
           <FadeIn className={styles.content}>
             <h2>
               {service.titleStart} <span>{service.titleHighlight}</span>
             </h2>
-            <RichText text={service.description} className={styles.description} />
+            {service.description && (
+              <RichText text={service.description} className={descriptionCls} />
+            )}
 
             {service.checklist && (
               <ul className={styles.checklist}>
@@ -82,6 +90,8 @@ export default function ServiceShowcase({ service }: { service: ServiceSection }
                 </ul>
               </div>
             ))}
+
+            {service.note && <RichText text={service.note} className={styles.note} />}
 
             <div className={styles.actions}>
               <Button href={ctaHref} external={!!service.primaryCta.whatsappMessage}>

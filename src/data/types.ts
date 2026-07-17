@@ -8,11 +8,15 @@
 
 /** Tabela de especificações técnicas de um card. */
 export interface SpecTable {
-  /** Cabeçalhos das colunas de valores (a primeira coluna é sempre "Spec") */
+  /** Cabeçalhos das colunas de valores (a célula da primeira coluna fica vazia) */
   columns: string[];
+  /** Oculta a linha de cabeçalho por completo (tabelas de uma coluna só) */
+  hideHeader?: boolean;
   rows: {
     label: string;
     values: string[];
+    /** Destaca a linha (fundo branco, texto azul) — ex.: energia solar total rejeitada */
+    highlight?: boolean;
   }[];
 }
 
@@ -27,7 +31,10 @@ export interface Shade {
 /** Grupo de itens com título (ex.: "Exterior", "Interior"). */
 export interface ItemGroup {
   title: string;
-  items: string[];
+  /** Lista simples de itens (com check) */
+  items?: string[];
+  /** Tons de cor (ex.: Matte/Gloss/Black Piano) — alternativa a items */
+  swatches?: { hex: string; label: string }[];
 }
 
 /** Ícones disponíveis para o selo do card (mapeados em FilmCard.tsx). */
@@ -38,13 +45,15 @@ export interface BrandLogo {
   src: string;
   width: number;
   height: number;
+  /** Altura exibida no header do card, em px (padrão: 22px) */
+  displayHeight?: number;
   alt: string;
 }
 
 /** Um card de catálogo (película, pacote de limpeza ou serviço de PPF). */
 export interface CatalogCard {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   /** Selo de texto no canto do card (ex.: "3 anos", "até 10 anos") */
   badge?: string;
   /** Selo com ícone, alternativa ao texto */
@@ -78,5 +87,7 @@ export interface CatalogSection {
   description: string;
   /** Logo de marca exibido acima do título da seção (ex.: logo 3M) */
   logo?: BrandLogo;
+  /** Título exibido imediatamente acima da grade de cards (ex.: "Marcas de PPF") */
+  cardsTitle?: string;
   cards: CatalogCard[];
 }

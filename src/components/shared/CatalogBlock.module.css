@@ -27,6 +27,15 @@
   border-radius: 8px;
 }
 
+.cardsTitle {
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 25px;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));

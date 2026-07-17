@@ -1,0 +1,46 @@
+.section {
+  background: #000001;
+  padding: 80px 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  width: 100%;
+}
+
+.item {
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--orange);
+  margin-bottom: 20px;
+  padding: 0 15px;
+}
+
+.imageWrap {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.photo {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+}

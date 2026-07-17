@@ -7,11 +7,7 @@ import Lightbox from "@/components/shared/Lightbox";
 import { galleryCategories, type GalleryPhoto } from "@/data/gallery2";
 import styles from "./Gallery2.module.css";
 
-/**
- * Modelo alternativo de galeria em teste: grade filtrável por categoria,
- * largura total (sem .container). Convive com o GalleryCarousel — nenhum
- * dos dois foi removido, apenas este é o exibido na página no momento.
- */
+/** Galeria em grade filtrável por categoria, largura total (sem .container). */
 export default function Gallery2() {
   const [active, setActive] = useState<string>("todos");
 

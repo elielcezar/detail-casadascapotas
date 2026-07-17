@@ -95,11 +95,13 @@ export interface ServiceSection {
     desktopHeight?: number;
   };
   /** Selo sobre a foto: texto (padrão) ou logo (ex.: 3M) */
-  imageBadge: string | { src: string; width: number; height: number; alt: string };
+  imageBadge?: string | { src: string; width: number; height: number; alt: string };
   titleStart: string;
   titleHighlight: string;
   /** Rich text */
-  description: string;
+  description?: string;
+  /** Cor do texto da descrição (padrão: cinza) */
+  descriptionColor?: "blue";
   checklist?: string[];
   subSections?: {
     icon: "star" | "gem";
@@ -113,6 +115,8 @@ export interface ServiceSection {
     icon: "whatsapp" | "none";
   };
   showPhone: boolean;
+  /** Nota em itálico ao final do conteúdo (rich text) */
+  note?: string;
   link?: {
     label: string;
     href: string;
@@ -254,9 +258,12 @@ export interface TeamMember {
 }
 
 export const team: TeamMember[] = [
-  { name: "Josoé", role: "Especialista", photo: { src: "/img/josoe.jpg", width: 630, height: 631 } },
-  { name: "Everson", role: "Especialista", photo: { src: "/img/lorran.jpg", width: 630, height: 631 } },
-  { name: "Matheus", role: "Especialista", photo: { src: "/img/matheus.jpg", width: 630, height: 631 } },
+  { name: "Douglas", role: "Películas / PPF", photo: { src: "/img/equipe/douglas.jpg", width: 300, height: 300 } },
+  { name: "Juliano", role: "Limpeza / Películas / PPF", photo: { src: "/img/equipe/juliano.jpg", width: 300, height: 300 } },
+  { name: "Luan", role: "Limpeza / PPF", photo: { src: "/img/equipe/luan.jpg", width: 300, height: 300 } },
+  { name: "Ricardo", role: "Limpeza", photo: { src: "/img/equipe/ricardo.jpg", width: 300, height: 300 } },
+  { name: "Thalita", role: "Limpeza", photo: { src: "/img/equipe/thalita.jpg", width: 300, height: 300 } },
+  { name: "Tiago", role: "Limpeza", photo: { src: "/img/equipe/tiago.jpg", width: 300, height: 300 } },
 ];
 
 export interface GalleryImage {

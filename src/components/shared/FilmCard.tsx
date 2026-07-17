@@ -29,24 +29,44 @@ function BenefitList({ items }: { items: string[] }) {
   );
 }
 
+function SwatchTableEl({ swatches }: { swatches: { hex: string; label: string }[] }) {
+  return (
+    <table className={`${styles.table} ${styles.swatchTable}`}>
+      <tbody>
+        {swatches.map((s) => (
+          <tr key={s.hex}>
+            <td>{s.label}</td>
+            <td>
+              <span className={styles.swatchBar} style={{ background: s.hex }} aria-hidden="true" />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
 function SpecTableEl({ table, label }: { table: SpecTable; label?: string }) {
   return (
     <>
       {label && <h4 className={styles.tableLabel}>{label}</h4>}
       <table className={styles.table}>
-        <thead>
-          <tr>
-            <th scope="col">Spec</th>
-            {table.columns.map((col, i) => (
-              <th scope="col" key={`${col}-${i}`}>
-                {col}
-              </th>
-            ))}
-          </tr>
-        </thead>
+        {!table.hideHeader && (
+          <thead>
+            <tr>
+              {/* Célula do canto vazia: a primeira coluna já tem os rótulos das linhas */}
+              <th scope="col" />
+              {table.columns.map((col, i) => (
+                <th scope="col" key={`${col}-${i}`}>
+                  {col}
+                </th>
+              ))}
+            </tr>
+          </thead>
+        )}
         <tbody>
           {table.rows.map((row) => (
-            <tr key={row.label}>
+            <tr key={row.label} className={row.highlight ? styles.rowHighlight : undefined}>
               <td>{row.label}</td>
               {row.values.map((value, i) => (
                 <td key={i}>{value}</td>
@@ -68,7 +88,7 @@ export default function FilmCard({ card }: { card: CatalogCard }) {
       <header className={styles.header}>
         <div>
           <h3>{card.title}</h3>
-          <span className={styles.subtitle}>{card.subtitle}</span>
+          {card.subtitle && <span className={styles.subtitle}>{card.subtitle}</span>}
         </div>
         <div className={styles.headerSide}>
           {card.brandLogo && (
@@ -78,6 +98,11 @@ export default function FilmCard({ card }: { card: CatalogCard }) {
               height={card.brandLogo.height}
               alt={card.brandLogo.alt}
               className={styles.brandLogo}
+              style={
+                card.brandLogo.displayHeight
+                  ? ({ "--brand-logo-height": `${card.brandLogo.displayHeight}px` } as React.CSSProperties)
+                  : undefined
+              }
             />
           )}
           {card.badge && <span className={styles.badge}>{card.badge}</span>}
@@ -99,7 +124,8 @@ export default function FilmCard({ card }: { card: CatalogCard }) {
         {card.groups?.map((group) => (
           <div className={styles.group} key={group.title}>
             <h4>{group.title}</h4>
-            <BenefitList items={group.items} />
+            {group.items && <BenefitList items={group.items} />}
+            {group.swatches && <SwatchTableEl swatches={group.swatches} />}
           </div>
         ))}
 

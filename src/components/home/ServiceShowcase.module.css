@@ -97,6 +97,17 @@
   font-size: 0.95rem;
 }
 
+.descriptionBlue {
+  color: var(--blue);
+}
+
+.note {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--gray);
+  margin-bottom: 20px;
+}
+
 .checklist {
   margin-bottom: 30px;
 }

@@ -24,23 +24,21 @@ export const filmSections: CatalogSection[] = [
           "Proteção UV",
           "Excelente custo-benefício dentro da 3M",
           "Cor fundo marrom",
+          "3 ANOS DE GARANTIA",
         ],
         table: {
           columns: ["FX 5", "FX 20", "FX 35", "FX 50", "FX 70"],
           rows: [
+            {
+              label: "Energia Solar Total Rejeitada",
+              values: ["61%", "57%", "54%", "50%", "46%"],
+              highlight: true,
+            },
             { label: "VLT", values: ["4%", "20%", "28%", "45%", "59%"] },
             { label: "Bloqueio UV", values: ["99%", "99%", "99%", "99%", "99%"] },
-            { label: "Red. Ofuscamento", values: ["95%", "74%", "63%", "40%", "21%"] },
-            { label: "TSER", values: ["61%", "57%", "54%", "50%", "46%"] },
+            { label: "Redução de Ofuscamento", values: ["95%", "74%", "63%", "40%", "21%"] },
           ],
         },
-        shades: [
-          { color: "#111", label: "FX 5" },
-          { color: "#333", label: "FX 20" },
-          { color: "#555", label: "FX 35" },
-          { color: "#888", label: "FX 50" },
-          { color: "#bbb", label: "FX 70" },
-        ],
       },
       {
         title: "Linha SAS",
@@ -52,21 +50,21 @@ export const filmSections: CatalogSection[] = [
           "Ajuda a segurar estilhaços em caso de quebra",
           "Pode ser usada em veículos, residências e lojas",
           "Cor fundo grafite",
+          "3 ANOS DE GARANTIA",
         ],
         table: {
           columns: ["SAS 5", "SAS 20", "SAS 35"],
           rows: [
+            {
+              label: "Energia Solar Total Rejeitada",
+              values: ["60%", "58%", "55%"],
+              highlight: true,
+            },
             { label: "VLT", values: ["5%", "17%", "27%"] },
             { label: "Bloqueio UV", values: ["99%", "99%", "99%"] },
-            { label: "Red. Ofuscamento", values: ["94%", "78%", "65%"] },
-            { label: "TSER", values: ["60%", "58%", "55%"] },
+            { label: "Redução de Ofuscamento", values: ["94%", "78%", "65%"] },
           ],
         },
-        shades: [
-          { color: "#111", label: "SAS 5" },
-          { color: "#333", label: "SAS 20" },
-          { color: "#555", label: "SAS 35" },
-        ],
       },
       {
         title: "Color Stable",
@@ -80,23 +78,21 @@ export const filmSections: CatalogSection[] = [
           "Excelente equilíbrio entre performance e custo",
           "Melhor visibilidade interna",
           "Cor fundo grafite",
+          "10 ANOS DE GARANTIA",
         ],
         table: {
           columns: ["CS IR 5", "CS IR 15", "CS IR 35", "CS IR 50", "CS IR 70"],
           rows: [
+            {
+              label: "Energia Solar Total Rejeitada",
+              values: ["64%", "53%", "57%", "54%", "50%"],
+              highlight: true,
+            },
             { label: "VLT", values: ["7%", "14%", "32%", "46%", "58%"] },
             { label: "Bloqueio UV", values: ["99,9%", "99,8%", "99,7%", "99,7%", "99,7%"] },
-            { label: "Red. Ofuscamento", values: ["91%", "81%", "57%", "37%", "21%"] },
-            { label: "TSER", values: ["64%", "63%", "57%", "54%", "50%"] },
+            { label: "Redução de Ofuscamento", values: ["91%", "81%", "57%", "37%", "21%"] },
           ],
         },
-        shades: [
-          { color: "#111", label: "CS IR 5" },
-          { color: "#2a2a2a", label: "CS IR 15" },
-          { color: "#555", label: "CS IR 35" },
-          { color: "#888", label: "CS IR 50" },
-          { color: "#bbb", label: "CS IR 70" },
-        ],
       },
       {
         title: "Ceramic IR",
@@ -109,22 +105,21 @@ export const filmSections: CatalogSection[] = [
           "Proteção UV",
           "Indicada para quem quer máximo conforto térmico",
           "Cor fundo grafite",
+          "12 ANOS DE GARANTIA",
         ],
         table: {
           columns: ["CIR 5", "CIR 15", "CIR 35", "CIR 50"],
           rows: [
+            {
+              label: "Energia Solar Total Rejeitada",
+              values: ["66%", "63%", "58%", "54%"],
+              highlight: true,
+            },
             { label: "VLT", values: ["5%", "16%", "37%", "5%"] },
             { label: "Bloqueio UV", values: ["99,9%", "99,9%", "99,8%", "99,8%"] },
-            { label: "Red. Ofuscamento", values: ["93%", "78%", "49%", "32%"] },
-            { label: "TSER", values: ["66%", "63%", "58%", "54%"] },
+            { label: "Redução de Ofuscamento", values: ["93%", "78%", "49%", "32%"] },
           ],
         },
-        shades: [
-          { color: "#111", label: "CIR 5" },
-          { color: "#2a2a2a", label: "CIR 15" },
-          { color: "#666", label: "CIR 35" },
-          { color: "#111", label: "CIR 50" },
-        ],
       },
       {
         title: "Crystalline",
@@ -133,26 +128,24 @@ export const filmSections: CatalogSection[] = [
         benefits: [
           "Linha topo de mercado da 3M",
           "Máxima rejeição de calor com altíssima transparência",
-          "Proteção UV com FPS altíssimo",
+          "Proteção UV com FPS superior a 1.700",
           "Não altera a estética do vidro",
           "Não desbota e não perde performance com o tempo",
-          "Garantia de fábrica",
+          "15 ANOS DE GARANTIA",
         ],
         table: {
           columns: ["CR 20", "CR 40", "CR 70", "CR 90"],
           rows: [
+            {
+              label: "Energia Solar Total Rejeitada",
+              values: ["62%", "6%", "50%", "34%"],
+              highlight: true,
+            },
             { label: "VLT", values: ["20%", "39%", "69%", "86%"] },
             { label: "Bloqueio UV", values: ["99%", "99%", "99%", "99%"] },
-            { label: "Red. Ofuscamento", values: ["77%", "55%", "22%", "3%"] },
-            { label: "TSER", values: ["62%", "60%", "50%", "34%"] },
+            { label: "Redução de Ofuscamento", values: ["77%", "55%", "22%", "3%"] },
           ],
         },
-        shades: [
-          { color: "#444", label: "CR 20" },
-          { color: "#777", label: "CR 40" },
-          { color: "#bbb", label: "CR 70" },
-          { color: "#e8e8e8", label: "CR 90" },
-        ],
       },
     ],
   },
@@ -165,64 +158,58 @@ export const filmSections: CatalogSection[] = [
       {
         title: "Sunblue Nano Ceramic",
         subtitle: "Nano Cerâmica",
-        benefits: ["Tecnologia nano cerâmica", "Visibilidade de 75%", "Cor fundo azul"],
+        benefits: ["Cor fundo azul", "10 ANOS DE GARANTIA"],
+        table: {
+          hideHeader: true,
+          columns: ["Valor"],
+          rows: [
+            { label: "Visibilidade", values: ["75%"] },
+            { label: "Bloqueio UV", values: ["99,9%"] },
+            { label: "Bloqueio Infravermelho", values: ["95%"] },
+          ],
+        },
       },
       {
         title: "Sunblue Nano com PS 4mil",
         subtitle: "Nano Carbono",
-        benefits: ["Tecnologia nano carbono", "Cor fundo azul"],
+        benefits: ["Cor fundo azul", "5 ANOS DE GARANTIA"],
         table: {
-          columns: ["PS 4mil"],
+          hideHeader: true,
+          columns: ["Valor"],
           rows: [
             { label: "Visibilidade", values: ["73%"] },
             { label: "Bloqueio UV", values: ["99%"] },
-            { label: "Bloq. Infravermelho", values: ["87%"] },
+            { label: "Bloqueio Infravermelho", values: ["87%"] },
           ],
         },
       },
       {
         title: "Sunblack Nano Ceramic",
         subtitle: "Nano Cerâmica",
-        benefits: [
-          "Tecnologia nano cerâmica",
-          "Bloqueio UV de 99,9%",
-          "Bloqueio infravermelho de 95%",
-        ],
+        benefits: ["Cor fundo grafite", "6 ANOS DE GARANTIA"],
         table: {
+          hideHeader: true,
           columns: ["5%", "20%", "35%"],
           rows: [
             { label: "Visibilidade", values: ["5%", "20%", "35%"] },
             { label: "Bloqueio UV", values: ["99,9%", "99,9%", "99,9%"] },
-            { label: "Bloq. Infravermelho", values: ["95%", "95%", "95%"] },
+            { label: "Bloqueio Infravermelho", values: ["95%", "95%", "95%"] },
           ],
         },
-        shades: [
-          { color: "#111", label: "5%" },
-          { color: "#333", label: "20%" },
-          { color: "#555", label: "35%" },
-        ],
       },
       {
         title: "Sunblock Nano",
         subtitle: "Nano Carbono",
-        benefits: [
-          "Tecnologia nano carbono",
-          "Bloqueio UV de 100%",
-          "Boa rejeição de infravermelho",
-        ],
+        benefits: ["Cor fundo grafite", "5 ANOS DE GARANTIA"],
         table: {
+          hideHeader: true,
           columns: ["5%", "20%", "35%"],
           rows: [
             { label: "Visibilidade", values: ["5%", "20%", "35%"] },
             { label: "Bloqueio UV", values: ["100%", "100%", "100%"] },
-            { label: "Bloq. Infravermelho", values: ["60%", "55%", "40%"] },
+            { label: "Bloqueio Infravermelho", values: ["60%", "55%", "40%"] },
           ],
         },
-        shades: [
-          { color: "#111", label: "5%" },
-          { color: "#333", label: "20%" },
-          { color: "#555", label: "35%" },
-        ],
       },
       {
         title: "PS Clean",
@@ -233,6 +220,7 @@ export const filmSections: CatalogSection[] = [
           "Proteção contra quebra e estilhaços",
         ],
         table: {
+          hideHeader: true,
           columns: ["4 Mil", "8 Mil", "8 Mil", "11 Mil"],
           rows: [{ label: "Visibilidade", values: ["G20%", "G5%", "20%", "20%"] }],
         },
@@ -245,28 +233,31 @@ export const filmSections: CatalogSection[] = [
           "Estética bonita",
           "Redução de calor moderada",
           "Opção mais acessível",
-          "Cor fundo verde e grafite",
+          "Cor fundo grafite",
+          "1 ANO DE GARANTIA",
         ],
         tables: [
           {
             label: "Fundo Verde",
             table: {
+              hideHeader: true,
               columns: ["5%", "20%", "35%", "50%"],
               rows: [
                 { label: "Visibilidade", values: ["5%", "20%", "35%", "50%"] },
                 { label: "Bloqueio UV", values: ["100%", "99%", "99%", "99%"] },
-                { label: "Bloq. Infravermelho", values: ["30%", "22%", "18%", "0%"] },
+                { label: "Bloqueio Infravermelho", values: ["30%", "22%", "18%", "10%"] },
               ],
             },
           },
           {
             label: "Fundo Grafite",
             table: {
+              hideHeader: true,
               columns: ["5%", "20%", "35%", "50%"],
               rows: [
                 { label: "Visibilidade", values: ["5%", "20%", "35%", "50%"] },
                 { label: "Bloqueio UV", values: ["99%", "99%", "99%", "99%"] },
-                { label: "Bloq. Infravermelho", values: ["76%", "58%", "42%", "0%"] },
+                { label: "Bloqueio Infravermelho", values: ["76%", "58%", "42%", "0%"] },
               ],
             },
           },

@@ -38,6 +38,7 @@ export default function CatalogBlock({
           highlight={section.titleHighlight}
           text={section.description}
         />
+        {section.cardsTitle && <h3 className={styles.cardsTitle}>{section.cardsTitle}</h3>}
         <div className={cardsCls}>
           {section.cards.map((card) => (
             <FilmCard key={card.title} card={card} />
