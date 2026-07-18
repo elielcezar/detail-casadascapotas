@@ -9,10 +9,9 @@ import styles from "./Gallery2.module.css";
 
 /** Galeria em grade filtrável por categoria, largura total (sem .container). */
 export default function Gallery2() {
-  const [active, setActive] = useState<string>("todos");
+  const [active, setActive] = useState<string>("controle-solar");
 
   const photos: GalleryPhoto[] = useMemo(() => {
-    if (active === "todos") return galleryCategories.flatMap((c) => c.photos);
     return galleryCategories.find((c) => c.slug === active)?.photos ?? [];
   }, [active]);
 
@@ -21,13 +20,6 @@ export default function Gallery2() {
   return (
     <>
       <div className={styles.filters} role="group" aria-label="Filtrar galeria por categoria">
-        <button
-          type="button"
-          className={active === "todos" ? `${styles.filter} ${styles.filterActive}` : styles.filter}
-          onClick={() => setActive("todos")}
-        >
-          Todos
-        </button>
         {galleryCategories.map((cat) => (
           <button
             key={cat.slug}
