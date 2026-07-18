@@ -28,7 +28,7 @@ export interface HeroSlide {
 
 export const heroSlides: HeroSlide[] = [
   {
-    background: "/img/ferrari-oficina.jpg",
+    background: "/img/banner-home/banner1.jpg",
     titleStart: "Excelência em",
     titleHighlight: "Estética Automotiva",
     subtitle:
@@ -39,7 +39,30 @@ export const heroSlides: HeroSlide[] = [
     ],
   },
   {
-    background: "/img/hero-pelicula.jpg",
+    background: "/img/banner-home/banner2.jpg",
+    titleStart: "Proteção",
+    titleHighlight: "Total",
+    titleEnd: "para seu Veículo",
+    subtitle:
+      "Películas 3M, PPF e limpeza profissional. De dentro para fora, cuidamos de cada detalhe com tecnologia de ponta e garantia de até 15 anos.",
+    buttons: [
+      { label: "Ver Películas", href: "/peliculas", variant: "primary", icon: "film" },
+      { label: "Agendar Agora", href: "", variant: "outline", icon: "whatsapp", whatsappMessage: "" },
+    ],
+  },
+  {
+    background: "/img/banner-home/banner3.jpg",
+    titleStart: "Excelência em",
+    titleHighlight: "Estética Automotiva",
+    subtitle:
+      "Proteção, beleza e cuidado profissional para o seu veículo. Trabalhamos com as melhores marcas do mercado para entregar resultados que superam expectativas.",
+    buttons: [
+      { label: "Nossos Serviços", href: "/#servicos", variant: "primary", icon: "tools" },
+      { label: "Fale Conosco", href: "", variant: "outline", icon: "whatsapp", whatsappMessage: "" },
+    ],
+  },
+  {
+    background: "/img/banner-home/banner4.jpg",
     titleStart: "Proteção",
     titleHighlight: "Total",
     titleEnd: "para seu Veículo",
@@ -258,12 +281,19 @@ export interface TeamMember {
 }
 
 export const team: TeamMember[] = [
-  { name: "Douglas", role: "Películas / PPF", photo: { src: "/img/equipe/douglas.jpg", width: 300, height: 300 } },
-  { name: "Juliano", role: "Limpeza / Películas / PPF", photo: { src: "/img/equipe/juliano.jpg", width: 300, height: 300 } },
-  { name: "Luan", role: "Limpeza / PPF", photo: { src: "/img/equipe/luan.jpg", width: 300, height: 300 } },
-  { name: "Ricardo", role: "Limpeza", photo: { src: "/img/equipe/ricardo.jpg", width: 300, height: 300 } },
-  { name: "Thalita", role: "Limpeza", photo: { src: "/img/equipe/thalita.jpg", width: 300, height: 300 } },
-  { name: "Tiago", role: "Limpeza", photo: { src: "/img/equipe/tiago.jpg", width: 300, height: 300 } },
+  { name: "Douglas", role: "Aplicador profissional de películas e PPF", photo: { src: "/img/equipe/douglas.jpg", width: 300, height: 300 } },
+  { name: "Juliano", role: "Supervisor", photo: { src: "/img/equipe/juliano.jpg", width: 300, height: 300 } },
+  { name: "Luan", role: "Aplicador profissional de PPF e Técnico em Estética", photo: { src: "/img/equipe/luan.jpg", width: 300, height: 300 } },
+  { name: "Ricardo", role: "Técnico em Estética Automotiva, Polimento especialista em Motos", photo: { src: "/img/equipe/ricardo.jpg", width: 300, height: 300 } },
+  { name: "Thalita", role: "Técnica em Estética", photo: { src: "/img/equipe/thalita.jpg", width: 300, height: 300 } },
+  { name: "Tiago", role: "Aplicador Profissional de Peliculas", photo: { src: "/img/equipe/tiago.jpg", width: 300, height: 300 } },
+];
+
+/** Time de vendas, exibido acima da equipe técnica na home. */
+export const salesTeam: TeamMember[] = [
+  { name: "Everson", role: "Vendedor", photo: { src: "/img/equipe/everson.jpg", width: 300, height: 300 } },
+  { name: "Josoé", role: "Vendedor", photo: { src: "/img/equipe/josoe.jpg", width: 300, height: 300 } },
+  { name: "Matheus", role: "Vendedor", photo: { src: "/img/equipe/matheus.jpg", width: 300, height: 300 } },
 ];
 
 export interface GalleryImage {

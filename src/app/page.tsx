@@ -16,7 +16,7 @@ export default function HomePage() {
         <ServiceShowcase key={service.id} service={service} />
       ))}
       <Counters />
-      <TeamSection id="equipe" />
+      <TeamSection id="equipe" showSalesTeam />
       <GallerySection />
       <CtaSection
         id="contato"
