@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import CatalogBlock from "@/components/shared/CatalogBlock";
 import CtaSection from "@/components/shared/CtaSection";
 import PageHero from "@/components/shared/PageHero";
+import PremiumCard from "@/components/shared/PremiumCard";
 import { premiumSections } from "@/data/premium";
 
 export const metadata: Metadata = {
@@ -23,7 +24,10 @@ export default function ProtecaoPremiumPage() {
           key={section.titleHighlight}
           section={section}
           alt={i % 2 === 1}
-          columns={2}
+          columns="full"
+          renderCard={(card, j) => (
+            <PremiumCard card={card} textSide={j % 2 === 0 ? "left" : "right"} />
+          )}
         />
       ))}
       <CtaSection

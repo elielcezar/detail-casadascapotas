@@ -15,6 +15,11 @@ export const premiumSections: CatalogSection[] = [
       {
         title: "Vitrificação",
         subtitle: "Revestimento Nano Cerâmico",
+        images: [
+          { src: "/img/protecao/vitrificacao/IMG_0164.jpg", width: 600, height: 400, alt: "Vitrificação — foto 1" },
+          { src: "/img/protecao/vitrificacao/IMG_3195.jpg", width: 600, height: 400, alt: "Vitrificação — foto 2" },
+          { src: "/img/protecao/vitrificacao/IMG_3731.jpg", width: 600, height: 717, alt: "Vitrificação — foto 3" },
+        ],
         benefits: [
           "Revestimento nano cerâmico de alta tecnologia",
           "Alta repelência contra líquidos e sujeira",
@@ -36,6 +41,11 @@ export const premiumSections: CatalogSection[] = [
       {
         title: "Glasshield",
         subtitle: "Nano Cerâmico para Vidros",
+        images: [
+          { src: "/img/protecao/glassshield/IMG_3829.jpg", width: 600, height: 400, alt: "Glasshield — foto 1" },
+          { src: "/img/protecao/glassshield/222IMG_3829.jpg", width: 600, height: 400, alt: "Glasshield — foto 2" },
+          { src: "/img/protecao/glassshield/Cópia-de-_MG_3171.jpg", width: 600, height: 400, alt: "Glasshield — foto 3" },
+        ],
         benefits: [
           "Aumenta a visibilidade em dias de chuva",
           "Aumenta a segurança do condutor e passageiros",
@@ -49,6 +59,11 @@ export const premiumSections: CatalogSection[] = [
       {
         title: "Leatherboost",
         subtitle: "Nano Coating para Couro",
+        images: [
+          { src: "/img/protecao/leatherboost/IMG_0113.jpg", width: 600, height: 400, alt: "Leatherboost — foto 1" },
+          { src: "/img/protecao/leatherboost/IMG_3897.jpg", width: 600, height: 400, alt: "Leatherboost — foto 2" },
+          { src: "/img/protecao/leatherboost/IMG_4046.jpg", width: 600, height: 400, alt: "Leatherboost — foto 3" },
+        ],
         benefits: [
           "Para couro natural e sintético",
           "Prolonga a vida útil do couro",
@@ -65,6 +80,11 @@ export const premiumSections: CatalogSection[] = [
       {
         title: "Cabincare",
         subtitle: "Nano Coating para Estofados",
+        images: [
+          { src: "/img/protecao/cabincare/IMG_4098.jpg", width: 600, height: 400, alt: "Cabincare — foto 1" },
+          { src: "/img/protecao/cabincare/IMG_4289.jpg", width: 600, height: 400, alt: "Cabincare — foto 2" },
+          { src: "/img/protecao/cabincare/d2c37410-d8f5-4d88-8a5f-3cecd713f879.jpg", width: 600, height: 450, alt: "Cabincare — foto 3" },
+        ],
         benefits: [
           "Para estofos, painéis de portas, forros de teto e tetos conversíveis",
           "Protege contra derramamentos espontâneos",

@@ -1,0 +1,128 @@
+.card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--blue);
+  border-radius: 8px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.card:hover {
+  box-shadow: var(--shadow);
+}
+
+.card + .card {
+  margin-top: 30px;
+}
+
+.textCol {
+  padding: 45px;
+}
+
+.imageCol {
+  position: relative;
+  min-height: 340px;
+}
+
+.textCol h3 {
+  font-size: 1.8rem;
+  color: var(--white);
+}
+
+.subtitle {
+  display: block;
+  color: var(--orange);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 3px;
+  margin-bottom: 20px;
+}
+
+.benefits {
+  margin-bottom: 20px;
+}
+
+.benefits li {
+  font-size: 0.95rem;
+  color: var(--white);
+  padding: 6px 0;
+  padding-left: 24px;
+  position: relative;
+}
+
+.check {
+  position: absolute;
+  left: 0;
+  top: 12px;
+  color: var(--orange);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  margin-bottom: 20px;
+}
+
+.table thead th {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 8px 10px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--white);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.table thead th:first-child {
+  text-align: left;
+  background: transparent;
+}
+
+.table tbody td {
+  padding: 8px 10px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--white);
+}
+
+.table tbody td:first-child {
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.78rem;
+  color: var(--orange);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+@media (min-width: 901px) {
+  .reversed .textCol {
+    order: 2;
+  }
+
+  .reversed .imageCol {
+    order: 1;
+  }
+}
+
+@media (max-width: 900px) {
+  .card {
+    grid-template-columns: 1fr;
+  }
+
+  .textCol {
+    padding: 30px;
+  }
+
+  .imageCol {
+    order: -1;
+    aspect-ratio: 4 / 3;
+    min-height: 0;
+  }
+}

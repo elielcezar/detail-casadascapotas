@@ -64,6 +64,8 @@ export interface CatalogCard {
   benefits?: string[];
   /** Grupos de itens com título (Exterior / Interior / Acabamentos...) */
   groups?: ItemGroup[];
+  /** Galeria de fotos do card, exibida em carrossel com fade (ex.: Proteção Premium) */
+  images?: { src: string; width: number; height: number; alt: string }[];
   /** Tabela única de especificações */
   table?: SpecTable;
   /** Múltiplas tabelas rotuladas (ex.: variantes "Fundo Verde" / "Fundo Grafite") */
