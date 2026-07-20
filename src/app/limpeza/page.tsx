@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import CatalogBlock from "@/components/shared/CatalogBlock";
 import CtaSection from "@/components/shared/CtaSection";
 import PageHero from "@/components/shared/PageHero";
-import TeamSection from "@/components/shared/TeamSection";
 import { cleaningSections } from "@/data/cleaning";
 
 export const metadata: Metadata = {
@@ -22,7 +21,6 @@ export default function LimpezaPage() {
       {cleaningSections.map((section) => (
         <CatalogBlock key={section.titleHighlight} section={section} />
       ))}
-      <TeamSection />
       <CtaSection
         titleStart="Ficou com"
         titleStrong="Dúvida?"
