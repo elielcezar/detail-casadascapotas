@@ -54,6 +54,8 @@ export interface BrandLogo {
 export interface CatalogCard {
   title: string;
   subtitle?: string;
+  /** Descrição exibida acima dos benefícios (rich text) */
+  description?: string;
   /** Selo de texto no canto do card (ex.: "3 anos", "até 10 anos") */
   badge?: string;
   /** Selo com ícone, alternativa ao texto */

@@ -73,6 +73,14 @@
   margin-top: auto;
 }
 
+/* --- Descrição --- */
+.description {
+  font-size: 0.9rem;
+  color: var(--white);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
 /* --- Lista de benefícios --- */
 .benefits {
   margin-bottom: 20px;

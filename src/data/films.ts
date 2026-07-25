@@ -150,10 +150,10 @@ export const filmSections: CatalogSection[] = [
     ],
   },
   {
-    titleStart: "Solarium Film e",
-    titleHighlight: "Antishock",
+    titleStart: "Película",
+    titleHighlight: "Solarium",
     description:
-      "A Solarium Film e a Antishock oferecem soluções em películas e proteção de superfícies com tecnologia, inovação e alta performance. Seus produtos garantem conforto térmico, proteção contra raios UV, rejeição de calor e preservação da estética, além de alta resistência contra riscos, impactos e agentes externos, proporcionando durabilidade, segurança e qualidade.",
+      "A Solarium oferece soluções em películas e proteção de superfícies com tecnologia, inovação e alta performance. Seus produtos garantem conforto térmico, proteção contra raios UV, rejeição de calor e preservação da estética, além de alta resistência contra riscos, impactos e agentes externos, proporcionando durabilidade, segurança e qualidade.",
     cards: [
       {
         title: "Sunblue Nano Ceramic",
@@ -168,21 +168,7 @@ export const filmSections: CatalogSection[] = [
             { label: "Bloqueio Infravermelho", values: ["95%"] },
           ],
         },
-      },
-      {
-        title: "Sunblue Nano com PS 4mil",
-        subtitle: "Nano Carbono",
-        benefits: ["Cor fundo azul", "5 ANOS DE GARANTIA"],
-        table: {
-          hideHeader: true,
-          columns: ["Valor"],
-          rows: [
-            { label: "Visibilidade", values: ["73%"] },
-            { label: "Bloqueio UV", values: ["99%"] },
-            { label: "Bloqueio Infravermelho", values: ["87%"] },
-          ],
-        },
-      },
+      },      
       {
         title: "Sunblack Nano Ceramic",
         subtitle: "Nano Cerâmica",
@@ -210,21 +196,7 @@ export const filmSections: CatalogSection[] = [
             { label: "Bloqueio Infravermelho", values: ["60%", "55%", "40%"] },
           ],
         },
-      },
-      {
-        title: "PS Clean",
-        subtitle: "Anti Vandalismo",
-        benefits: [
-          "Película de segurança anti-vandalismo",
-          "Diversas espessuras disponíveis",
-          "Proteção contra quebra e estilhaços",
-        ],
-        table: {
-          hideHeader: true,
-          columns: ["4 Mil", "8 Mil", "8 Mil", "11 Mil"],
-          rows: [{ label: "Visibilidade", values: ["G20%", "G5%", "20%", "20%"] }],
-        },
-      },
+      },      
       {
         title: "Película Diamond",
         subtitle: "Linha Profissional",
@@ -262,6 +234,22 @@ export const filmSections: CatalogSection[] = [
             },
           },
         ],
+      },
+      {
+        title: "Sunblue Nano com PS 4mil",
+        subtitle: "Nano Carbono",
+        description:
+          "Também conhecida como antivandalismo ou anti-estilhaço. Material mais espesso, aumentando a resistência e proteção dos vidros.\n\n<b>Retenção de estilhaços:</b> prevenindo ferimentos graves nos ocupantes do veículo em caso de forte impacto ou quebra acidental.\n\n<b>Atraso de Intrusão:</b> não torna o vidro indestrutível mas exige muito mais esforço e tempo para romper a barreira. Isso ajuda a frustrar furtos rápidos em semáforos ou estacionamentos públicos.",
+        benefits: ["Cor fundo azul", "Anti-vandalismo", "5 ANOS DE GARANTIA"],
+        table: {
+          hideHeader: true,
+          columns: ["Valor"],
+          rows: [
+            { label: "Visibilidade", values: ["73%"] },
+            { label: "Bloqueio UV", values: ["99%"] },
+            { label: "Bloqueio Infravermelho", values: ["87%"] },
+          ],
+        },
       },
     ],
   },

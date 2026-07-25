@@ -115,6 +115,8 @@ export default function FilmCard({ card }: { card: CatalogCard }) {
       </header>
 
       <div className={styles.body}>
+        {card.description && <RichText text={card.description} className={styles.description} />}
+
         {card.benefits && <BenefitList items={card.benefits} />}
 
         {card.table && <SpecTableEl table={card.table} />}
