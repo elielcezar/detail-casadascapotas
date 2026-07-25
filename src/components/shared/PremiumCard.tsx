@@ -4,6 +4,7 @@ import { whatsappLink } from "@/data/site";
 import Button from "./Button";
 import FadeCarousel from "./FadeCarousel";
 import FadeIn from "./FadeIn";
+import RichText from "./RichText";
 import WhatsAppIcon from "./WhatsAppIcon";
 import styles from "./PremiumCard.module.css";
 
@@ -22,6 +23,8 @@ export default function PremiumCard({
       <div className={styles.textCol}>
         <h3>{card.title}</h3>
         {card.subtitle && <span className={styles.subtitle}>{card.subtitle}</span>}
+
+        {card.description && <RichText text={card.description} className={styles.description} />}
 
         {card.benefits && (
           <ul className={styles.benefits}>

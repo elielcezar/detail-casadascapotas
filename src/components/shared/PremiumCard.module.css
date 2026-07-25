@@ -42,6 +42,13 @@
   margin-bottom: 20px;
 }
 
+.description {
+  font-size: 0.9rem;
+  color: var(--white);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
 .benefits {
   margin-bottom: 20px;
 }

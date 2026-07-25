@@ -20,9 +20,14 @@ export const premiumSections: CatalogSection[] = [
           { src: "/img/protecao/vitrificacao/IMG_3195.jpg", width: 600, height: 400, alt: "Vitrificação — foto 2" },
           { src: "/img/protecao/vitrificacao/IMG_3731.jpg", width: 600, height: 717, alt: "Vitrificação — foto 3" },
         ],
+        description:
+          "Uma das mais avançadas tecnologias para a proteção da pintura de veículos. Cria uma Camada de vidro flexível de alta resistência sobre o verniz do carro.",
         benefits: [
-          "Revestimento nano cerâmico de alta tecnologia",
-          "Alta repelência contra líquidos e sujeira",
+          "Escudo contra raios UV evitando desbotamento e a perda de brilho causados pelo sol.",
+          "Protege contra agentes corrosivos do dia a dia, como seiva de árvores e fezes de pássaros.",
+          "Resistência a micro-riscos: Minimiza riscos superficiais.",
+          "Facilidade extrema de limpeza com repelência à líquidos, lavagens rápidas e economia de produtos de limpeza.",
+          "Estética Premium: Brilho profundo, renovação visual, longa duração.",
         ],
         table: {
           columns: ["NeoCoat X", "MetalCoat F2", "XR03", "ZR53", "NL272"],
