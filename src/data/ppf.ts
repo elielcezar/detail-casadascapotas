@@ -1,4 +1,5 @@
 import type { CatalogSection } from "./types";
+import type { ServiceSection } from "./home";
 
 const logo3M = { src: "/img/3m-white.png", width: 346, height: 183, alt: "Logo 3M" };
 const logoAntishock = {
@@ -95,3 +96,85 @@ export const ppfLines: {
     title: "Full PPF",
   },
 ];
+
+/** Bloco "O que é o PPF" — mesmo modelo de texto+imagem usado na home. */
+export const aboutPpf: ServiceSection = {
+  id: "sobre-ppf",
+  altBackground: true,
+  reversed: true,
+  image: {
+    src: "/img/ppf-luvas.jpg",
+    width: 941,
+    height: 1672,
+    alt: "Profissional aplicando PPF com luvas no farol do veículo",
+    orientation: "portrait",
+  },
+  imageBadge: "Proteção Invisível",
+  titleStart: "Entenda o",
+  titleHighlight: "PPF",
+  descriptionColor: "blue",
+  description:
+    "<strong>O que é o PPF?</strong>\nO PPF é uma película transparente de alta tecnologia que protege a pintura do seu veículo sem alterar a cor ou o brilho original.\n\n<strong>Para o que serve?</strong>\nCria uma barreira de proteção contra riscos, pedras, arranhões, manchas e raios UV, preservando a aparência de veículo novo por muito mais tempo.\n\n<strong>Qual dor do cliente soluciona?</strong>\nEvita prejuízos com retoques e repinturas, ajuda a preservar o valor de revenda do veículo e garante mais tranquilidade para você aproveitar seu carro sem se preocupar com os pequenos danos do dia a dia.",
+  primaryCta: {
+    label: "Solicitar Orçamento",
+    whatsappMessage: "Olá! Gostaria de saber mais sobre PPF.",
+    icon: "whatsapp",
+  },
+  showPhone: false,
+};
+
+/** Bloco "PPF Para-brisa" — texto à esquerda, imagem à direita. */
+export const parabrisa: ServiceSection = {
+  id: "ppf-parabrisa",
+  altBackground: false,
+  reversed: true,
+  image: {
+    src: "/img/carro-parabrisa.jpg",
+    width: 1126,
+    height: 518,
+    alt: "Para-brisa de veículo com aplicação de PPF",
+  },
+  titleStart: "PPF –",
+  titleHighlight: "Para-brisa",
+  checklist: [
+    "Película de Segurança para Vidros",
+    "Aumenta a resistência do vidro",
+    "Ajuda contra estilhaçamento",
+    "Uso automotivo",
+  ],
+  primaryCta: {
+    label: "Solicitar Orçamento",
+    whatsappMessage: "Olá! Gostaria de um orçamento de PPF para o para-brisa.",
+    icon: "whatsapp",
+  },
+  showPhone: false,
+};
+
+/** Bloco "PPF Kit Interno" — imagem à esquerda, texto à direita. */
+export const kitInterno: ServiceSection = {
+  id: "ppf-kit-interno",
+  altBackground: true,
+  reversed: false,
+  image: {
+    src: "/img/carro-interno.jpg",
+    width: 1416,
+    height: 654,
+    alt: "Console e painel interno do veículo com aplicação de PPF",
+  },
+  titleStart: "PPF –",
+  titleHighlight: "Kit Interno",
+  description: "Console/Painel",
+  checklist: [
+    "Película de protetora para multimídia, console, painel",
+    "Aumenta a proteção de riscos e danos do dia a dia",
+    "Ajuda contra desgaste natural",
+    "O cliente pode escolher o PPF Gloss ou Fosco",
+  ],
+  note: "**Necessário análise de viabilidade em áreas em Black piano e não é possível aplicar em partes plásticas.",
+  primaryCta: {
+    label: "Solicitar Orçamento",
+    whatsappMessage: "Olá! Gostaria de um orçamento do PPF Kit Interno.",
+    icon: "whatsapp",
+  },
+  showPhone: false,
+};
