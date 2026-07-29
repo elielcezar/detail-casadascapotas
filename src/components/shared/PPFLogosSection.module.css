@@ -1,0 +1,29 @@
+.section {
+  padding: 60px 0;
+}
+
+.logosGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  align-items: center;
+  justify-items: center;
+}
+
+.logoItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoItem img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .logosGrid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}

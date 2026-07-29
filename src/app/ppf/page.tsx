@@ -4,12 +4,13 @@ import ServiceShowcase from "@/components/home/ServiceShowcase";
 import CtaSection from "@/components/shared/CtaSection";
 import ImageTitleGrid from "@/components/shared/ImageTitleGrid";
 import PageHero from "@/components/shared/PageHero";
-import { aboutPpf, kitInterno, parabrisa, ppfLines, ppfSections } from "@/data/ppf";
+import PPFLogosSection from "@/components/shared/PPFLogosSection";
+import { aboutPpf, kitInterno, parabrisa, ppfLines, ppfLogos, ppfSections } from "@/data/ppf";
 
 export const metadata: Metadata = {
   title: "Portfólio de PPF",
   description:
-    "Portfólio de PPF - Paint Protection Film: Linha Premium e Linha Standart, com cobertura em PPF Frontal, Quina e Concha ou Full PPF. Proteção de até 10 anos para a pintura do seu veículo.",
+    "Portfólio de PPF - Paint Protection Film: Linha Premium e Linha Standard, com cobertura em PPF Frontal, Quina e Concha ou Full PPF. Proteção de até 10 anos para a pintura do seu veículo.",
 };
 
 export default function PpfPage() {
@@ -24,6 +25,7 @@ export default function PpfPage() {
       {ppfSections.map((section, i) => (
         <CatalogBlock key={section.titleHighlight} section={section} alt={i % 2 === 1} />
       ))}
+      <PPFLogosSection logos={ppfLogos} />
       <ImageTitleGrid slides={ppfLines} />
       <ServiceShowcase service={parabrisa} />
       <ServiceShowcase service={kitInterno} />
