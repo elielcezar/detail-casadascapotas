@@ -45,7 +45,7 @@ export const ppfSections: CatalogSection[] = [
         },
       },
       {
-        title: "Linha Standart",
+        title: "Linha Standard",
         brandLogo: logoAntishock,
         benefits: ["190 micras", "Anti Shock", "7 anos de proteção"],
         groups: [
@@ -56,7 +56,7 @@ export const ppfSections: CatalogSection[] = [
         ],
         cta: {
           label: "Falar com Especialista",
-          message: "Olá! Gostaria de saber mais sobre a Linha Standart de PPF.",
+          message: "Olá! Gostaria de saber mais sobre a Linha Standard de PPF.",
         },
       },
     ],
@@ -114,7 +114,7 @@ export const aboutPpf: ServiceSection = {
   titleHighlight: "PPF",
   descriptionColor: "blue",
   description:
-    "<strong>O que é o PPF?</strong>\nO PPF é uma película transparente de alta tecnologia que protege a pintura do seu veículo sem alterar a cor ou o brilho original.\n\n<strong>Para o que serve?</strong>\nCria uma barreira de proteção contra riscos, pedras, arranhões, manchas e raios UV, preservando a aparência de veículo novo por muito mais tempo.\n\n<strong>Qual dor do cliente soluciona?</strong>\nEvita prejuízos com retoques e repinturas, ajuda a preservar o valor de revenda do veículo e garante mais tranquilidade para você aproveitar seu carro sem se preocupar com os pequenos danos do dia a dia.",
+    "<strong>PPF - PAINT PROTECTION FILM</strong>\n\nMais alto nível de Proteção contra arranhões, manchas e danos causados por detritos na estrada. Propriedades auto regenerativas que reparam pequenos arranhões quando expostos ao calor. Proteção aos raios UV e Criação de uma barreira invisível para manter a pintura do veículo impecável.\nTecnologias hidro-repelente (Repelência à água) facilitando a limpeza, impedindo que líquidos grudem na superfície.\n\n<strong>PPF Premium 100% TPU, com garantias a partir de 5 anos.</strong>\n1. Resistência a arranhões e pedriscos.\n2. Resistência a manchas\n3. Proteção contra os raios UV\n4. Resistência a desbotamento\n5. Preserva a pintura do veículo\n6. Acabamento com brilho intenso",
   primaryCta: {
     label: "Solicitar Orçamento",
     whatsappMessage: "Olá! Gostaria de saber mais sobre PPF.",
