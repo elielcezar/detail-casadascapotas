@@ -28,7 +28,7 @@ export const cleaningSections: CatalogSection[] = [
           },
           {
             title: "Interior",
-            items: ["Aspiração + limpeza leve", "Vidros veiculares"],
+            items: ["Aspiração profunda + limpeza leve", "Limpeza de vidros"],
           },
           {
             title: "Acabamentos (externos)",
@@ -52,13 +52,12 @@ export const cleaningSections: CatalogSection[] = [
               "Lavagem com luva de microfibra",
               "Rodas e caixas com pincéis",
               "Detalhamento (APC) em acabamentos",
-              "Descontaminação com clay bar (contaminação leve)",
-              "Secagem controlada",
+              "Descontaminação com clay bar (contaminação leve)",              
             ],
           },
           {
             title: "Interior",
-            items: ["Aspiração + limpeza leve", "Vidros veiculares"],
+            items: ["Aspiração profunda + limpeza leve", "Limpeza de vidros"],
           },
           {
             title: "Acabamentos (externos)",

@@ -25,15 +25,11 @@ export const galleryCategories: GalleryCategory[] = [
   {
     slug: "controle-solar",
     label: "Controle Solar",
-    photos: [
-      { src: "/img/galeria/controle-solar/controle-solar-01.jpg", width: 1200, height: 799, alt: "Controle Solar — foto 1" },
+    photos: [      
       { src: "/img/galeria/controle-solar/controle-solar-02.jpg", width: 1200, height: 800, alt: "Controle Solar — foto 2" },
-      { src: "/img/galeria/controle-solar/controle-solar-03.jpg", width: 1200, height: 800, alt: "Controle Solar — foto 3" },
-      { src: "/img/galeria/controle-solar/controle-solar-04.jpg", width: 1200, height: 1800, alt: "Controle Solar — foto 4" },
-      { src: "/img/galeria/controle-solar/controle-solar-05.jpg", width: 1200, height: 1800, alt: "Controle Solar — foto 5" },
-      { src: "/img/galeria/controle-solar/controle-solar-06.jpg", width: 1200, height: 1800, alt: "Controle Solar — foto 6" },
-      { src: "/img/galeria/controle-solar/controle-solar-07.jpg", width: 1200, height: 1800, alt: "Controle Solar — foto 7" },
-      { src: "/img/galeria/controle-solar/controle-solar-08.jpg", width: 1200, height: 1800, alt: "Controle Solar — foto 8" },
+      { src: "/img/galeria/controle-solar/controle-solar-03.jpg", width: 1200, height: 800, alt: "Controle Solar — foto 3" },      
+      { src: "/img/galeria/controle-solar/controle-solar-05.jpg", width: 1200, height: 1800, alt: "Controle Solar — foto 5" },      
+      { src: "/img/galeria/controle-solar/controle-solar-07.jpg", width: 1200, height: 1800, alt: "Controle Solar — foto 7" },      
       { src: "/img/galeria/controle-solar/controle-solar-09.jpg", width: 1200, height: 1800, alt: "Controle Solar — foto 9" },
       { src: "/img/galeria/controle-solar/controle-solar-10.jpg", width: 1200, height: 1800, alt: "Controle Solar — foto 10" },
       { src: "/img/galeria/controle-solar/controle-solar-11.jpg", width: 1200, height: 1800, alt: "Controle Solar — foto 11" },

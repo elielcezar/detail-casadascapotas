@@ -39,8 +39,8 @@ export default function TeamSection({ id, showSalesTeam = false }: TeamSectionPr
         {showSalesTeam && (
           <div className={styles.group}>
             <SectionTitle
-              start="Nosso"
-              highlight="Time"
+              start="Equipe"
+              highlight="Comercial"
               text="Profissionais dedicados e apaixonados pelo que fazem, prontos para oferecer o melhor atendimento."
             />
             <TeamGrid members={salesTeam} />
@@ -48,8 +48,8 @@ export default function TeamSection({ id, showSalesTeam = false }: TeamSectionPr
         )}
         <div className={styles.group}>
           <SectionTitle
-            start="Nossa"
-            highlight="Equipe"
+            start="Equipe"
+            highlight="Técnica"
             text="Técnicos altamente qualificados para garantir um serviço de alta performance. Seu carro em boas mãos."
           />
           <TeamGrid members={team} />
