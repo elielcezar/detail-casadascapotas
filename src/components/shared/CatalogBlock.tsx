@@ -38,7 +38,9 @@ export default function CatalogBlock({
             width={section.logo.width}
             height={section.logo.height}
             alt={section.logo.alt}
-            className={styles.logo}
+            className={
+              section.logo.plain ? `${styles.logo} ${styles.logoPlain}` : styles.logo
+            }
           />
         )}
         <SectionTitle

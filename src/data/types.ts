@@ -47,6 +47,11 @@ export interface BrandLogo {
   height: number;
   /** Altura exibida no header do card, em px (padrão: 22px) */
   displayHeight?: number;
+  /**
+   * Exibe o logo sem o fundo azul de contraste — use em logos escuros, que
+   * já aparecem bem sobre o fundo claro da seção (ex.: Nasiol).
+   */
+  plain?: boolean;
   alt: string;
 }
 

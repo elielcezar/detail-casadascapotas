@@ -27,6 +27,15 @@
   border-radius: 8px;
 }
 
+/* Logos escuros (ex.: Nasiol) dispensam o fundo de contraste */
+.logoPlain {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  height: 70px;
+  margin-bottom: 40px;
+}
+
 .cardsTitle {
   text-align: center;
   font-family: var(--font-heading);

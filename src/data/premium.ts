@@ -7,6 +7,13 @@ import type { CatalogSection } from "./types";
  */
 export const premiumSections: CatalogSection[] = [
   {
+    logo: {
+      src: "/img/nasiol.png",
+      width: 300,
+      height: 172,
+      alt: "Logo Nasiol",
+      plain: true,
+    },
     titleStart: "Nano",
     titleHighlight: "Coatings",
     description:
