@@ -54,9 +54,10 @@ export const premiumSections: CatalogSection[] = [
         title: "Glasshield",
         subtitle: "Nano Cerâmico para Vidros",
         images: [
-          { src: "/img/protecao/glassshield/IMG_3829.jpg", width: 600, height: 400, alt: "Glasshield — foto 1" },
-          { src: "/img/protecao/glassshield/222IMG_3829.jpg", width: 600, height: 400, alt: "Glasshield — foto 2" },
-          { src: "/img/protecao/glassshield/Cópia-de-_MG_3171.jpg", width: 600, height: 400, alt: "Glasshield — foto 3" },
+          { src: "/img/protecao/glassshield/00.jpg", width: 600, height: 400, alt: "Glasshield — foto 1" },
+          { src: "/img/protecao/glassshield/01.jpg", width: 600, height: 467, alt: "Glasshield — foto 2" },
+          { src: "/img/protecao/glassshield/02.jpg", width: 600, height: 606, alt: "Glasshield — foto 3" },
+          { src: "/img/protecao/glassshield/03.jpg", width: 600, height: 400, alt: "Glasshield — foto 4" },
         ],
         benefits: [
           "Aumenta a visibilidade em dias de chuva",
@@ -93,12 +94,13 @@ export const premiumSections: CatalogSection[] = [
         title: "Cabincare",
         subtitle: "Nano Coating para Estofados",
         images: [
-          { src: "/img/protecao/cabincare/IMG_4098.jpg", width: 600, height: 400, alt: "Cabincare — foto 1" },
-          { src: "/img/protecao/cabincare/IMG_4289.jpg", width: 600, height: 400, alt: "Cabincare — foto 2" },
-          { src: "/img/protecao/cabincare/d2c37410-d8f5-4d88-8a5f-3cecd713f879.jpg", width: 600, height: 450, alt: "Cabincare — foto 3" },
+          { src: "/img/protecao/cabincare/00.jpg", width: 600, height: 600, alt: "Cabincare — foto 1" },
+          { src: "/img/protecao/cabincare/01.jpg", width: 600, height: 399, alt: "Cabincare — foto 2" },
+          { src: "/img/protecao/cabincare/02.jpg", width: 600, height: 407, alt: "Cabincare — foto 3" },
+          { src: "/img/protecao/cabincare/03.jpg", width: 600, height: 400, alt: "Cabincare — foto 4" },
         ],
         benefits: [
-          "Para estofos, painéis de portas, forros de teto e tetos conversíveis",
+          "Para estofos, painéis de portas, forros de teto e capotas de tetos conversíveis",
           "Protege contra derramamentos espontâneos",
           "Aumenta a vida útil dos assentos",
           "Fórmula não alérgica e livre de tóxicos",
