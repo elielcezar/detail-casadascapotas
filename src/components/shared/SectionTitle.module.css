@@ -42,6 +42,22 @@
   max-width: 700px;
 }
 
+/* Alinhado à esquerda — usado quando o título divide espaço com uma foto
+   ao lado, em vez de encabeçar a seção inteira */
+.left {
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.left p {
+  max-width: none;
+  margin: 0;
+}
+
+.left .line {
+  margin: 15px 0 0;
+}
+
 /* Título branco para fundos escuros */
 .light h2 {
   color: var(--cream);

@@ -12,6 +12,20 @@ export const filmSections: CatalogSection[] = [
     titleHighlight: "3M",
     description:
       "Há mais de 100 anos, a 3M é referência mundial em inovação, qualidade e proteção. Suas películas automotivas oferecem controle solar, proteção contra raios UV, conforto térmico e acabamento premium.\n\nA Casa das Capotas é Revendedor e Aplicador Autorizado 3M, unindo produtos originais à experiência de uma equipe especializada para garantir uma instalação precisa e o máximo desempenho em cada projeto.",
+    images: [
+      {
+        src: "/img/pelicula-0.jpg",
+        width: 600,
+        height: 400,
+        alt: "Teto solar de um veículo preto com película aplicada, refletindo a iluminação da oficina",
+      },
+      {
+        src: "/img/pelicula1.jpg",
+        width: 600,
+        height: 400,
+        alt: "Película de controle solar aplicada nos vidros laterais de um sedã branco",
+      },
+    ],
     cards: [
       {
         title: "Linha FX",
@@ -138,7 +152,7 @@ export const filmSections: CatalogSection[] = [
           rows: [
             {
               label: "Energia Solar Total Rejeitada",
-              values: ["62%", "6%", "50%", "34%"],
+              values: ["62%", "60%", "50%", "34%"],
               highlight: true,
             },
             { label: "VLT", values: ["20%", "39%", "69%", "86%"] },

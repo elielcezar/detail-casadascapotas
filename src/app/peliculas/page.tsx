@@ -17,9 +17,9 @@ export default function PeliculasPage() {
         start="Catálogo de"
         highlight="Películas"
         image={{
-          src: "/img/3m-header.jpg",
+          src: "/img/3m-header2.jpg",
           width: 2498,
-          height: 310,
+          height: 410,
           alt: "3M — Tecnologia, Proteção e Performance",
           mobileSrc: "/img/3m-header-mob.jpg",
         }}

@@ -34,8 +34,9 @@
   width: 100%;
   height: auto;
   /* Reserva o espaço na proporção do banner desktop antes da imagem
-     carregar, evitando layout shift */
-  aspect-ratio: 2498 / 310;
+     carregar, evitando layout shift. A proporção vem de --banner-ratio,
+     definida em PageHero.tsx a partir das dimensões reais da arte */
+  aspect-ratio: var(--banner-ratio);
 }
 
 /* Variante para fotos (em vez de banners gráficos já na proporção certa):

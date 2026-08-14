@@ -10,6 +10,8 @@ interface SectionTitleProps {
   variant?: "section" | "category";
   /** Título branco para seções de fundo escuro */
   light?: boolean;
+  /** Alinhamento do bloco (padrão: centralizado) */
+  align?: "center" | "left";
 }
 
 /** Título centralizado de seção, com destaque vermelho e linha decorativa. */
@@ -19,11 +21,13 @@ export default function SectionTitle({
   text,
   variant = "section",
   light = false,
+  align = "center",
 }: SectionTitleProps) {
   const cls = [
     styles.wrap,
     variant === "category" ? styles.category : "",
     light ? styles.light : "",
+    align === "left" ? styles.left : "",
   ]
     .filter(Boolean)
     .join(" ");

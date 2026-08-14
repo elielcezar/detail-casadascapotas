@@ -28,8 +28,14 @@ interface PageHeroProps {
 export default function PageHero({ start, highlight, text, image }: PageHeroProps) {
   if (image) {
     const bannerCls = image.fit === "cover" ? styles.bannerImageCover : styles.bannerImage;
+    // Proporção real do banner, usada para reservar o espaço antes do
+    // carregamento — vem dos dados para que trocar a arte por outra de
+    // formato diferente não distorça a imagem
+    const bannerStyle = {
+      "--banner-ratio": `${image.width} / ${image.height}`,
+    } as React.CSSProperties;
     return (
-      <section className={styles.pageHeroImage}>
+      <section className={styles.pageHeroImage} style={bannerStyle}>
         <h1 className="sr-only">
           {start} {highlight}
         </h1>

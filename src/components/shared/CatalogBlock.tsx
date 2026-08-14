@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import type { CatalogCard, CatalogSection } from "@/data/types";
 import AppImage from "./AppImage";
+import FadeCarousel from "./FadeCarousel";
 import FilmCard from "./FilmCard";
 import SectionTitle from "./SectionTitle";
 import styles from "./CatalogBlock.module.css";
@@ -22,6 +23,16 @@ export default function CatalogBlock({
   /** Renderização customizada de cada card, no lugar do FilmCard padrão */
   renderCard?: (card: CatalogCard, index: number) => React.ReactNode;
 }) {
+  const introImages = section.images?.length ? section.images : null;
+  const sectionTitle = (
+    <SectionTitle
+      variant="category"
+      align={introImages ? "left" : "center"}
+      start={section.titleStart}
+      highlight={section.titleHighlight}
+      text={section.description}
+    />
+  );
   const cardsCls =
     columns === 2
       ? `${styles.cards} ${styles.cardsTwoCol}`
@@ -43,12 +54,18 @@ export default function CatalogBlock({
             }
           />
         )}
-        <SectionTitle
-          variant="category"
-          start={section.titleStart}
-          highlight={section.titleHighlight}
-          text={section.description}
-        />
+        {introImages ? (
+          // Com fotos, título e descrição saem do topo centralizado e passam
+          // a dividir a linha com o carrossel, alinhados à esquerda
+          <div className={styles.intro}>
+            {sectionTitle}
+            <div className={styles.introCarousel}>
+              <FadeCarousel images={introImages} />
+            </div>
+          </div>
+        ) : (
+          sectionTitle
+        )}
         {section.cardsTitle && <h3 className={styles.cardsTitle}>{section.cardsTitle}</h3>}
         <div className={cardsCls}>
           {section.cards.map((card, i) =>

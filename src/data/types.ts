@@ -94,6 +94,17 @@ export interface CatalogSection {
   titleHighlight: string;
   /** Rich text — ver nota no topo do arquivo */
   description: string;
+  /**
+   * Fotos exibidas ao lado da descrição: em vez do parágrafo centralizado sob
+   * o título, a descrição ocupa metade esquerda e as fotos, em carrossel com
+   * fade, a metade direita.
+   */
+  images?: {
+    src: string;
+    width: number;
+    height: number;
+    alt: string;
+  }[];
   /** Logo de marca exibido acima do título da seção (ex.: logo 3M) */
   logo?: BrandLogo;
   /** Título exibido imediatamente acima da grade de cards (ex.: "Marcas de PPF") */

@@ -36,6 +36,26 @@
   margin-bottom: 40px;
 }
 
+/* Intro em duas colunas de 50% — descrição da seção à esquerda, carrossel de
+   fotos à direita (usado quando a seção define `images`, ex.: Linha 3M) */
+.intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+/* O FadeCarousel usa imagens com `fill`, então o container precisa de
+   posição e altura definidas */
+.introCarousel {
+  position: relative;
+  height: 420px;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
 .cardsTitle {
   text-align: center;
   font-family: var(--font-heading);
@@ -61,8 +81,43 @@
   grid-template-columns: 1fr;
 }
 
+/* A grade só passa a 3 colunas a partir de 1399px. O auto-fit acima abriria
+   a terceira coluna já perto de 1150px, com cards de ~350px — estreitos
+   demais para as tabelas de especificação, que acabavam cortadas pelo
+   overflow do card. Entre 769px e 1398px ficam no máximo 2 colunas
+   (a variante de coluna única da Proteção Premium é preservada). */
+@media (min-width: 769px) and (max-width: 1398px) {
+  .cards:not(.cardsFull) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* No desktop o intro ocupa a largura do container e respira mais antes da
+   grade de cards */
+@media (min-width: 769px) {
+  .intro {
+    margin: 20px 0 80px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .intro {
+    gap: 35px;
+  }
+}
+
 @media (max-width: 768px) {
   .cards {
     grid-template-columns: 1fr;
+  }
+
+  .intro {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .introCarousel {
+    height: auto;
+    aspect-ratio: 3 / 2;
   }
 }
