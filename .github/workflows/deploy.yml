@@ -72,10 +72,6 @@ jobs:
           # todas as contas de e-mail e os certificados do cliente.
           server-dir: ${{ secrets.FTP_SERVER_DIR }}
           local-dir: ./out/
-          # TEMPORÁRIO — primeira execução. Conecta e loga o que faria, sem
-          # escrever. É a única forma de conferir FTP_SERVER_DIR, já que o
-          # GitHub não devolve o valor de um secret. Remover depois de validar.
-          dry-run: true
           # FTP sem TLS, por decisão consciente.
           #
           # O servidor (HostGator, Pure-FTPd) responde AUTH TLS, mas o
