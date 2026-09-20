@@ -1,0 +1,134 @@
+name: Build and Deploy
+
+on:
+  # Dispara via webhook do WordPress (plugin github-deploy-trigger)
+  repository_dispatch:
+    types: [wordpress_publish]
+
+  # Dispara em push na branch main
+  push:
+    branches: [main]
+
+  # Dispara manualmente pelo GitHub
+  workflow_dispatch:
+
+  # Backup: rebuild automático 2x ao dia (6h e 18h UTC = 3h e 15h Brasília)
+  schedule:
+    - cron: '0 6,18 * * *'
+
+# O Pure-FTPd do cPanel limita conexões simultâneas: dois deploys ao mesmo
+# tempo derrubam um ao outro. Aqui os deploys entram em fila em vez de
+# correrem juntos.
+# cancel-in-progress: false de propósito — cancelar um deploy no meio do FTP
+# deixaria o servidor em estado parcial. O GitHub mantém só a execução
+# pendente mais recente na fila, então nada se acumula.
+concurrency:
+  group: deploy-producao
+  cancel-in-progress: false
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    # Necessário para o keepalive conseguir commitar (ver último step)
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # `cache: 'npm'` guarda só ~/.npm. NÃO adicione .next/cache aqui:
+      # o fetch-cache do Next guarda as respostas do WordPress entre builds,
+      # e o deploy passaria a publicar conteúdo velho sem nenhum erro. O
+      # script `prebuild` limpa esse diretório, mas não crie o problema.
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Next.js
+        run: npm run build
+        env:
+          NEXT_PUBLIC_WP_API_URL: ${{ secrets.WP_API_URL }}
+          # Origem das imagens do WordPress. Só precisa ser definido quando o
+          # admin mudar de domínio; sem ele, usa a origem da própria API.
+          NEXT_PUBLIC_WP_MEDIA_URL: ${{ secrets.WP_MEDIA_URL }}
+          NEXT_PUBLIC_BASE_PATH: ${{ secrets.BASE_PATH }}
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # ATENÇÃO: precisa ser /casadascapotascuritiba.com/, NUNCA "/".
+          # A conta FTP cai no home do cPanel, não na raiz do site. Apontar
+          # para "/" faria esta action apagar mail/, ssl/, logs/ e etc/ —
+          # todas as contas de e-mail e os certificados do cliente.
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          local-dir: ./out/
+          # TEMPORÁRIO — primeira execução. Conecta e loga o que faria, sem
+          # escrever. É a única forma de conferir FTP_SERVER_DIR, já que o
+          # GitHub não devolve o valor de um secret. Remover depois de validar.
+          dry-run: true
+          # FTP sem TLS, por decisão consciente.
+          #
+          # O servidor (HostGator, Pure-FTPd) responde AUTH TLS, mas o
+          # certificado da porta 21 é *.hostgator.com.br e não cobre
+          # casadascapotascuritiba.com nem o IP — então a validação falha.
+          # O hostname do PTR (br508-ip03.hostgator.com.br) não serve: resolve
+          # para a Cloudflare, não para o servidor de FTP.
+          #
+          # Consequência: usuário e senha do FTP trafegam em texto puro do
+          # runner até o servidor, a cada deploy. Aceitável aqui porque a conta
+          # é limitada ao home do cPanel deste cliente e `server-dir` restringe
+          # a escrita a uma pasta.
+          #
+          # Para voltar a FTPS: peça ao cliente o "Nome do servidor" no cPanel
+          # (Informações gerais), use-o em FTP_SERVER e troque para `ftps`.
+          # Ao transferir o painel para o cliente, troque a senha do FTP — ela
+          # já circulou em texto puro.
+          protocol: ftp
+          dangerous-clean-slate: false
+          # O export estático gera centenas de arquivos pequenos; com o padrão
+          # de 30s o socket de controle estoura no meio.
+          timeout: 120000
+          # Esta action APAGA do servidor tudo que não existe em out/.
+          # Tudo que mora dentro de /casadascapotascuritiba.com/ e não é
+          # gerado pelo Next precisa estar listado aqui.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            .well-known/**
+            .ftp-deploy-sync-state.json
+        continue-on-error: false
+
+      # O GitHub desativa workflows agendados após 60 dias sem atividade no
+      # repositório. Este step cria um commit vazio quando o último commit
+      # passa de 45 dias, zerando o contador. Commits feitos com o
+      # GITHUB_TOKEN não disparam novos workflows, então não há loop de build.
+      - name: Keepalive (evita auto-desativação do cron)
+        if: github.event_name == 'schedule'
+        run: |
+          set -euo pipefail
+          dias=$(( ( $(date +%s) - $(git log -1 --format=%ct) ) / 86400 ))
+          echo "Último commit há ${dias} dia(s)."
+          if [ "$dias" -lt 45 ]; then
+            echo "Ainda longe do limite de 60 dias. Nada a fazer."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit --allow-empty -m "chore: keepalive do workflow agendado"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+          echo "Commit de keepalive enviado."
+
+      - name: Notify on failure
+        if: failure()
+        run: echo "Deploy failed! Check the logs above for details."
