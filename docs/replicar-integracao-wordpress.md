@@ -381,6 +381,50 @@ antigo quase sempre é cache — limpe pelo hPanel antes de investigar o build.
 workflows agendados são desativados sem aviso. O step de keepalive existe por
 isso.
 
+**O fetch-cache do Next publica conteúdo velho.** `.next/cache/fetch-cache`
+guarda as respostas do WordPress *entre builds*. O build roda, reporta sucesso
+e gera o site com o conteúdo anterior — nenhum erro em lugar nenhum. No runner
+do GitHub o diretório nasce vazio, então produção escapa por acidente; basta
+alguém adicionar `.next/` ao cache do workflow "para acelerar" e o site congela
+silenciosamente. Adicione um script `prebuild` que apague esse diretório e
+deixe um comentário no workflow dizendo para não cacheá-lo.
+
+**As retentativas brigam com o timeout de página do Next.** A escada de espera
+do `wpFetch` (2s + 5s + 15s + 30s) soma ~52 segundos, mas o Next mata a geração
+de cada página aos 60s e recomeça do zero. Na prática a última retentativa — a
+mais importante, porque é a que atravessa um bloqueio temporário — nunca chega
+ao fim. Aumente `staticPageGenerationTimeout` para 180 em vez de encurtar a
+escada: a espera longa é o mecanismo, não o problema.
+
+**Campo `required` no ACF impede update parcial via REST.** Um `POST` que
+mande só um campo devolve `400 rest_invalid_param` exigindo todos os campos
+obrigatórios do grupo. O admin não sofre porque envia o formulário inteiro —
+quem quebra é script de seed, migração e automação. Ou reenvie os obrigatórios
+junto, ou deixe `required: 0` e valide em outro lugar.
+
+**O certificado FTPS de hospedagem compartilhada não cobre o domínio do
+cliente.** Em HostGator o certificado da porta 21 é `*.hostgator.com.br`, então
+conectar por `dominiodocliente.com.br` ou pelo IP falha na validação TLS. O
+hostname do PTR também pode não servir: no caso deste projeto ele resolvia para
+a Cloudflare, não para o servidor de FTP. O nome utilizável está no cPanel, em
+*Informações gerais → Nome do servidor*. Sem ele, a escolha é entre FTP em
+texto puro e não fazer deploy — decida conscientemente e registre no workflow.
+
+**O plugin de deploy vem apontado para o projeto de origem.** O campo de
+repositório tem um default embutido no código, e ele continua sendo o do
+projeto anterior. Com um token fine-grained restrito ao repositório novo, o
+disparo vai para o lugar errado e o GitHub devolve
+`403 Resource not accessible by personal access token` — que parece problema de
+token e não é. Troque o default em `field_repo()` ao replicar, e confira o
+campo salvo antes de culpar a credencial.
+
+**Prefira token fine-grained ao classic.** O guia original pedia scope `repo`,
+que dá escrita em *todos* os repositórios da conta — e esse token fica em texto
+no banco do WordPress, legível por qualquer administrador do site. Um
+fine-grained restrito a um repositório, com `Contents: Read and write`, faz o
+mesmo `repository_dispatch`. Contrapartida: expira em no máximo um ano, e
+quando expira os deploys param sem ninguém perceber. Anote a data.
+
 ---
 
 ## O que NÃO está neste repositório
