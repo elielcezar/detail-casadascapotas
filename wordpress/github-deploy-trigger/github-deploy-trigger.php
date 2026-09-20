@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: GitHub Deploy Trigger
- * Plugin URI: https://notebookexpert.com.br
- * Description: Dispara rebuild automático do site Next.js via GitHub Actions quando posts, páginas, seminovos, depoimentos ou dicas do especialista são alterados.
+ * Plugin URI: https://casadascapotascuritiba.com
+ * Description: Dispara rebuild automático do site Next.js via GitHub Actions quando páginas, categorias da galeria, membros da equipe ou cards de catálogo são alterados.
  * Version: 1.2.0
- * Author: NotebookExpert
- * Author URI: https://notebookexpert.com.br
+ * Author: Eliel Cezar
+ * Author URI: https://casadascapotascuritiba.com
  * License: GPL v2 or later
  * Text Domain: github-deploy-trigger
  */
@@ -25,11 +25,10 @@ class GitHub_Deploy_Trigger {
      */
     private function get_watched_post_types() {
         return apply_filters('github_deploy_watched_post_types', [
-            'post',
             'page',
-            'seminovo',
-            'depoimento',
-            'dica_do_especialista',
+            'galeria_categoria',
+            'membro_equipe',
+            'card_catalogo',
         ]);
     }
 
@@ -48,7 +47,7 @@ class GitHub_Deploy_Trigger {
         }
 
         if ($post_type === 'page') {
-            return (bool) $this->get_option('trigger_pages', 0);
+            return (bool) $this->get_option('trigger_pages', 1);
         }
 
         return true;
@@ -104,8 +103,8 @@ class GitHub_Deploy_Trigger {
     /**
      * Registrar os hooks de publicação de cada tipo observado.
      * O hook do WordPress é publish_{post_type} — publish_post só cobre o tipo
-     * "post", então sem isto publicar um seminovo/depoimento/dica do
-     * especialista nunca republicava o site.
+     * "post", então sem isto publicar uma categoria da galeria, um membro da
+     * equipe ou um card de catálogo nunca republicava o site.
      */
     public function register_publish_hooks() {
         foreach ($this->get_watched_post_types() as $post_type) {
@@ -269,7 +268,7 @@ class GitHub_Deploy_Trigger {
      * Campo: Trigger Pages
      */
     public function field_trigger_pages() {
-        $checked = $this->get_option('trigger_pages', 0);
+        $checked = $this->get_option('trigger_pages', 1);
         ?>
         <label>
             <input type="checkbox" 
@@ -404,8 +403,8 @@ class GitHub_Deploy_Trigger {
                 </ol>
                 <p><strong>Tempo médio:</strong> 3-5 minutos após a publicação</p>
                 <p>
-                    <strong>Seminovos, Depoimentos e Dicas do Especialista</strong> disparam deploy
-                    sempre — as opções acima valem apenas para posts do blog e páginas.
+                    <strong>Galeria, Equipe e Cards de Catálogo</strong> disparam deploy
+                    sempre — as opções acima valem apenas para posts e páginas.
                 </p>
                 <p style="border-left:4px solid #dba617;padding-left:10px;">
                     <strong>Atenção:</strong> se o log abaixo mostrar sucesso mas o site não atualizar,

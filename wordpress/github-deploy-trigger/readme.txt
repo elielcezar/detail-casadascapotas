@@ -1,5 +1,5 @@
 === GitHub Deploy Trigger ===
-Contributors: notebookexpert
+Contributors: elielcezar
 Tags: github, deploy, actions, webhook, headless
 Requires at least: 5.0
 Tested up to: 6.4
@@ -16,7 +16,7 @@ Este plugin permite integrar seu WordPress com GitHub Actions para fazer deploy 
 **Funcionalidades:**
 
 * Disparo automático ao publicar, editar, enviar para lixeira, excluir ou restaurar
-* Cobre posts, páginas e os CPTs Seminovo, Depoimento e Dica do Especialista
+* Cobre páginas e os CPTs Categoria da Galeria, Membro da Equipe e Card de Catálogo
 * Página de configurações no admin
 * Botão de teste manual
 * Log de atividades
@@ -25,7 +25,7 @@ Este plugin permite integrar seu WordPress com GitHub Actions para fazer deploy 
 **Tipos de conteúdo observados:**
 
 Posts e páginas respeitam as caixas de seleção das configurações. Os CPTs
-(`seminovo`, `depoimento`, `dica_do_especialista`) sempre disparam, já que
+(`galeria_categoria`, `membro_equipe`, `card_catalogo`) sempre disparam, já que
 existem exclusivamente para alimentar o frontend. A lista pode ser ajustada
 pelo filtro `github_deploy_watched_post_types`.
 
@@ -58,7 +58,7 @@ pelo filtro `github_deploy_watched_post_types`.
 * O botao de teste manual segue ignorando o debounce
 
 = 1.1.0 =
-* Corrige: publicar ou editar Seminovo, Depoimento e Dica do Especialista não disparava deploy
+* Corrige: publicar ou editar CPTs não disparava deploy
   (o hook publish_{post_type} só estava registrado para post e page)
 * Centraliza a verificação de tipo em should_trigger_for()
 * Novo filtro github_deploy_watched_post_types

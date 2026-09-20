@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: Expert Headless Mode
+ * Plugin Name: Detail Headless Mode
  * Description: Redireciona o frontend para o painel, limpa o cabeçalho e mantém apenas a REST API ativa.
  * Version: 1.1
- * Author: Notebook Expert
+ * Author: Eliel Cezar
  */
 
 // Impede o acesso direto ao arquivo
@@ -14,9 +14,9 @@ if (!defined('ABSPATH')) exit;
  * frontend do WordPress vai para o painel. Quem não estiver logado cai na tela
  * de login, então nenhum conteúdo da instalação fica visível.
  *
- * Não redirecionamos para o site público preservando o path: o permalink do WP
- * é /AAAA/MM/DD/slug/ e no Next.js o post vive em /dicas/<slug>, então o
- * destino sempre daria 404.
+ * Não redirecionamos para o site público preservando o path: este WordPress
+ * só alimenta conteúdo (galeria, equipe, textos) e nenhum dos seus posts tem
+ * URL correspondente no site, então o destino sempre daria 404.
  */
 add_action('template_redirect', function() {
     // 1. Permite a REST API (é o que alimenta o site Next.js)
