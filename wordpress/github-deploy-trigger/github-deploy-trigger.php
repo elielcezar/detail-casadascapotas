@@ -222,7 +222,9 @@ class GitHub_Deploy_Trigger {
                autocomplete="new-password" />
         <button type="button" class="button" onclick="toggleTokenVisibility()">Mostrar/Ocultar</button>
         <p class="description">
-            Gere em <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a> com scope <code>repo</code>
+            Gere em <a href="https://github.com/settings/personal-access-tokens/new" target="_blank">tokens fine-grained</a>,
+            restrito a este repositório, com a permissão <code>Contents: Read and write</code>.<br>
+            Um token sem acesso ao repositório configurado abaixo devolve <code>HTTP 403</code>.
         </p>
         <script>
         function toggleTokenVisibility() {
@@ -237,7 +239,7 @@ class GitHub_Deploy_Trigger {
      * Campo: Repositório
      */
     public function field_repo() {
-        $value = $this->get_option('github_repo', 'elielcezar/notebook-expert');
+        $value = $this->get_option('github_repo', 'elielcezar/detail-casadascapotas');
         ?>
         <input type="text" 
                name="<?php echo $this->option_name; ?>[github_repo]" 
