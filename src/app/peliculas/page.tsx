@@ -3,6 +3,7 @@ import CatalogBlock from "@/components/shared/CatalogBlock";
 import CtaSection from "@/components/shared/CtaSection";
 import PageHero from "@/components/shared/PageHero";
 import { filmSections } from "@/data/films";
+import { overlayCatalog } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Catálogo de Películas",
@@ -10,7 +11,9 @@ export const metadata: Metadata = {
     "Catálogo completo de películas automotivas: 3M FX, Color Stable, Ceramic IR, Crystalline, Sunblack, Sunblock e mais. Garantia de fábrica de até 15 anos.",
 };
 
-export default function PeliculasPage() {
+export default async function PeliculasPage() {
+  const sections = await overlayCatalog(filmSections);
+
   return (
     <>
       <PageHero
@@ -24,7 +27,7 @@ export default function PeliculasPage() {
           mobileSrc: "/img/3m-header-mob.jpg",
         }}
       />
-      {filmSections.map((section, i) => (
+      {sections.map((section, i) => (
         <CatalogBlock key={section.titleHighlight} section={section} alt={i % 2 === 1} wide />
       ))}
       <CtaSection

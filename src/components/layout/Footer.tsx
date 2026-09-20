@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Clock, Facebook, Instagram, Mail, MapPin, Phone, Youtube } from "lucide-react";
-import { site, whatsappLink } from "@/data/site";
+import { whatsappLink } from "@/data/site";
+import { getSettings } from "@/lib/content";
 import WhatsAppIcon from "@/components/shared/WhatsAppIcon";
 import styles from "./Footer.module.css";
 
@@ -19,20 +20,22 @@ const usefulLinks = [
   { label: "Contato", href: "/#contato" },
 ];
 
-export default function Footer() {
+export default async function Footer() {
+  const settings = await getSettings();
+
   return (
     <footer className={styles.footer}>
       <div className="container">
         <div className={styles.grid}>
           <div>
-            <h2 className={styles.colTitle}>{site.shortName}</h2>
+            <h2 className={styles.colTitle}>{settings.shortName}</h2>
             <p>
               Referência em estética automotiva em Curitiba. Oferecemos serviços de películas,
               PPF e limpeza profissional com produtos premium e garantia de qualidade.
             </p>
             <div className={styles.social}>
               <a
-                href={site.social.instagram}
+                href={settings.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -40,7 +43,7 @@ export default function Footer() {
                 <Instagram size={16} aria-hidden="true" />
               </a>
               <a
-                href={site.social.facebook}
+                href={settings.social.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
@@ -48,14 +51,14 @@ export default function Footer() {
                 <Facebook size={16} aria-hidden="true" />
               </a>
               <a
-                href={site.social.youtube}
+                href={settings.social.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="YouTube"
               >
                 <Youtube size={16} aria-hidden="true" />
               </a>
-              <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+              <a href={whatsappLink({ whatsapp: settings.whatsapp })} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                 <WhatsAppIcon size={16} />
               </a>
             </div>
@@ -87,16 +90,16 @@ export default function Footer() {
             <h2 className={styles.colTitle}>Contato</h2>
             <ul className={styles.contact}>
               <li>
-                <MapPin size={16} aria-hidden="true" /> {site.address.city} - {site.address.state}
+                <MapPin size={16} aria-hidden="true" /> {settings.address.city} - {settings.address.state}
               </li>
               <li>
-                <Phone size={16} aria-hidden="true" /> {site.phone}
+                <Phone size={16} aria-hidden="true" /> {settings.phone}
               </li>
               <li>
-                <Mail size={16} aria-hidden="true" /> {site.email}
+                <Mail size={16} aria-hidden="true" /> {settings.email}
               </li>
               <li>
-                <Clock size={16} aria-hidden="true" /> {site.hours}
+                <Clock size={16} aria-hidden="true" /> {settings.hours}
               </li>
             </ul>
           </div>
@@ -104,7 +107,7 @@ export default function Footer() {
 
         <div className={styles.bottom}>
           <span>
-            &copy; {new Date().getFullYear()} {site.name}. Todos os direitos reservados.
+            &copy; {new Date().getFullYear()} {settings.name}. Todos os direitos reservados.
           </span>          
         </div>
       </div>

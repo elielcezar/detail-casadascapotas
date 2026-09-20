@@ -20,6 +20,7 @@ export const premiumSections: CatalogSection[] = [
       "Revestimentos nano cerâmicos de alta tecnologia que elevam a proteção do seu veículo a um novo patamar — da pintura ao couro, dos vidros aos estofados.",
     cards: [
       {
+        id: "premium-vitrificacao",
         title: "Vitrificação",
         subtitle: "Revestimento Nano Cerâmico",
         images: [
@@ -51,6 +52,7 @@ export const premiumSections: CatalogSection[] = [
         },
       },
       {
+        id: "premium-glasshield",
         title: "Glasshield",
         subtitle: "Nano Cerâmico para Vidros",
         images: [
@@ -70,6 +72,7 @@ export const premiumSections: CatalogSection[] = [
         },
       },
       {
+        id: "premium-leatherboost",
         title: "Leatherboost",
         subtitle: "Nano Coating para Couro",
         images: [
@@ -91,6 +94,7 @@ export const premiumSections: CatalogSection[] = [
         },
       },
       {
+        id: "premium-cabincare",
         title: "Cabincare",
         subtitle: "Nano Coating para Estofados",
         images: [

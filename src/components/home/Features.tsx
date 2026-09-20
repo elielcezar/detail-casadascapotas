@@ -1,7 +1,8 @@
 import { Award, Shield, Users } from "lucide-react";
 import FadeIn from "@/components/shared/FadeIn";
 import RichText from "@/components/shared/RichText";
-import { features, type Feature } from "@/data/home";
+import { type Feature } from "@/data/home";
+import { getHome } from "@/lib/content";
 import styles from "./Features.module.css";
 
 const icons: Record<Feature["icon"], typeof Award> = {
@@ -11,7 +12,9 @@ const icons: Record<Feature["icon"], typeof Award> = {
 };
 
 /** Cards de diferenciais logo abaixo do hero. */
-export default function Features() {
+export default async function Features() {
+  const { features } = await getHome();
+
   return (
     <section className={styles.features}>
       <div className="container">

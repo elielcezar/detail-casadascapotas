@@ -5,17 +5,20 @@ import HeroCarousel from "@/components/home/HeroCarousel";
 import ServiceShowcase from "@/components/home/ServiceShowcase";
 import CtaSection from "@/components/shared/CtaSection";
 import TeamSection from "@/components/shared/TeamSection";
-import { serviceSections } from "@/data/home";
+import { getHome, getSettings } from "@/lib/content";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const { whatsapp } = await getSettings();
+  const { heroSlides, counters, serviceSections } = await getHome();
+
   return (
     <>
-      <HeroCarousel />
+      <HeroCarousel slides={heroSlides} whatsapp={whatsapp} />
       <Features />
       {serviceSections.map((service) => (
         <ServiceShowcase key={service.id} service={service} />
       ))}
-      <Counters />
+      <Counters counters={counters} />
       <TeamSection id="equipe" showSalesTeam />
       <GallerySection />
       <CtaSection

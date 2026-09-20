@@ -2,14 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import FadeIn from "@/components/shared/FadeIn";
-import { counters } from "@/data/home";
+import type { Counter } from "@/data/home";
 import { withBasePath } from "@/lib/basePath";
 import styles from "./Counters.module.css";
 
 const DURATION_MS = 2000;
 
 /** Contadores animados sobre foto escurecida da oficina. */
-export default function Counters() {
+export default function Counters({ counters }: { counters: Counter[] }) {
   const sectionRef = useRef<HTMLElement>(null);
   const startedRef = useRef(false);
   const [values, setValues] = useState(() => counters.map(() => 0));
@@ -57,7 +57,10 @@ export default function Counters() {
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+    // `counters` virou prop (vem do WordPress via overlay), então entra nas
+    // dependências. Remontar o observer é inofensivo: startedRef garante que
+    // a animação roda uma vez só.
+  }, [counters]);
 
   return (
     <section className={styles.counters} ref={sectionRef}>

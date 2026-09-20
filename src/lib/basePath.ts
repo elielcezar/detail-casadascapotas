@@ -7,5 +7,8 @@
  * passar por aqui.
  */
 export function withBasePath(path: string): string {
+  // URL absoluta (imagem vinda do WordPress) já aponta para outro domínio:
+  // prefixar o basePath geraria "/detail/https://detail.ecwd.cloud/...".
+  if (/^(https?:)?\/\//.test(path) || path.startsWith("data:")) return path;
   return `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${path}`;
 }

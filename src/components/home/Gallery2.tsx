@@ -4,23 +4,30 @@ import { useMemo, useState } from "react";
 import { ZoomIn } from "lucide-react";
 import AppImage from "@/components/shared/AppImage";
 import Lightbox from "@/components/shared/Lightbox";
-import { galleryCategories, type GalleryPhoto } from "@/data/gallery2";
+import type { GalleryCategory, GalleryPhoto } from "@/data/gallery2";
 import styles from "./Gallery2.module.css";
 
+interface Gallery2Props {
+  /** Categorias já resolvidas pelo overlay (WordPress ou padrão do código). */
+  categories: GalleryCategory[];
+}
+
 /** Galeria em grade filtrável por categoria, largura total (sem .container). */
-export default function Gallery2() {
-  const [active, setActive] = useState<string>("controle-solar");
+export default function Gallery2({ categories }: Gallery2Props) {
+  // A categoria inicial é a primeira da lista, não um slug fixo: a ordem e os
+  // slugs passaram a vir do WordPress e podem mudar sem aviso.
+  const [active, setActive] = useState<string>(categories[0]?.slug ?? "");
 
   const photos: GalleryPhoto[] = useMemo(() => {
-    return galleryCategories.find((c) => c.slug === active)?.photos ?? [];
-  }, [active]);
+    return categories.find((c) => c.slug === active)?.photos ?? [];
+  }, [categories, active]);
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   return (
     <>
       <div className={styles.filters} role="group" aria-label="Filtrar galeria por categoria">
-        {galleryCategories.map((cat) => (
+        {categories.map((cat) => (
           <button
             key={cat.slug}
             type="button"

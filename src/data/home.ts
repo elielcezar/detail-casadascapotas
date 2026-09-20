@@ -26,6 +26,24 @@ export interface HeroSlide {
   }[];
 }
 
+/**
+ * Pares de botões que um slide do hero pode usar.
+ *
+ * O WordPress escolhe o par pelo nome (campo "Botões"); rótulo, destino,
+ * variante e ícone ficam aqui, no código. É o que impede um slide editado no
+ * admin de apontar para uma rota que não existe.
+ */
+export const heroButtonPresets = {
+  servicos: [
+    { label: "Nossos Serviços", href: "/#servicos", variant: "primary", icon: "tools" },
+    { label: "Fale Conosco", href: "", variant: "outline", icon: "whatsapp", whatsappMessage: "" },
+  ],
+  peliculas: [
+    { label: "Ver Películas", href: "/peliculas", variant: "primary", icon: "film" },
+    { label: "Agendar Agora", href: "", variant: "outline", icon: "whatsapp", whatsappMessage: "" },
+  ],
+} satisfies Record<string, HeroSlide["buttons"]>;
+
 export const heroSlides: HeroSlide[] = [
   {
     background: "/img/banner-home/banner1.jpg",

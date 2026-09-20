@@ -1,6 +1,7 @@
 import { Check, Gem, Layers, Shield, Star, Tablet } from "lucide-react";
 import type { BadgeIcon, CatalogCard, SpecTable } from "@/data/types";
 import { whatsappLink } from "@/data/site";
+import { getSettings } from "@/lib/content";
 import AppImage from "./AppImage";
 import Button from "./Button";
 import FadeIn from "./FadeIn";
@@ -80,7 +81,9 @@ function SpecTableEl({ table, label }: { table: SpecTable; label?: string }) {
 }
 
 /** Card de catálogo usado nas páginas de películas, limpeza e PPF. */
-export default function FilmCard({ card }: { card: CatalogCard }) {
+export default async function FilmCard({ card }: { card: CatalogCard }) {
+  const { whatsapp } = await getSettings();
+
   const Icon = card.badgeIcon ? badgeIcons[card.badgeIcon] : null;
 
   return (
@@ -147,7 +150,7 @@ export default function FilmCard({ card }: { card: CatalogCard }) {
         {card.note && <RichText text={card.note} className={styles.note} />}
 
         {card.cta && (
-          <Button href={whatsappLink(card.cta.message)} external block>
+          <Button href={whatsappLink({ whatsapp, message: card.cta.message })} external block>
             <WhatsAppIcon size={16} /> {card.cta.label}
           </Button>
         )}

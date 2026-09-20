@@ -28,6 +28,7 @@ export const filmSections: CatalogSection[] = [
     ],
     cards: [
       {
+        id: "film-fx",
         title: "Linha FX",
         subtitle: "Linha de Entrada",
         brandLogo: logo3M,
@@ -55,6 +56,7 @@ export const filmSections: CatalogSection[] = [
         },
       },
       {
+        id: "film-sas",
         title: "Linha SAS",
         subtitle: "Película de Segurança",
         brandLogo: logo3M,
@@ -81,6 +83,7 @@ export const filmSections: CatalogSection[] = [
         },
       },
       {
+        id: "film-color-stable",
         title: "Color Stable",
         subtitle: "Premium — Nano Cerâmica",
         brandLogo: logo3M,
@@ -109,6 +112,7 @@ export const filmSections: CatalogSection[] = [
         },
       },
       {
+        id: "film-ceramic-ir",
         title: "Ceramic IR",
         subtitle: "Premium — Nano Cerâmica",
         brandLogo: logo3M,
@@ -136,6 +140,7 @@ export const filmSections: CatalogSection[] = [
         },
       },
       {
+        id: "film-crystalline",
         title: "Crystalline",
         subtitle: "Super Premium — Nano Cerâmica",
         brandLogo: logo3M,
@@ -170,6 +175,7 @@ export const filmSections: CatalogSection[] = [
       "A Solarium oferece soluções em películas e proteção de superfícies com tecnologia, inovação e alta performance. Seus produtos garantem conforto térmico, proteção contra raios UV, rejeição de calor e preservação da estética, além de alta resistência contra riscos, impactos e agentes externos, proporcionando durabilidade, segurança e qualidade.",
     cards: [
       {
+        id: "film-sunblue",
         title: "Sunblue Nano Ceramic",
         subtitle: "Nano Cerâmica",
         benefits: ["Cor fundo azul", "10 ANOS DE GARANTIA"],
@@ -184,6 +190,7 @@ export const filmSections: CatalogSection[] = [
         },
       },      
       {
+        id: "film-sunblack",
         title: "Sunblack Nano Ceramic",
         subtitle: "Nano Cerâmica",
         benefits: ["Cor fundo grafite", "6 ANOS DE GARANTIA"],
@@ -198,6 +205,7 @@ export const filmSections: CatalogSection[] = [
         },
       },
       {
+        id: "film-sunblock",
         title: "Sunblock Nano",
         subtitle: "Nano Carbono",
         benefits: ["Cor fundo grafite", "5 ANOS DE GARANTIA"],
@@ -212,6 +220,7 @@ export const filmSections: CatalogSection[] = [
         },
       },      
       {
+        id: "film-diamond",
         title: "Película Diamond",
         subtitle: "Linha Profissional",
         benefits: [
@@ -250,6 +259,7 @@ export const filmSections: CatalogSection[] = [
         ],
       },
       {
+        id: "film-sunblue-ps4",
         title: "Sunblue Nano com PS 4mil",
         subtitle: "Nano Carbono",
         description:

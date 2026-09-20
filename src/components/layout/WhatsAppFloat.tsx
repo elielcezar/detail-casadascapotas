@@ -1,12 +1,15 @@
 import { whatsappLink } from "@/data/site";
+import { getSettings } from "@/lib/content";
 import WhatsAppIcon from "@/components/shared/WhatsAppIcon";
 import styles from "./WhatsAppFloat.module.css";
 
 /** Botão flutuante de WhatsApp, presente em todas as páginas. */
-export default function WhatsAppFloat() {
+export default async function WhatsAppFloat() {
+  const { whatsapp } = await getSettings();
+
   return (
     <a
-      href={whatsappLink()}
+      href={whatsappLink({ whatsapp })}
       target="_blank"
       rel="noopener noreferrer"
       className={styles.float}

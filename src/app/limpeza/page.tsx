@@ -3,6 +3,7 @@ import CatalogBlock from "@/components/shared/CatalogBlock";
 import CtaSection from "@/components/shared/CtaSection";
 import PageHero from "@/components/shared/PageHero";
 import { cleaningSections } from "@/data/cleaning";
+import { overlayCatalog } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Portfólio de Limpeza",
@@ -10,7 +11,9 @@ export const metadata: Metadata = {
     "Portfólio de limpeza automotiva profissional: Limpeza Clássica e Limpeza Técnica. Lavagem detalhada, descontaminação, selante de pintura e mais.",
 };
 
-export default function LimpezaPage() {
+export default async function LimpezaPage() {
+  const sections = await overlayCatalog(cleaningSections);
+
   return (
     <>
       <PageHero
@@ -18,7 +21,7 @@ export default function LimpezaPage() {
         highlight="Limpeza"
         text="Conheça nossos pacotes de limpeza automotiva. Da manutenção periódica à revitalização completa, cuidado profissional em cada detalhe."
       />
-      {cleaningSections.map((section) => (
+      {sections.map((section) => (
         <CatalogBlock key={section.titleHighlight} section={section} />
       ))}
       <CtaSection

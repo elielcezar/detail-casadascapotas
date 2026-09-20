@@ -12,6 +12,7 @@ export const cleaningSections: CatalogSection[] = [
       "Dois pacotes desenvolvidos para atender desde a manutenção periódica até a revitalização completa do seu veículo.",
     cards: [
       {
+        id: "limpeza-classica",
         title: "Limpeza Clássica",
         subtitle: "Manutenção Periódica",
         badgeIcon: "star",
@@ -41,6 +42,7 @@ export const cleaningSections: CatalogSection[] = [
         },
       },
       {
+        id: "limpeza-tecnica",
         title: "Limpeza Técnica",
         subtitle: "Revitalização Completa",
         badgeIcon: "gem",
@@ -75,6 +77,7 @@ export const cleaningSections: CatalogSection[] = [
         },
       },
       {
+        id: "limpeza-tecnica-motos",
         title: "Limpeza Técnica para Motos",
         subtitle: "Revitalização para Motocicletas",
         badgeIcon: "shield",

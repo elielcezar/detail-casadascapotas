@@ -6,14 +6,18 @@ import FadeIn from "@/components/shared/FadeIn";
 import RichText from "@/components/shared/RichText";
 import WhatsAppIcon from "@/components/shared/WhatsAppIcon";
 import { type ServiceSection } from "@/data/home";
-import { site, whatsappLink } from "@/data/site";
+import { whatsappLink } from "@/data/site";
+import { getSettings } from "@/lib/content";
 import styles from "./ServiceShowcase.module.css";
 
 /** Seção de serviço da home (Películas / Limpeza / PPF): imagem + conteúdo. */
-export default function ServiceShowcase({ service }: { service: ServiceSection }) {
+export default async function ServiceShowcase({ service }: { service: ServiceSection }) {
   const sectionCls = service.altBackground ? `${styles.section} ${styles.alt}` : styles.section;
   const rowCls = service.reversed ? `${styles.row} ${styles.reversed}` : styles.row;
-  const ctaHref = service.primaryCta.href ?? whatsappLink(service.primaryCta.whatsappMessage);
+  const settings = await getSettings();
+  const ctaHref =
+    service.primaryCta.href ??
+    whatsappLink({ whatsapp: settings.whatsapp, message: service.primaryCta.whatsappMessage });
   const imageCls =
     service.image.orientation === "portrait" ? `${styles.image} ${styles.portrait}` : styles.image;
   const imageStyle = service.image.desktopHeight
@@ -101,7 +105,7 @@ export default function ServiceShowcase({ service }: { service: ServiceSection }
               {service.showPhone && (
                 <div className={styles.phone}>
                   <Phone size={16} aria-hidden="true" />
-                  <span>{site.phone}</span>
+                  <span>{settings.phone}</span>
                 </div>
               )}
             </div>

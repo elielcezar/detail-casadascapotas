@@ -1,4 +1,5 @@
-import { salesTeam, team, type TeamMember } from "@/data/home";
+import type { TeamMember } from "@/data/home";
+import { getTeam } from "@/lib/content";
 import AppImage from "./AppImage";
 import FadeIn from "./FadeIn";
 import SectionTitle from "./SectionTitle";
@@ -32,7 +33,9 @@ interface TeamSectionProps {
 }
 
 /** Seção "Nossa Equipe" (técnicos), com "Nosso Time" (vendas) opcional acima. */
-export default function TeamSection({ id, showSalesTeam = false }: TeamSectionProps) {
+export default async function TeamSection({ id, showSalesTeam = false }: TeamSectionProps) {
+  const { tecnica, vendas } = await getTeam();
+
   return (
     <section className={styles.team} id={id}>
       <div className="container">
@@ -43,7 +46,7 @@ export default function TeamSection({ id, showSalesTeam = false }: TeamSectionPr
               highlight="Comercial"
               text="Profissionais dedicados e apaixonados pelo que fazem, prontos para oferecer o melhor atendimento."
             />
-            <TeamGrid members={salesTeam} />
+            <TeamGrid members={vendas} />
           </div>
         )}
         <div className={styles.group}>
@@ -52,7 +55,7 @@ export default function TeamSection({ id, showSalesTeam = false }: TeamSectionPr
             highlight="Técnica"
             text="Técnicos altamente qualificados para garantir um serviço de alta performance. Seu carro em boas mãos."
           />
-          <TeamGrid members={team} />
+          <TeamGrid members={tecnica} />
         </div>
       </div>
     </section>

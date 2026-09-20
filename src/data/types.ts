@@ -57,6 +57,13 @@ export interface BrandLogo {
 
 /** Um card de catálogo (película, pacote de limpeza ou serviço de PPF). */
 export interface CatalogCard {
+  /**
+   * Identificador estável que liga este card ao conteúdo editável no
+   * WordPress (campo `id_card` do CPT card_catalogo). Nunca renomeie nem
+   * reutilize: mudar aqui sem mudar no admin faz o card voltar
+   * silenciosamente para o texto padrão.
+   */
+  id: string;
   title: string;
   subtitle?: string;
   /** Descrição exibida acima dos benefícios (rich text) */

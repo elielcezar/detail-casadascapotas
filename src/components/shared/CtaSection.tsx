@@ -1,5 +1,6 @@
 import { Globe, Instagram, Phone } from "lucide-react";
-import { site, whatsappLink } from "@/data/site";
+import { whatsappLink } from "@/data/site";
+import { getSettings } from "@/lib/content";
 import Button from "./Button";
 import RichText from "./RichText";
 import WhatsAppIcon from "./WhatsAppIcon";
@@ -20,7 +21,7 @@ interface CtaSectionProps {
 }
 
 /** Faixa vermelha de chamada para ação, usada em todas as páginas. */
-export default function CtaSection({
+export default async function CtaSection({
   id,
   titleStart,
   titleStrong,
@@ -30,6 +31,8 @@ export default function CtaSection({
   phoneLabel,
   showContactInfo = false,
 }: CtaSectionProps) {
+  const settings = await getSettings();
+
   return (
     <section className={styles.cta} id={id}>
       <div className="container">
@@ -38,26 +41,26 @@ export default function CtaSection({
         </h2>
         <RichText text={text} />
         <div className={styles.buttons}>
-          <Button href={whatsappLink(whatsappMessage)} variant="dark" external>
+          <Button href={whatsappLink({ whatsapp: settings.whatsapp, message: whatsappMessage })} variant="dark" external>
             <WhatsAppIcon size={18} /> {whatsappLabel}
           </Button>
-          <Button href={`tel:${site.phoneHref}`} variant="outline">
-            <Phone size={16} aria-hidden="true" /> {phoneLabel ?? site.phone}
+          <Button href={`tel:${settings.phoneHref}`} variant="outline">
+            <Phone size={16} aria-hidden="true" /> {phoneLabel ?? settings.phone}
           </Button>
         </div>
         {showContactInfo && (
           <div className={styles.contactInfo}>
             <div className={styles.contactItem}>
               <Phone size={16} aria-hidden="true" />
-              <span>{site.phone}</span>
+              <span>{settings.phone}</span>
             </div>
             <div className={styles.contactItem}>
               <Instagram size={16} aria-hidden="true" />
-              <span>{site.instagramHandle}</span>
+              <span>{settings.instagramHandle}</span>
             </div>
             <div className={styles.contactItem}>
               <Globe size={16} aria-hidden="true" />
-              <span>{site.parentWebsite}</span>
+              <span>{settings.parentWebsite}</span>
             </div>
           </div>
         )}

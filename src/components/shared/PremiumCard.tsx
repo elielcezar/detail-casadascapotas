@@ -1,6 +1,7 @@
 import { Check } from "lucide-react";
 import type { CatalogCard } from "@/data/types";
 import { whatsappLink } from "@/data/site";
+import { getSettings } from "@/lib/content";
 import Button from "./Button";
 import FadeCarousel from "./FadeCarousel";
 import FadeIn from "./FadeIn";
@@ -9,13 +10,14 @@ import WhatsAppIcon from "./WhatsAppIcon";
 import styles from "./PremiumCard.module.css";
 
 /** Card da Proteção Premium: texto + carrossel de fotos em colunas, lado alternado por card. */
-export default function PremiumCard({
+export default async function PremiumCard({
   card,
   textSide = "left",
 }: {
   card: CatalogCard;
   textSide?: "left" | "right";
 }) {
+  const { whatsapp } = await getSettings();
   const cls = textSide === "right" ? `${styles.card} ${styles.reversed}` : styles.card;
 
   return (
@@ -63,7 +65,7 @@ export default function PremiumCard({
         )}
 
         {card.cta && (
-          <Button href={whatsappLink(card.cta.message)} external>
+          <Button href={whatsappLink({ whatsapp, message: card.cta.message })} external>
             <WhatsAppIcon size={16} /> {card.cta.label}
           </Button>
         )}

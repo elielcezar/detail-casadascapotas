@@ -4,6 +4,7 @@ import CtaSection from "@/components/shared/CtaSection";
 import PageHero from "@/components/shared/PageHero";
 import PremiumCard from "@/components/shared/PremiumCard";
 import { premiumSections } from "@/data/premium";
+import { overlayCatalog } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Proteção Premium",
@@ -11,7 +12,9 @@ export const metadata: Metadata = {
     "Revestimentos nano cerâmicos de alta tecnologia: Vitrificação, Glasshield, Leatherboost e Cabincare. Proteção premium para pintura, vidros, couro e estofados.",
 };
 
-export default function ProtecaoPremiumPage() {
+export default async function ProtecaoPremiumPage() {
+  const sections = await overlayCatalog(premiumSections);
+
   return (
     <>
       <PageHero
@@ -19,7 +22,7 @@ export default function ProtecaoPremiumPage() {
         highlight="Premium"
         text="Revestimentos nano cerâmicos de alta tecnologia para proteger cada detalhe do seu veículo, por dentro e por fora."
       />
-      {premiumSections.map((section, i) => (
+      {sections.map((section, i) => (
         <CatalogBlock
           key={section.titleHighlight}
           section={section}

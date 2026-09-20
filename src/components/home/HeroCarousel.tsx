@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight, Film, Wrench } from "lucide-react";
 import Button from "@/components/shared/Button";
 import RichText from "@/components/shared/RichText";
 import WhatsAppIcon from "@/components/shared/WhatsAppIcon";
-import { heroSlides } from "@/data/home";
+import type { HeroSlide } from "@/data/home";
 import { whatsappLink } from "@/data/site";
 import { withBasePath } from "@/lib/basePath";
 import styles from "./HeroCarousel.module.css";
@@ -14,11 +14,19 @@ const icons = { tools: Wrench, film: Film };
 
 const AUTOPLAY_MS = 8000;
 
+interface HeroCarouselProps {
+  /** Slides já resolvidos pelo overlay. */
+  slides: HeroSlide[];
+  /** Número do WhatsApp já resolvido pelo overlay. Componente de cliente
+   * não pode buscar no WordPress, então o valor desce da home por prop. */
+  whatsapp: string;
+}
+
 /** Carrossel de destaque do topo da home, com autoplay e navegação. */
-export default function HeroCarousel() {
+export default function HeroCarousel({ slides, whatsapp }: HeroCarouselProps) {
   const [active, setActive] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const count = heroSlides.length;
+  const count = slides.length;
 
   const startAutoplay = useCallback(() => {
     if (timerRef.current) clearInterval(timerRef.current);
@@ -48,7 +56,7 @@ export default function HeroCarousel() {
       aria-label="Destaques"
     >
       <div className={styles.carousel}>
-        {heroSlides.map((slide, i) => {
+        {slides.map((slide, i) => {
           const isActive = i === active;
           // Só o primeiro slide leva o h1 da página; os demais usam <p>
           const TitleTag: "h1" | "p" = i === 0 ? "h1" : "p";
@@ -77,7 +85,7 @@ export default function HeroCarousel() {
                     {slide.buttons.map((btn) => {
                       const isWhatsApp = btn.whatsappMessage !== undefined;
                       const href = isWhatsApp
-                        ? whatsappLink(btn.whatsappMessage || undefined)
+                        ? whatsappLink({ whatsapp, message: btn.whatsappMessage || undefined })
                         : btn.href;
                       const Icon =
                         btn.icon && btn.icon !== "whatsapp" ? icons[btn.icon] : null;
@@ -115,7 +123,7 @@ export default function HeroCarousel() {
       </button>
 
       <div className={styles.dots}>
-        {heroSlides.map((slide, i) => (
+        {slides.map((slide, i) => (
           <button
             key={slide.titleHighlight}
             type="button"
