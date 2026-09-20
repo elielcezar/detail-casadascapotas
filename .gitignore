@@ -28,3 +28,6 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# manifesto do seed (mapa local -> ID de anexo no WP)
+scripts/.seed-manifest.json

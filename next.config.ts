@@ -21,6 +21,16 @@ const nextConfig: NextConfig = {
     // Sem servidor Node não há otimizador de imagens em tempo real;
     // as imagens já são comprimidas manualmente em public/img
     unoptimized: true,
+    // Galeria e equipe vêm da biblioteca de mídia do WordPress. Com
+    // `unoptimized` o Next não exige esta lista, mas ela documenta a origem
+    // permitida e evita quebra se a otimização for religada um dia.
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "detail.ecwd.cloud",
+        pathname: "/wp-content/uploads/**",
+      },
+    ],
   },
 };
 
