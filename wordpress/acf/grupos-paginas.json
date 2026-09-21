@@ -11,7 +11,11 @@
         "instructions": "Como aparece no site, com formatacao. Ex.: (41) 3333-7490",
         "required": 0,
         "conditional_logic": 0,
-        "wrapper": { "width": "50", "class": "", "id": "" },
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
         "default_value": "",
         "maxlength": "",
         "placeholder": "(41) 3333-7490",
@@ -26,7 +30,11 @@
         "instructions": "So digitos, com +55 e DDD. E o numero que o celular disca ao tocar no telefone. Ex.: +554133337490",
         "required": 0,
         "conditional_logic": 0,
-        "wrapper": { "width": "50", "class": "", "id": "" },
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
         "default_value": "",
         "maxlength": "",
         "placeholder": "+554133337490",
@@ -41,7 +49,11 @@
         "instructions": "So digitos, com DDI e DDD, SEM o sinal de mais. Ex.: 554133337490",
         "required": 0,
         "conditional_logic": 0,
-        "wrapper": { "width": "50", "class": "", "id": "" },
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
         "default_value": "",
         "maxlength": "",
         "placeholder": "554133337490",
@@ -56,7 +68,11 @@
         "instructions": "",
         "required": 0,
         "conditional_logic": 0,
-        "wrapper": { "width": "50", "class": "", "id": "" },
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
         "default_value": "",
         "placeholder": "",
         "prepend": "",
@@ -70,7 +86,11 @@
         "instructions": "Ex.: Seg-Sex: 8h as 18h",
         "required": 0,
         "conditional_logic": 0,
-        "wrapper": { "width": "50", "class": "", "id": "" },
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
         "default_value": "",
         "maxlength": "",
         "placeholder": "",
@@ -85,7 +105,11 @@
         "instructions": "Com o arroba. Ex.: @casadascapotascuritiba",
         "required": 0,
         "conditional_logic": 0,
-        "wrapper": { "width": "50", "class": "", "id": "" },
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
         "default_value": "",
         "maxlength": "",
         "placeholder": "@casadascapotascuritiba",
@@ -100,7 +124,11 @@
         "instructions": "",
         "required": 0,
         "conditional_logic": 0,
-        "wrapper": { "width": "33", "class": "", "id": "" },
+        "wrapper": {
+          "width": "33",
+          "class": "",
+          "id": ""
+        },
         "default_value": "",
         "placeholder": ""
       },
@@ -112,7 +140,11 @@
         "instructions": "",
         "required": 0,
         "conditional_logic": 0,
-        "wrapper": { "width": "33", "class": "", "id": "" },
+        "wrapper": {
+          "width": "33",
+          "class": "",
+          "id": ""
+        },
         "default_value": "",
         "placeholder": ""
       },
@@ -124,7 +156,11 @@
         "instructions": "",
         "required": 0,
         "conditional_logic": 0,
-        "wrapper": { "width": "34", "class": "", "id": "" },
+        "wrapper": {
+          "width": "34",
+          "class": "",
+          "id": ""
+        },
         "default_value": "",
         "placeholder": ""
       }
@@ -143,7 +179,13 @@
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
-    "hide_on_screen": ["the_content", "excerpt", "discussion", "comments", "featured_image"],
+    "hide_on_screen": [
+      "the_content",
+      "excerpt",
+      "discussion",
+      "comments",
+      "featured_image"
+    ],
     "active": true,
     "description": "Campo vazio mantem o valor atual do site. Apagar um campo NAO remove a informacao do ar.",
     "show_in_rest": 1
@@ -160,7 +202,11 @@
         "instructions": "Os slides aparecem nesta ordem. Sem nenhuma linha, o site mantem o carrossel atual.",
         "required": 0,
         "conditional_logic": 0,
-        "wrapper": { "width": "", "class": "", "id": "" },
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
         "layout": "block",
         "pagination": 0,
         "min": 0,
@@ -176,7 +222,11 @@
             "instructions": "Banners disponiveis. Para adicionar um novo, fale com o desenvolvedor — a imagem precisa ser cortada e comprimida para nao pesar no carregamento.",
             "required": 1,
             "conditional_logic": 0,
-            "wrapper": { "width": "50", "class": "", "id": "" },
+            "wrapper": {
+              "width": "50",
+              "class": "",
+              "id": ""
+            },
             "choices": {
               "/img/banner-home/banner1.jpg": "Banner 1",
               "/img/banner-home/banner2.jpg": "Banner 2",
@@ -200,7 +250,11 @@
             "instructions": "Par de botoes exibido neste slide.",
             "required": 1,
             "conditional_logic": 0,
-            "wrapper": { "width": "50", "class": "", "id": "" },
+            "wrapper": {
+              "width": "50",
+              "class": "",
+              "id": ""
+            },
             "choices": {
               "servicos": "Nossos Serviços + Fale Conosco",
               "peliculas": "Ver Películas + Agendar Agora"
@@ -222,7 +276,11 @@
             "instructions": "Ex.: Excelência em",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "33", "class": "", "id": "" },
+            "wrapper": {
+              "width": "33",
+              "class": "",
+              "id": ""
+            },
             "default_value": "",
             "maxlength": "",
             "placeholder": "",
@@ -238,7 +296,11 @@
             "instructions": "Parte colorida. Ex.: Estética Automotiva",
             "required": 1,
             "conditional_logic": 0,
-            "wrapper": { "width": "33", "class": "", "id": "" },
+            "wrapper": {
+              "width": "33",
+              "class": "",
+              "id": ""
+            },
             "default_value": "",
             "maxlength": "",
             "placeholder": "",
@@ -254,7 +316,11 @@
             "instructions": "Opcional. Ex.: para seu Veículo",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "34", "class": "", "id": "" },
+            "wrapper": {
+              "width": "34",
+              "class": "",
+              "id": ""
+            },
             "default_value": "",
             "maxlength": "",
             "placeholder": "",
@@ -270,7 +336,11 @@
             "instructions": "Use <strong>texto</strong> para negrito.",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
             "default_value": "",
             "maxlength": "",
             "rows": 3,
@@ -288,7 +358,11 @@
         "instructions": "Os três blocos com ícone logo abaixo do carrossel.",
         "required": 0,
         "conditional_logic": 0,
-        "wrapper": { "width": "", "class": "", "id": "" },
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
         "layout": "block",
         "pagination": 0,
         "min": 0,
@@ -304,7 +378,11 @@
             "instructions": "",
             "required": 1,
             "conditional_logic": 0,
-            "wrapper": { "width": "30", "class": "", "id": "" },
+            "wrapper": {
+              "width": "30",
+              "class": "",
+              "id": ""
+            },
             "choices": {
               "award": "Prêmio",
               "users": "Pessoas",
@@ -327,7 +405,11 @@
             "instructions": "",
             "required": 1,
             "conditional_logic": 0,
-            "wrapper": { "width": "70", "class": "", "id": "" },
+            "wrapper": {
+              "width": "70",
+              "class": "",
+              "id": ""
+            },
             "default_value": "",
             "maxlength": "",
             "placeholder": "",
@@ -343,7 +425,11 @@
             "instructions": "",
             "required": 1,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
             "default_value": "",
             "maxlength": "",
             "rows": 3,
@@ -361,7 +447,11 @@
         "instructions": "A faixa de contadores animados.",
         "required": 0,
         "conditional_logic": 0,
-        "wrapper": { "width": "", "class": "", "id": "" },
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
         "layout": "table",
         "pagination": 0,
         "min": 0,
@@ -377,7 +467,11 @@
             "instructions": "So o numero, sem pontos. Ex.: 200000",
             "required": 1,
             "conditional_logic": 0,
-            "wrapper": { "width": "25", "class": "", "id": "" },
+            "wrapper": {
+              "width": "25",
+              "class": "",
+              "id": ""
+            },
             "default_value": "",
             "min": 0,
             "max": "",
@@ -395,7 +489,11 @@
             "instructions": "Exibido apos o numero.",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "20", "class": "", "id": "" },
+            "wrapper": {
+              "width": "20",
+              "class": "",
+              "id": ""
+            },
             "default_value": "+",
             "maxlength": 3,
             "placeholder": "+",
@@ -411,7 +509,11 @@
             "instructions": "Ex.: Clientes Atendidos",
             "required": 1,
             "conditional_logic": 0,
-            "wrapper": { "width": "55", "class": "", "id": "" },
+            "wrapper": {
+              "width": "55",
+              "class": "",
+              "id": ""
+            },
             "default_value": "",
             "maxlength": "",
             "placeholder": "",
@@ -429,7 +531,11 @@
         "instructions": "Textos dos três blocos de serviço da home. A foto, o lado em que ela aparece e a cor de fundo continuam definidos no código.",
         "required": 0,
         "conditional_logic": 0,
-        "wrapper": { "width": "", "class": "", "id": "" },
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
         "layout": "block",
         "pagination": 0,
         "min": 0,
@@ -445,13 +551,17 @@
             "instructions": "Qual dos blocos da home este conteudo edita. Nao repita o mesmo bloco duas vezes.",
             "required": 1,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
             "choices": {
-              "peliculas": "Películas",
+              "servicos": "Películas",
               "limpeza": "Limpeza",
               "ppf": "PPF"
             },
-            "default_value": "peliculas",
+            "default_value": "servicos",
             "allow_null": 0,
             "multiple": 0,
             "ui": 0,
@@ -468,7 +578,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "50", "class": "", "id": "" },
+            "wrapper": {
+              "width": "50",
+              "class": "",
+              "id": ""
+            },
             "default_value": "",
             "maxlength": "",
             "placeholder": "",
@@ -484,7 +598,11 @@
             "instructions": "Parte colorida do titulo.",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "50", "class": "", "id": "" },
+            "wrapper": {
+              "width": "50",
+              "class": "",
+              "id": ""
+            },
             "default_value": "",
             "maxlength": "",
             "placeholder": "",
@@ -500,7 +618,11 @@
             "instructions": "Linha em branco cria paragrafo. Use <strong>texto</strong> para negrito.",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
             "default_value": "",
             "maxlength": "",
             "rows": 4,
@@ -516,7 +638,11 @@
             "instructions": "Um item por linha. Cada linha vira um item com check.",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
             "default_value": "",
             "maxlength": "",
             "rows": 6,
@@ -541,9 +667,174 @@
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
-    "hide_on_screen": ["the_content", "excerpt", "discussion", "comments", "featured_image"],
+    "hide_on_screen": [
+      "the_content",
+      "excerpt",
+      "discussion",
+      "comments",
+      "featured_image"
+    ],
     "active": true,
     "description": "Repeater vazio mantem o conteudo atual do site. Esvaziar NAO apaga a secao do ar.",
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_detail_ppf",
+    "title": "PPF — Conteúdo",
+    "fields": [
+      {
+        "key": "field_detail_ppf_serv",
+        "label": "Blocos da página",
+        "name": "secoes_servico",
+        "type": "repeater",
+        "instructions": "Textos dos tres blocos da pagina de PPF. Foto, lado da imagem, logos das marcas e os blocos de cobertura continuam definidos no codigo.",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "layout": "block",
+        "pagination": 0,
+        "min": 0,
+        "max": 3,
+        "collapsed": "field_detail_ppf_serv_id",
+        "button_label": "Adicionar bloco",
+        "sub_fields": [
+          {
+            "key": "field_detail_ppf_serv_id",
+            "label": "Bloco",
+            "name": "id_secao",
+            "type": "select",
+            "instructions": "Qual dos blocos da pagina este conteudo edita. Nao repita o mesmo bloco.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "choices": {
+              "sobre-ppf": "Sobre o PPF",
+              "ppf-parabrisa": "Para-brisa",
+              "ppf-kit-interno": "Kit Interno"
+            },
+            "default_value": "sobre-ppf",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "ajax": 0,
+            "return_format": "value",
+            "placeholder": "",
+            "parent_repeater": "field_detail_ppf_serv"
+          },
+          {
+            "key": "field_detail_ppf_serv_inicio",
+            "label": "Título — início",
+            "name": "titulo_inicio",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "50",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "parent_repeater": "field_detail_ppf_serv"
+          },
+          {
+            "key": "field_detail_ppf_serv_destaque",
+            "label": "Título — destaque",
+            "name": "titulo_destaque",
+            "type": "text",
+            "instructions": "Parte colorida do titulo.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "50",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "parent_repeater": "field_detail_ppf_serv"
+          },
+          {
+            "key": "field_detail_ppf_serv_descricao",
+            "label": "Descrição",
+            "name": "descricao",
+            "type": "textarea",
+            "instructions": "Linha em branco cria paragrafo. Use <strong>texto</strong> para negrito.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "rows": 4,
+            "placeholder": "",
+            "new_lines": "",
+            "parent_repeater": "field_detail_ppf_serv"
+          },
+          {
+            "key": "field_detail_ppf_serv_checklist",
+            "label": "Lista de itens",
+            "name": "checklist",
+            "type": "textarea",
+            "instructions": "Um item por linha. Cada linha vira um item com check.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "rows": 6,
+            "placeholder": "",
+            "new_lines": "",
+            "parent_repeater": "field_detail_ppf_serv"
+          }
+        ]
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page",
+          "operator": "==",
+          "value": "261"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+      "the_content",
+      "excerpt",
+      "discussion",
+      "comments",
+      "featured_image"
+    ],
+    "active": true,
+    "description": "Repeater vazio mantem o conteudo atual do site.",
     "show_in_rest": 1
   }
 ]

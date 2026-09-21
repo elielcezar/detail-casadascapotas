@@ -16,10 +16,13 @@
 import { cache } from "react";
 import {
   getCatalogCards as wpGetCatalogCards,
+  type WordPressServiceSection,
   getHomeContent as wpGetHomeContent,
   getGalleryCategories as wpGetGalleryCategories,
+  getServiceSections as wpGetServiceSections,
   getSiteSettings as wpGetSiteSettings,
   indexCatalogCards,
+  WP_PAGE_IDS,
   linesToList,
   getTeamMembers as wpGetTeamMembers,
   stripHtml,
@@ -40,8 +43,9 @@ import {
   type ServiceSection,
   type TeamMember,
 } from "@/data/home";
+import { aboutPpf, kitInterno, parabrisa } from "@/data/ppf";
 import { site } from "@/data/site";
-import type { CatalogSection } from "@/data/types";
+import type { CatalogSection, ItemGroup } from "@/data/types";
 
 /**
  * Categorias da galeria filtrável.
@@ -153,10 +157,18 @@ export async function overlayCatalog(sections: CatalogSection[]): Promise<Catalo
         .map((linha) => linha?.item?.trim())
         .filter((item): item is string => Boolean(item));
 
+      // Listas com título próprio (Exterior / Interior / Acabamentos). Grupo
+      // sem título ou sem nenhum item é descartado em vez de virar um bloco
+      // vazio no card.
+      const grupos: ItemGroup[] = (Array.isArray(wp.grupos) ? wp.grupos : [])
+        .map((g) => ({ title: g?.titulo?.trim() ?? "", items: linesToList(g?.itens) }))
+        .filter((g) => g.title.length > 0 && g.items.length > 0);
+
       return {
         ...card,
         description: wp.descricao?.trim() || card.description,
         benefits: beneficios.length > 0 ? beneficios : card.benefits,
+        groups: grupos.length > 0 ? grupos : card.groups,
         note: wp.nota?.trim() || card.note,
         cta: card.cta
           ? { ...card.cta, message: wp.mensagem_cta?.trim() || card.cta.message }
@@ -212,19 +224,7 @@ export const getHome = cache(async (): Promise<HomeContent> => {
 
   // Blocos de serviço são overlay, não substituição: layout, foto, âncora,
   // CTA e link continuam no código, casados por `id`.
-  const porId = new Map(wp.secoes_servico.map((s) => [s.id_secao, s]));
-  const wpSections: ServiceSection[] = serviceSections.map((section) => {
-    const over = porId.get(section.id as "peliculas" | "limpeza" | "ppf");
-    if (!over) return section;
-    const checklist = linesToList(over.checklist);
-    return {
-      ...section,
-      titleStart: over.titulo_inicio?.trim() || section.titleStart,
-      titleHighlight: over.titulo_destaque?.trim() || section.titleHighlight,
-      description: over.descricao?.trim() || section.description,
-      checklist: checklist.length > 0 ? checklist : section.checklist,
-    };
-  });
+  const wpSections = aplicarBlocosServico(serviceSections, wp.secoes_servico);
 
   return {
     heroSlides: wpHero.length > 0 ? wpHero : heroSlides,
@@ -232,4 +232,38 @@ export const getHome = cache(async (): Promise<HomeContent> => {
     counters: wpCounters.length > 0 ? wpCounters : counters,
     serviceSections: wpSections,
   };
+});
+
+/**
+ * Sobrescreve os textos de blocos de serviço, casando por `id`.
+ *
+ * Usada pela home e pela /ppf: as duas páginas usam o mesmo formato, com
+ * conjuntos de `id` diferentes. Bloco sem correspondente no WordPress fica
+ * intacto, e layout, foto, âncora e CTA seguem vindo do código.
+ */
+function aplicarBlocosServico(
+  secoes: ServiceSection[],
+  overrides: WordPressServiceSection[]
+): ServiceSection[] {
+  const porId = new Map(overrides.map((o) => [o.id_secao, o]));
+
+  return secoes.map((secao) => {
+    const over = porId.get(secao.id);
+    if (!over) return secao;
+
+    const checklist = linesToList(over.checklist);
+    return {
+      ...secao,
+      titleStart: over.titulo_inicio?.trim() || secao.titleStart,
+      titleHighlight: over.titulo_destaque?.trim() || secao.titleHighlight,
+      description: over.descricao?.trim() || secao.description,
+      checklist: checklist.length > 0 ? checklist : secao.checklist,
+    };
+  });
+}
+
+/** Os três blocos da página /ppf. */
+export const getPpfSections = cache(async (): Promise<ServiceSection[]> => {
+  const overrides = await wpGetServiceSections(WP_PAGE_IDS.ppf);
+  return aplicarBlocosServico([aboutPpf, parabrisa, kitInterno], overrides);
 });

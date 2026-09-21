@@ -155,6 +155,7 @@ export function toSiteImage(img: WordPressImage): SiteImage {
 export const WP_PAGE_IDS = {
   home: 20,
   configuracoes: 22,
+  ppf: 261,
 };
 
 export interface WordPressPage {
@@ -248,6 +249,8 @@ export interface WordPressCatalogCard {
     id_card: string;
     descricao: string;
     beneficios: { item: string }[];
+    /** Listas com titulo proprio; `itens` vem com um por linha. */
+    grupos: { titulo: string; itens: string }[];
     nota: string;
     mensagem_cta: string;
   };
@@ -332,7 +335,8 @@ export interface WordPressCounter {
  * src/data/home.ts, casados por `id_secao`.
  */
 export interface WordPressServiceSection {
-  id_secao: "peliculas" | "limpeza" | "ppf";
+  /** Casa com o `id` da seção em src/data. Cada página tem o seu conjunto. */
+  id_secao: string;
   titulo_inicio: string;
   titulo_destaque: string;
   descricao: string;
@@ -365,4 +369,15 @@ export function linesToList(value: string | undefined): string[] {
     .split(/\r?\n/)
     .map((line) => line.trim())
     .filter((line) => line.length > 0);
+}
+
+/**
+ * Blocos de serviço de uma página de conteúdo.
+ *
+ * A home e a /ppf usam o mesmo formato de repeater, com conjuntos de
+ * `id_secao` diferentes — por isso a busca recebe o ID da página.
+ */
+export async function getServiceSections(pageId: number): Promise<WordPressServiceSection[]> {
+  const page = await getPageById(pageId);
+  return asArray<WordPressServiceSection>(page?.acf?.secoes_servico);
 }

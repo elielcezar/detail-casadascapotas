@@ -21,6 +21,7 @@ import { team, salesTeam, heroSlides, features, counters, serviceSections } from
 import { filmSections } from "../src/data/films";
 import { cleaningSections } from "../src/data/cleaning";
 import { premiumSections } from "../src/data/premium";
+import { aboutPpf, parabrisa, kitInterno } from "../src/data/ppf";
 import { site } from "../src/data/site";
 
 const WP = process.env.WP_API_URL || "https://detail.ecwd.cloud/wp-json/wp/v2";
@@ -187,6 +188,12 @@ async function seedCards() {
       id_card: card.id,
       descricao: card.description ?? "",
       beneficios: (card.benefits ?? []).map((item) => ({ item })),
+      // Os cards de limpeza guardam todo o conteúdo em `groups`, não em
+      // `benefits` — sem isto eles apareceriam vazios no admin.
+      grupos: (card.groups ?? []).map((g) => ({
+        titulo: g.title,
+        itens: (g.items ?? []).join("\n"),
+      })),
       nota: card.note ?? "",
       mensagem_cta: card.cta?.message ?? "",
     });
@@ -260,6 +267,30 @@ async function seedHome() {
     acf.hero_slides.length, acf.features.length, acf.counters.length, acf.secoes_servico.length);
 }
 
+async function seedPpf() {
+  console.log("\n▸ Página PPF (261)");
+
+  const blocos = [aboutPpf, parabrisa, kitInterno].map((sec) => ({
+    id_secao: sec.id,
+    titulo_inicio: sec.titleStart,
+    titulo_destaque: sec.titleHighlight,
+    descricao: sec.description,
+    checklist: (sec.checklist ?? []).join("\n"),
+  }));
+
+  if (DRY) {
+    console.log("    [dry] %d blocos: %s", blocos.length, blocos.map((b) => b.id_secao).join(", "));
+    return;
+  }
+
+  await wp("/pages/261", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ acf: { secoes_servico: blocos } }),
+  });
+  console.log("    preenchida: %s", blocos.map((b) => b.id_secao).join(", "));
+}
+
 async function main() {
   console.log(`Seed → ${WP}${DRY ? "  (DRY RUN — nada será escrito)" : ""}`);
   await seedGallery();
@@ -267,6 +298,7 @@ async function main() {
   await seedCards();
   await seedSettings();
   await seedHome();
+  await seedPpf();
   saveManifest();
   console.log(`\nConcluído. ${Object.keys(manifest).length} imagens no manifesto.`);
 }

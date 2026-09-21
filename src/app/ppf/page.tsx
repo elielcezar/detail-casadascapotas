@@ -5,7 +5,8 @@ import CtaSection from "@/components/shared/CtaSection";
 import ImageTitleGrid from "@/components/shared/ImageTitleGrid";
 import PageHero from "@/components/shared/PageHero";
 import PPFLogosSection from "@/components/shared/PPFLogosSection";
-import { aboutPpf, kitInterno, parabrisa, ppfLines, ppfLogos, ppfSections } from "@/data/ppf";
+import { ppfLines, ppfLogos, ppfSections } from "@/data/ppf";
+import { getPpfSections, overlayCatalog } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Portfólio de PPF",
@@ -13,7 +14,11 @@ export const metadata: Metadata = {
     "Portfólio de PPF - Paint Protection Film: Linha Premium e Linha Standard, com cobertura em PPF Frontal, Quina e Concha ou Full PPF. Proteção de até 10 anos para a pintura do seu veículo.",
 };
 
-export default function PpfPage() {
+export default async function PpfPage() {
+  // Os três blocos vêm na ordem em que aparecem na página
+  const [sobre, parabrisa, kitInterno] = await getPpfSections();
+  const sections = await overlayCatalog(ppfSections);
+
   return (
     <>
       <PageHero
@@ -21,8 +26,8 @@ export default function PpfPage() {
         highlight="PPF"
         text="Paint Protection Film: proteção invisível contra riscos, pedras e desgaste do dia a dia — para a pintura, os vidros e o interior do seu veículo."
       />
-      <ServiceShowcase service={aboutPpf} />
-      {ppfSections.map((section, i) => (
+      <ServiceShowcase service={sobre} />
+      {sections.map((section, i) => (
         <CatalogBlock key={section.titleHighlight} section={section} alt={i % 2 === 1} />
       ))}
       <PPFLogosSection logos={ppfLogos} />

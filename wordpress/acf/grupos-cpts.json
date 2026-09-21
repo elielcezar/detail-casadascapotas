@@ -11,7 +11,11 @@
         "instructions": "Arraste para reordenar. Preencha o texto alternativo de cada imagem na biblioteca de mídia — ele vira o alt no site e conta para acessibilidade e SEO.",
         "required": 1,
         "conditional_logic": 0,
-        "wrapper": { "width": "", "class": "", "id": "" },
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
         "return_format": "array",
         "library": "all",
         "min": 1,
@@ -56,7 +60,11 @@
         "instructions": "Ex.: Aplicador profissional de peliculas e PPF",
         "required": 1,
         "conditional_logic": 0,
-        "wrapper": { "width": "", "class": "", "id": "" },
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
         "default_value": "",
         "maxlength": "",
         "placeholder": "",
@@ -71,7 +79,11 @@
         "instructions": "Foto quadrada. O site exibe em 300x300.",
         "required": 1,
         "conditional_logic": 0,
-        "wrapper": { "width": "", "class": "", "id": "" },
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
         "return_format": "array",
         "library": "all",
         "min_width": 300,
@@ -87,7 +99,11 @@
         "instructions": "O time de vendas aparece acima da equipe tecnica na home.",
         "required": 1,
         "conditional_logic": 0,
-        "wrapper": { "width": "", "class": "", "id": "" },
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
         "choices": {
           "tecnica": "Equipe Tecnica",
           "vendas": "Time de Vendas"
@@ -132,7 +148,11 @@
         "instructions": "Identificador tecnico que liga este card ao card correspondente no codigo. NAO invente nem altere — use exatamente um dos IDs da lista entregue pelo desenvolvedor. Errar aqui faz o card ser ignorado silenciosamente.",
         "required": 1,
         "conditional_logic": 0,
-        "wrapper": { "width": "", "class": "", "id": "" },
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
         "default_value": "",
         "maxlength": "",
         "placeholder": "ex.: pelicula-fx",
@@ -147,7 +167,11 @@
         "instructions": "Linha em branco cria um paragrafo novo. Use <strong>texto</strong> para negrito. Deixe vazio para manter o texto que ja esta no site.",
         "required": 0,
         "conditional_logic": 0,
-        "wrapper": { "width": "", "class": "", "id": "" },
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
         "default_value": "",
         "maxlength": "",
         "rows": 5,
@@ -159,10 +183,14 @@
         "label": "Benefícios",
         "name": "beneficios",
         "type": "repeater",
-        "instructions": "Lista com check vermelho. Deixe sem nenhuma linha para manter a lista atual do site.",
+        "instructions": "Lista simples com check vermelho. Cards que usam Grupos de itens abaixo deixam esta lista vazia. Sem nenhuma linha, mantem a lista atual do site.",
         "required": 0,
         "conditional_logic": 0,
-        "wrapper": { "width": "", "class": "", "id": "" },
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
         "layout": "table",
         "pagination": 0,
         "min": 0,
@@ -178,13 +206,79 @@
             "instructions": "",
             "required": 1,
             "conditional_logic": 0,
-            "wrapper": { "width": "", "class": "", "id": "" },
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
             "default_value": "",
             "maxlength": "",
             "placeholder": "",
             "prepend": "",
             "append": "",
             "parent_repeater": "field_detail_card_beneficios"
+          }
+        ]
+      },
+      {
+        "key": "field_detail_card_grupos",
+        "label": "Grupos de itens",
+        "name": "grupos",
+        "type": "repeater",
+        "instructions": "Listas com titulo proprio, como Exterior / Interior / Acabamentos. Deixe sem nenhuma linha para manter os grupos que ja estao no site.",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "layout": "block",
+        "pagination": 0,
+        "min": 0,
+        "max": 0,
+        "collapsed": "field_detail_card_grupo_titulo",
+        "button_label": "Adicionar grupo",
+        "sub_fields": [
+          {
+            "key": "field_detail_card_grupo_titulo",
+            "label": "Título do grupo",
+            "name": "titulo",
+            "type": "text",
+            "instructions": "Ex.: Exterior",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "parent_repeater": "field_detail_card_grupos"
+          },
+          {
+            "key": "field_detail_card_grupo_itens",
+            "label": "Itens",
+            "name": "itens",
+            "type": "textarea",
+            "instructions": "Um item por linha. Cada linha vira um item com check.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "rows": 7,
+            "placeholder": "",
+            "new_lines": "",
+            "parent_repeater": "field_detail_card_grupos"
           }
         ]
       },
@@ -196,7 +290,11 @@
         "instructions": "Texto em italico no fim do card. Opcional.",
         "required": 0,
         "conditional_logic": 0,
-        "wrapper": { "width": "", "class": "", "id": "" },
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
         "default_value": "",
         "maxlength": "",
         "rows": 3,
@@ -211,7 +309,11 @@
         "instructions": "Texto que ja vem preenchido quando o cliente clica no botao deste card.",
         "required": 0,
         "conditional_logic": 0,
-        "wrapper": { "width": "", "class": "", "id": "" },
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
         "default_value": "",
         "maxlength": "",
         "rows": 2,
