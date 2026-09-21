@@ -23,6 +23,7 @@ import { heroSlides, features, counters, serviceSections, team, salesTeam } from
 import { galleryCategories } from "../src/data/gallery2";
 import { navItems } from "../src/data/navigation";
 import { site } from "../src/data/site";
+import { pageSeo } from "../src/data/seo";
 
 /** Chaves que não são conteúdo: caminhos de arquivo, dimensões, flags. */
 const NAO_E_CONTEUDO = new Set([
@@ -41,7 +42,11 @@ const COBERTO = [
   /^(films|cleaning|premium)\.\w+\[\]\.cards\[\]\.(description|note)$/,
   /^(films|cleaning|premium)\.\w+\[\]\.cards\[\]\.benefits\[\]$/,
   /^(films|cleaning|premium)\.\w+\[\]\.cards\[\]\.groups\[\]\.(title|items\[\])$/,
-  /^(films|cleaning|premium)\.\w+\[\]\.cards\[\]\.cta\.message$/,
+  /^(films|cleaning|premium)\.\w+\[\]\.cards\[\]\.cta\.(message|label)$/,
+  /^(films|cleaning|premium)\.\w+\[\]\.cards\[\]\.(title|subtitle)$/,
+  /^home\.serviceSections\[\]\.(note|subSections\[\]\.(title|items\[\]))$/,
+  /^ppf\.(aboutPpf|parabrisa|kitInterno)\.note$/,
+  /^seo\.pageSeo\.\w+\.(title|description)$/,
   /^ppf\.(aboutPpf|parabrisa|kitInterno)\.(titleStart|titleHighlight|description|checklist\[\])$/,
   /^site\.site\.(phone|phoneHref|whatsapp|email|hours|instagramHandle)$/,
   /^site\.site\.social\.\w+$/,
@@ -61,6 +66,7 @@ const PAGINA: [RegExp, string][] = [
   [/^ppf\./, "/ppf"],
   [/^home\.|^gallery2\./, "/ (home)"],
   [/^site\.|^navigation\./, "global"],
+  [/^seo\./, "SEO (todas)"],
 ];
 
 const achados = new Map<string, { n: number; amostra: string }>();
@@ -98,6 +104,7 @@ const raizes: [string, unknown][] = [
   ["gallery2.galleryCategories", galleryCategories],
   ["navigation.navItems", navItems],
   ["site.site", site],
+  ["seo.pageSeo", pageSeo],
 ];
 for (const [nome, valor] of raizes) anda(valor, nome);
 

@@ -12,8 +12,8 @@ documento, é este documento que está velho.
 npx tsx scripts/auditar-cobertura.ts
 ```
 
-Levantado em 20/09/2026, depois das Fases 0 a 5 e das correções da `/limpeza`
-e da `/ppf`.
+Atualizado em 20/09/2026, depois do lote que cobriu `/limpeza`, `/ppf`,
+nomes dos cards, subseções da home e SEO por página.
 
 ---
 
@@ -22,171 +22,118 @@ e da `/ppf`.
 ```
 página                coberto  proposital   lacuna
 --------------------------------------------------
-/peliculas                 50         214       28
-/limpeza                   39           3       12
-/protecao-premium          24          12       29
-/ppf                       16           2       19
-/ (home)                  234           9       28
-global                      9           1       12
+/peliculas                 70         214        8
+/limpeza                   48           3        3
+/protecao-premium          36          12       17
+/ppf                       17           2       18
+/ (home)                  248           9       14
+global                      9           1       13
+SEO (todas)                10           0        0
 --------------------------------------------------
-TOTAL                     372         241      128
+TOTAL                     438         241       73
 ```
 
 **Coberto** — o overlay lê do WordPress.
 **Proposital** — fora do painel por decisão; ver a seção final.
 **Lacuna** — texto que ninguém edita sem desenvolvedor.
 
-Os 214 "proposital" de `/peliculas` são quase todos células de tabela de
+Os 214 "proposital" de `/peliculas` são quase todos célula de tabela de
 especificação: 108 valores, 32 rótulos de linha, 29 cabeçalhos de coluna.
-Elas mudam quando a 3M troca de linha, o que já exige desenvolvedor de
-qualquer forma.
+Mudam quando a 3M troca de linha, o que já exige desenvolvedor.
+
+### O que mudou no lote de 20/09
+
+Cobertura foi de **372 para 438**; lacunas de **128 para 73**.
+
+| Entregue | Onde |
+|---|---|
+| Grupos de itens dos cards (27 textos) | `/limpeza` |
+| Três blocos de serviço | `/ppf` |
+| Nome, subtítulo e texto do botão dos cards | as três páginas de catálogo |
+| Subseções dos blocos de serviço (12 itens) | `/` |
+| Nota de rodapé dos blocos de serviço | `/` e `/ppf` |
+| Título e descrição para o Google | as 5 páginas |
+
+Páginas criadas no WordPress no processo: PPF (261), Películas (276),
+Limpeza (277), Proteção Premium (278).
 
 ---
 
-## As lacunas, por volume
+## Lacuna 1 — Texto alternativo das imagens
 
-| Qtd | Página | Campo |
-|---|---|---|
-| 14 | `/protecao-premium` | `cards[].images[].alt` |
-| 12 | `/` | `serviceSections[].subSections[].items[]` |
-| 10 | `/peliculas` | `cards[].title` |
-| 10 | `/peliculas` | `cards[].subtitle` |
-| 6 | global | `navItems[].label` |
-| 4 | `/protecao-premium` | `cards[].title`, `cards[].subtitle`, `cards[].cta.label` |
-| 3 | `/limpeza` | `cards[].title`, `cards[].subtitle`, `cards[].cta.label` |
-| 3 | `/` | `serviceSections[].image.alt`, `link.label`, `primaryCta.label` |
-| 3 | `/ppf` | `ppfLines[].title`, `ppfLines[].image.alt` |
-| 1–2 | várias | títulos e descrições de seção, `imageBadge`, alts de imagem |
+**Prioridade: alta agora que é a maior.** Cerca de 26 textos, sendo 14 nas
+galerias dos cards de `/protecao-premium`.
 
----
+Não é estética: é o que leitores de tela anunciam e o que o Google usa para
+entender a imagem.
 
-## Lacuna 1 — Título e subtítulo dos cards
-
-**Prioridade: alta. É a mais barata de todas.**
-
-30 textos entre as três páginas de catálogo. E o título **já está no
-WordPress**: o seed grava `card.title` como título do post, que é o que o
-cliente vê ao abrir o card. Ele só não é lido de volta.
-
-Hoje o cliente edita o título no admin, salva, e o site continua mostrando o
-título antigo — sem nenhum aviso. É pior que não ter o campo.
+Os alts da galeria e da equipe **já vêm do WordPress**, porque são imagens da
+biblioteca de mídia. Estes não, porque as imagens continuam em `public/img` —
+e alt não existe sem a imagem ao lado.
 
 ### Passos
 
-1. Em `overlayCatalog()`, usar `stripHtml(wp.title.rendered)` como `title`
-   quando não estiver vazio. Exige incluir `title` no `_fields` da busca de
-   `card_catalogo`.
-2. Acrescentar um campo `subtitulo` ao grupo ACF dos cards.
+Duas opções, e a escolha depende de quanto se quer migrar:
 
-**Esforço:** uma hora, e resolve uma incoerência que o cliente vai notar.
+- **Migrar essas imagens para a biblioteca de mídia.** O alt vem junto, de
+  graça, e o cliente edita na mesma tela em que troca a foto.
+- **Criar campos de alt separados.** Mais barato agora, mas passa a haver
+  dois lugares para editar a mesma imagem, e eles saem de sincronia.
 
----
-
-## Lacuna 2 — `subSections` no bloco de limpeza da home
-
-**Prioridade: alta.** 12 itens em duas subseções ("Limpeza Clássica" e
-"Limpeza Técnica"), visíveis na home e sem nenhum campo no painel.
-
-É o terceiro caso do mesmo padrão — depois dos `groups` dos cards e dos
-blocos da `/ppf`. O mecanismo existe, mas não alcança onde o conteúdo está.
-
-### Passos
-
-Mesmo formato do repeater `grupos` que já resolveu os cards de limpeza:
-título do grupo + itens um por linha, dentro do repeater `secoes_servico` da
-Home.
-
-**Esforço:** uma hora. O mapeamento é idêntico ao de `grupos`.
+Recomendo a primeira. É a decisão que está travando esta lacuna.
 
 ---
 
-## Lacuna 3 — Texto alternativo das imagens
+## Lacuna 2 — Rótulos de botão dos blocos de serviço
 
-**Prioridade: média. É SEO e acessibilidade, não estética.**
+**Prioridade: média.** 8 textos: `primaryCta.label`, `primaryCta.whatsappMessage`
+e `link.label` nos blocos da home e da `/ppf`.
 
-- 14 em `/protecao-premium` (galerias dos cards)
-- 3 na home, 3 na `/ppf`, 2 em `/peliculas`, mais os logos
-
-Os alts da galeria e da equipe **já vêm do WordPress**, porque são imagens
-da biblioteca de mídia. Estes não, porque as imagens continuam em
-`public/img` — e alt não existe sem a imagem ao lado.
+Os cards de catálogo já tiveram o rótulo do botão coberto neste lote; os
+blocos de serviço ficaram para trás. Mesma inconsistência que motivou aquela
+correção: renomear um bloco deixa o botão dizendo o nome antigo.
 
 ### Passos
 
-Duas opções, e a escolha depende de quanto você quer migrar:
-
-- **Migrar essas imagens para a biblioteca de mídia.** Aí o alt vem junto,
-  de graça, e o cliente edita na mesma tela em que troca a foto.
-- **Criar campos de alt separados.** Mais barato agora, mas cria dois
-  lugares para editar a mesma imagem — e eles saem de sincronia.
-
-Recomendo a primeira, quando houver motivo para migrar as imagens.
-
----
-
-## Lacuna 4 — Rótulos de botão e `primaryCta.label`
-
-**Prioridade: média.**
-
-A **mensagem** do WhatsApp já é editável; o **rótulo do botão** não. São 11
-textos entre os cards e os blocos de serviço.
-
-Vale notar que essas mensagens são o texto que chega ao vendedor. Se ninguém
-as revisou, é um bom momento — elas são lidas por gente, não por máquina.
-
-### Passos
-
-Acrescentar `cta_label` ao grupo dos cards e `botao_label` ao repeater de
-blocos de serviço. Mapeamento direto, sem estrutura nova.
+Acrescentar `botao_label`, `botao_mensagem` e `link_label` ao repeater
+`secoes_servico`, nos grupos da Home e da PPF. Mapeamento direto.
 
 **Esforço:** uma hora.
 
 ---
 
-## Lacuna 5 — Títulos e descrições de seção
+## Lacuna 3 — Títulos e descrições de seção de catálogo
 
-**Prioridade: baixa.**
-
-Cada seção de catálogo tem `titleStart`, `titleHighlight` e `description`
-fora do overlay — só os cards dentro dela entraram.
+**Prioridade: baixa.** 10 textos.
 
 ```
-films.ts      "Linha 3M", "Película Solarium"
-cleaning.ts   "Nossos Pacotes"
-premium.ts    "Nano Coatings"
+films.ts      "Linha 3M", "Película Solarium"  + 2 descrições
+cleaning.ts   "Nossos Pacotes"                 + 1 descrição
+premium.ts    "Nano Coatings"                  + 1 descrição
 ```
 
-Mudam quando o cliente troca de fornecedor. Quando isso acontece, a foto e o
-logo mudam junto, o que já exige desenvolvedor.
-
-**Esforço:** algumas horas. Avalie se compensa.
+Mudam quando o cliente troca de fornecedor — e aí a foto e o logo mudam
+junto, o que já exige desenvolvedor.
 
 ---
 
-## Lacuna 6 — `/ppf`: blocos de cobertura e a nota do Kit Interno
+## Lacuna 4 — `/ppf`: blocos de cobertura e selos
 
-**Prioridade: baixa.**
+**Prioridade: baixa.** 3 títulos de cobertura (PPF Frontal, Quina e Concha,
+Full PPF), 2 alts de logo, 1 selo sobre a foto.
 
-A `/ppf` foi coberta nos três blocos de serviço, mas ficaram de fora:
-
-- `ppfLines[].title` — os três blocos de cobertura (PPF Frontal, Quina e
-  Concha, Full PPF): 3 títulos e 3 alts
-- `kitInterno.note` — **o tipo `ServiceSection` tem um campo `note` que eu
-  não incluí no grupo ACF da `/ppf`**. É um campo só, e fecha a cobertura
-  daquela página
-
-O `note` é o mais fácil e o mais claramente esquecido: acrescente `nota` ao
-repeater `secoes_servico` do grupo *PPF — Conteúdo* e mapeie no overlay.
+Cobrir os títulos de cobertura exigiria acrescentar `id` ao tipo `ppfLines`,
+que hoje não tem. Custo maior que o retorno para três textos que não mudam.
 
 ---
 
-## Lacuna 7 — Menu e dados da empresa
+## Lacuna 5 — Menu e dados da empresa
 
-**Prioridade: baixa. Provavelmente não fazer.**
+**Prioridade: baixa. Provavelmente não fazer.** 13 textos.
 
 O menu ([`navigation.ts`](../src/data/navigation.ts), 6 itens) e
-`site.name`, `site.shortName`, `site.description`, `site.address` estão no
-código.
+`site.name`, `site.shortName`, `site.description`, `site.address`,
+`site.parentWebsite`, `site.parentWebsiteUrl`.
 
 Menu editável costuma dar errado: o cliente aponta para uma rota que não
 existe e a página dá 404 em produção. Se for fazer, use um select das rotas
@@ -218,30 +165,34 @@ Se quebra, fica no código.
 
 ## Ordem sugerida
 
-1. **Lacuna 1** — título dos cards. O campo já existe no admin e não faz
-   nada; isso é pior que não existir.
-2. **Lacuna 2** — `subSections` da home. Mesmo mapeamento dos `groups`.
-3. **Lacuna 6, a parte do `note`** — um campo, fecha a `/ppf`.
-4. Pergunte ao cliente o que ele sentiu falta depois de um mês usando o
+1. **Decidir sobre a Lacuna 1** — migrar as imagens para a biblioteca de
+   mídia ou não. É a maior lacuna e a decisão trava as duas saídas.
+2. **Lacuna 2** — rótulos dos botões, pela mesma lógica que motivou a
+   correção dos cards.
+3. Perguntar ao cliente o que ele sentiu falta depois de um mês usando o
    painel. A resposta será melhor que este documento.
-5. O resto, conforme a resposta.
+4. O resto, conforme a resposta.
 
-Antes de cada uma, aplique o mesmo critério: **com que frequência isso
-muda?** Campo editável que ninguém usa é mais uma interface para o cliente
-errar.
+Antes de cada uma, aplique o critério: **com que frequência isso muda?**
+Campo editável que ninguém usa é mais uma interface para o cliente errar.
 
 ---
 
 ## Um padrão que se repetiu três vezes
 
 Os `groups` dos cards, os blocos da `/ppf` e os `subSections` da home caíram
-todos no mesmo erro: **o overlay foi desenhado a partir do tipo mais comum,
-e o conteúdo real estava numa variação do tipo**.
+todos no mesmo erro: **o overlay foi desenhado a partir do tipo mais comum, e
+o conteúdo real estava numa variação do tipo**.
 
 Cards de limpeza não usam `benefits`, usam `groups`. A `/ppf` não tem cards,
 tem `ServiceSection`. O bloco de limpeza da home não usa `checklist`, usa
 `subSections`.
 
-Em todos os casos o build passava, o admin abria e o site funcionava — só
-que o campo aparecia vazio e ninguém entendia por quê. A varredura existe
-para não precisar descobrir isso uma página por vez.
+Em todos os casos o build passava, o admin abria e o site funcionava — só que
+o campo aparecia vazio e ninguém entendia por quê. A varredura existe para
+não precisar descobrir isso uma página por vez.
+
+E uma variação do mesmo: o **nome do card** já estava no WordPress como
+título do post, e não era lido de volta. O cliente editava, salvava, e o site
+continuava mostrando o antigo. Campo que mente é pior que campo que não
+existe — vale procurar por outros antes de acrescentar campos novos.
