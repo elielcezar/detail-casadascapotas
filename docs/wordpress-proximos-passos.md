@@ -178,6 +178,62 @@ Campo editável que ninguém usa é mais uma interface para o cliente errar.
 
 ---
 
+## Pendências de infraestrutura e entrega
+
+Não são cobertura de conteúdo. São itens de servidor e de handover que
+ficaram em aberto quando a integração foi concluída, em 20/09/2026.
+
+### Migrar o WordPress para o subdomínio do cliente
+
+Hoje o admin vive em `detail.ecwd.cloud`, um VPS Hostinger que **não é do
+cliente**. Foi decisão consciente para não travar o projeto, com a migração
+adiada.
+
+Importa porque a URL de cada imagem fica **gravada no HTML publicado**: a
+galeria e a equipe do site dependem desse domínio estar no ar.
+
+O caminho já está preparado — a origem das imagens sai de
+`NEXT_PUBLIC_WP_MEDIA_URL`, então migrar é:
+
+1. Mover a instalação para `admin.casadascapotascuritiba.com`
+2. `search-replace` no banco do WordPress, trocando a origem dos anexos
+3. Definir o secret `WP_MEDIA_URL` no GitHub e atualizar `WP_API_URL`
+4. Atualizar o `hostname` em `remotePatterns` no `next.config.ts`
+5. Rebuild
+
+**Nenhum componente muda.** A variável existe exatamente para isso.
+
+Existe uma pasta `admin.casadascapotascuritiba.com/` no servidor do cliente
+desde 02/09/2026, anterior a este trabalho — confira o que há nela antes de
+usar o subdomínio.
+
+### Verificar o `malware.txt` no servidor do cliente
+
+Há um arquivo `malware.txt` na raiz da conta cPanel, com dono `root` e data
+de 26/08/2026. O formato é típico de scanner do provedor (Imunify360 ou
+similar). Não foi investigado. Leia antes de assumir que não é nada.
+
+### Trocar credenciais ao entregar o painel
+
+Duas, e as duas circularam durante o desenvolvimento:
+
+- **Senha do FTP.** Trafega em texto puro a cada deploy, porque o
+  certificado FTPS do HostGator não cobre o domínio do cliente — a decisão e
+  o motivo estão registrados em `.github/workflows/deploy.yml`.
+- **Token do GitHub.** Fine-grained, restrito a `detail-casadascapotas` com
+  `Contents: Read and write`, guardado em texto no banco do WordPress.
+  **Expira** — anote a data. Quando expirar, o plugin passa a registrar erro
+  HTTP no log e os deploys automáticos param sem que ninguém perceba, porque
+  o cron de backup 2×/dia continua funcionando.
+
+### Compartilhar o material de treinamento
+
+O guia visual em [`../Nextjs-to-WP/`](../Nextjs-to-WP/) foi publicado como
+artefato privado. A equipe só abre depois de compartilhado pelo menu Share
+da página.
+
+---
+
 ## Um padrão que se repetiu três vezes
 
 Os `groups` dos cards, os blocos da `/ppf` e os `subSections` da home caíram
