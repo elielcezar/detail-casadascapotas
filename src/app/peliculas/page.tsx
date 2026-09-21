@@ -1,15 +1,24 @@
 import type { Metadata } from "next";
+import { WP_PAGE_IDS } from "@/lib/wordpress";
+import { pageSeo } from "@/data/seo";
 import CatalogBlock from "@/components/shared/CatalogBlock";
 import CtaSection from "@/components/shared/CtaSection";
 import PageHero from "@/components/shared/PageHero";
 import { filmSections } from "@/data/films";
-import { overlayCatalog } from "@/lib/content";
+import { getPageSeo, overlayCatalog } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Catálogo de Películas",
-  description:
-    "Catálogo completo de películas automotivas: 3M FX, Color Stable, Ceramic IR, Crystalline, Sunblack, Sunblock e mais. Garantia de fábrica de até 15 anos.",
-};
+/**
+ * Título e descrição vêm do WordPress, com o texto abaixo como padrão.
+ * Metadata vazia é pior que desatualizada: sem ela o Google inventa a
+ * sua própria a partir do conteúdo da página.
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getPageSeo(WP_PAGE_IDS.peliculas);
+  return {
+    title: seo.title ?? pageSeo.peliculas.title,
+    description: seo.description ?? pageSeo.peliculas.description,
+  };
+}
 
 export default async function PeliculasPage() {
   const sections = await overlayCatalog(filmSections);

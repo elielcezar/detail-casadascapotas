@@ -19,6 +19,7 @@ import {
   type WordPressServiceSection,
   getHomeContent as wpGetHomeContent,
   getGalleryCategories as wpGetGalleryCategories,
+  getPageSeo as wpGetPageSeo,
   getServiceSections as wpGetServiceSections,
   getSiteSettings as wpGetSiteSettings,
   indexCatalogCards,
@@ -263,12 +264,26 @@ function aplicarBlocosServico(
     if (!over) return secao;
 
     const checklist = linesToList(over.checklist);
+
+    // Blocos com ícone e lista própria (os dois pacotes de limpeza, na home).
+    // Subseção sem título ou sem item é descartada em vez de virar um bloco
+    // vazio.
+    const subsecoes = (Array.isArray(over.subsecoes) ? over.subsecoes : [])
+      .map((sub) => ({
+        icon: sub?.icone ?? "star",
+        title: sub?.titulo?.trim() ?? "",
+        items: linesToList(sub?.itens),
+      }))
+      .filter((sub) => sub.title.length > 0 && sub.items.length > 0);
+
     return {
       ...secao,
       titleStart: over.titulo_inicio?.trim() || secao.titleStart,
       titleHighlight: over.titulo_destaque?.trim() || secao.titleHighlight,
       description: over.descricao?.trim() || secao.description,
       checklist: checklist.length > 0 ? checklist : secao.checklist,
+      note: over.nota?.trim() || secao.note,
+      subSections: subsecoes.length > 0 ? subsecoes : secao.subSections,
     };
   });
 }
@@ -278,3 +293,20 @@ export const getPpfSections = cache(async (): Promise<ServiceSection[]> => {
   const overrides = await wpGetServiceSections(WP_PAGE_IDS.ppf);
   return aplicarBlocosServico([aboutPpf, parabrisa, kitInterno], overrides);
 });
+
+/**
+ * Título e descrição de uma página para buscadores.
+ *
+ * O fallback fica no código de propósito: metadata vazia é pior que
+ * metadata desatualizada — o Google inventa a sua própria a partir do
+ * conteúdo, e aí você perde o controle das duas.
+ */
+export const getPageSeo = cache(
+  async (pageId: number): Promise<{ title?: string; description?: string }> => {
+    const acf = await wpGetPageSeo(pageId);
+    return {
+      title: acf.seo_titulo?.trim() || undefined,
+      description: acf.seo_descricao?.trim() || undefined,
+    };
+  }
+);

@@ -1,15 +1,24 @@
 import type { Metadata } from "next";
+import { WP_PAGE_IDS } from "@/lib/wordpress";
+import { pageSeo } from "@/data/seo";
 import CatalogBlock from "@/components/shared/CatalogBlock";
 import CtaSection from "@/components/shared/CtaSection";
 import PageHero from "@/components/shared/PageHero";
 import { cleaningSections } from "@/data/cleaning";
-import { overlayCatalog } from "@/lib/content";
+import { getPageSeo, overlayCatalog } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Portfólio de Limpeza",
-  description:
-    "Portfólio de limpeza automotiva profissional: Limpeza Clássica e Limpeza Técnica. Lavagem detalhada, descontaminação, selante de pintura e mais.",
-};
+/**
+ * Título e descrição vêm do WordPress, com o texto abaixo como padrão.
+ * Metadata vazia é pior que desatualizada: sem ela o Google inventa a
+ * sua própria a partir do conteúdo da página.
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getPageSeo(WP_PAGE_IDS.limpeza);
+  return {
+    title: seo.title ?? pageSeo.limpeza.title,
+    description: seo.description ?? pageSeo.limpeza.description,
+  };
+}
 
 export default async function LimpezaPage() {
   const sections = await overlayCatalog(cleaningSections);

@@ -27,6 +27,8 @@ export const site = {
 
   instagramHandle: "@casadascapotascuritiba",
   parentWebsite: "www.casadascapotas.com",
+  /** Destino do logo no cabeçalho — pedido do cliente, não é a home deste site */
+  parentWebsiteUrl: "https://www.casadascapotas.com",
 
   address: {
     city: "Curitiba",

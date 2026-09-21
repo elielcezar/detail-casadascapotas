@@ -23,6 +23,7 @@ import { cleaningSections } from "../src/data/cleaning";
 import { premiumSections } from "../src/data/premium";
 import { aboutPpf, parabrisa, kitInterno } from "../src/data/ppf";
 import { site } from "../src/data/site";
+import { pageSeo } from "../src/data/seo";
 
 const WP = process.env.WP_API_URL || "https://detail.ecwd.cloud/wp-json/wp/v2";
 const USER = process.env.WP_USER;
@@ -268,6 +269,12 @@ async function seedHome() {
       descricao: sec.description,
       // O campo no admin é "um item por linha"
       checklist: (sec.checklist ?? []).join("\n"),
+      nota: sec.note ?? "",
+      subsecoes: (sec.subSections ?? []).map((sub) => ({
+        icone: sub.icon,
+        titulo: sub.title,
+        itens: sub.items.join("\n"),
+      })),
     })),
   };
 
@@ -295,6 +302,7 @@ async function seedPpf() {
     titulo_destaque: sec.titleHighlight,
     descricao: sec.description,
     checklist: (sec.checklist ?? []).join("\n"),
+    nota: sec.note ?? "",
   }));
 
   if (DRY) {
@@ -310,6 +318,31 @@ async function seedPpf() {
   console.log("    preenchida: %s", blocos.map((b) => b.id_secao).join(", "));
 }
 
+async function seedSeo() {
+  console.log("\n▸ SEO das páginas");
+  const paginas: [keyof typeof pageSeo, number][] = [
+    ["home", 20],
+    ["peliculas", 276],
+    ["limpeza", 277],
+    ["ppf", 261],
+    ["protecaoPremium", 278],
+  ];
+
+  for (const [chave, id] of paginas) {
+    const { title, description } = pageSeo[chave];
+    if (DRY) {
+      console.log(`    [dry] ${chave} (${id}): ${title}`);
+      continue;
+    }
+    await wp(`/pages/${id}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ acf: { seo_titulo: title, seo_descricao: description } }),
+    });
+    console.log(`    ${chave} (${id}): ${title}`);
+  }
+}
+
 async function main() {
   console.log(`Seed → ${WP}${DRY ? "  (DRY RUN — nada será escrito)" : ""}`);
   await seedGallery();
@@ -318,6 +351,7 @@ async function main() {
   await seedSettings();
   await seedHome();
   await seedPpf();
+  await seedSeo();
   saveManifest();
   console.log(`\nConcluído. ${Object.keys(manifest).length} imagens no manifesto.`);
 }

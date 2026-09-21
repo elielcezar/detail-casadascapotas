@@ -649,6 +649,115 @@
             "placeholder": "",
             "new_lines": "",
             "parent_repeater": "field_detail_home_serv"
+          },
+          {
+            "key": "field_detail_home_serv_nota",
+            "label": "Nota de rodapé",
+            "name": "nota",
+            "type": "textarea",
+            "instructions": "Texto menor no fim do bloco. Opcional.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 2,
+            "new_lines": "",
+            "parent_repeater": "field_detail_home_serv"
+          },
+          {
+            "key": "field_detail_home_serv_subsecoes",
+            "label": "Subseções",
+            "name": "subsecoes",
+            "type": "repeater",
+            "instructions": "Blocos com icone e lista propria, como os dois pacotes na secao de limpeza. Deixe sem nenhuma linha para manter as subsecoes atuais.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "field_detail_home_serv_subsecoes_titulo",
+            "button_label": "Adicionar subseção",
+            "parent_repeater": "field_detail_home_serv",
+            "sub_fields": [
+              {
+                "key": "field_detail_home_serv_subsecoes_icone",
+                "label": "Ícone",
+                "name": "icone",
+                "type": "select",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                  "width": "",
+                  "class": "",
+                  "id": ""
+                },
+                "default_value": "star",
+                "placeholder": "",
+                "parent_repeater": "field_detail_home_serv_subsecoes",
+                "choices": {
+                  "star": "Estrela",
+                  "gem": "Diamante"
+                },
+                "allow_null": 0,
+                "multiple": 0,
+                "ui": 0,
+                "ajax": 0,
+                "return_format": "value"
+              },
+              {
+                "key": "field_detail_home_serv_subsecoes_titulo",
+                "label": "Título",
+                "name": "titulo",
+                "type": "text",
+                "instructions": "Ex.: Limpeza Clássica",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                  "width": "",
+                  "class": "",
+                  "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "maxlength": "",
+                "prepend": "",
+                "append": "",
+                "parent_repeater": "field_detail_home_serv_subsecoes"
+              },
+              {
+                "key": "field_detail_home_serv_subsecoes_itens",
+                "label": "Itens",
+                "name": "itens",
+                "type": "textarea",
+                "instructions": "Um item por linha.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                  "width": "",
+                  "class": "",
+                  "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "maxlength": "",
+                "rows": 7,
+                "new_lines": "",
+                "parent_repeater": "field_detail_home_serv_subsecoes"
+              }
+            ]
           }
         ]
       }
@@ -808,6 +917,26 @@
             "placeholder": "",
             "new_lines": "",
             "parent_repeater": "field_detail_ppf_serv"
+          },
+          {
+            "key": "field_detail_ppf_serv_nota",
+            "label": "Nota de rodapé",
+            "name": "nota",
+            "type": "textarea",
+            "instructions": "Texto menor no fim do bloco. Opcional.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 2,
+            "new_lines": "",
+            "parent_repeater": "field_detail_ppf_serv"
           }
         ]
       }
@@ -835,6 +964,96 @@
     ],
     "active": true,
     "description": "Repeater vazio mantem o conteudo atual do site.",
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_detail_seo",
+    "title": "SEO da página",
+    "fields": [
+      {
+        "key": "field_detail_seo_titulo",
+        "label": "Título no Google",
+        "name": "seo_titulo",
+        "type": "text",
+        "instructions": "Aparece na aba do navegador e como titulo azul no Google. Ideal ate 60 caracteres. O nome do site e acrescentado automaticamente depois. Vazio mantem o titulo atual.",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "placeholder": "",
+        "maxlength": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_detail_seo_descricao",
+        "label": "Descrição no Google",
+        "name": "seo_descricao",
+        "type": "textarea",
+        "instructions": "O paragrafo cinza sob o titulo no Google. Ideal entre 120 e 155 caracteres. Vazio mantem a descricao atual.",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "placeholder": "",
+        "maxlength": "",
+        "rows": 3,
+        "new_lines": ""
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page",
+          "operator": "==",
+          "value": "20"
+        }
+      ],
+      [
+        {
+          "param": "page",
+          "operator": "==",
+          "value": "261"
+        }
+      ],
+      [
+        {
+          "param": "page",
+          "operator": "==",
+          "value": "276"
+        }
+      ],
+      [
+        {
+          "param": "page",
+          "operator": "==",
+          "value": "277"
+        }
+      ],
+      [
+        {
+          "param": "page",
+          "operator": "==",
+          "value": "278"
+        }
+      ]
+    ],
+    "menu_order": 10,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Vale so para o Google e para a aba do navegador; nao muda nada visivel na pagina.",
     "show_in_rest": 1
   }
 ]

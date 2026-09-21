@@ -156,6 +156,9 @@ export const WP_PAGE_IDS = {
   home: 20,
   configuracoes: 22,
   ppf: 261,
+  peliculas: 276,
+  limpeza: 277,
+  protecaoPremium: 278,
 };
 
 export interface WordPressPage {
@@ -351,6 +354,9 @@ export interface WordPressServiceSection {
   descricao: string;
   /** Um item por linha */
   checklist: string;
+  nota: string;
+  /** Blocos com ícone e lista própria; `itens` vem com um por linha. */
+  subsecoes: { icone: "star" | "gem"; titulo: string; itens: string }[];
 }
 
 export interface WordPressHomeContent {
@@ -389,4 +395,20 @@ export function linesToList(value: string | undefined): string[] {
 export async function getServiceSections(pageId: number): Promise<WordPressServiceSection[]> {
   const page = await getPageById(pageId);
   return asArray<WordPressServiceSection>(page?.acf?.secoes_servico);
+}
+
+/**
+ * Título e descrição da página para buscadores.
+ *
+ * Só afeta a aba do navegador e o resultado no Google — nada visível na
+ * página em si.
+ */
+export interface WordPressPageSeo {
+  seo_titulo: string;
+  seo_descricao: string;
+}
+
+export async function getPageSeo(pageId: number): Promise<Partial<WordPressPageSeo>> {
+  const page = await getPageById(pageId);
+  return (page?.acf ?? {}) as Partial<WordPressPageSeo>;
 }
