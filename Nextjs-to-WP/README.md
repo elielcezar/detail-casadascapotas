@@ -343,6 +343,121 @@ confirme que ele sai com erro em vez de gerar páginas vazias.
 
 ---
 
+## O que muda conforme a hospedagem
+
+Quatro coisas variam de provedor para provedor, e três delas são
+destrutivas quando você erra. Confira na Fase 0, não na Fase 5.
+
+> Marcado com ✔ o que foi verificado nesta implantação. O resto é
+> comportamento conhecido dos painéis, mas **liste o servidor antes de
+> configurar** em vez de confiar na tabela.
+
+### 1. Onde a conta de FTP cai
+
+O mais perigoso. A action de deploy **apaga do servidor tudo que não existe
+no build** — se o diretório de destino estiver errado, ela apaga o que
+encontrar pela frente.
+
+| Painel | Onde a conta cai | O que existe lá além do site |
+|---|---|---|
+| cPanel ✔ | `/home/usuario/` | `mail/`, `ssl/`, `logs/`, `etc/`, `public_html/`, uma pasta por domínio |
+| hPanel (Hostinger) | `/` | `public_html/`, `domains/`, `.ssh/` |
+| Plesk | `/` | `httpdocs/`, `logs/`, `anon_ftp/` |
+| VPS próprio ✔ | onde você definir | o que você tiver posto lá |
+
+Em cPanel com domínio adicional, o site fica numa **subpasta com o nome do
+domínio** — não em `public_html/`. Foi o caso aqui: a conta caía em
+`/home/usuario/` e o site vivia em `/home/usuario/dominio.com.br/`.
+
+Apontar o deploy para `/` nesse cenário apaga as contas de e-mail e os
+certificados do cliente. Sempre liste antes:
+
+```bash
+curl -s --ftp-pasv -u 'usuario:senha' "ftp://SERVIDOR/" | awk '{print $NF}'
+```
+
+### 2. `.htaccess` funciona ou é ignorado
+
+| Servidor | `.htaccess` | Consequência |
+|---|---|---|
+| Apache ✔ | lê | regras de rewrite e CORS funcionam |
+| LiteSpeed | lê | idem, e ainda tem o cache próprio (ver adiante) |
+| nginx ✔ | **ignora, em silêncio** | precisa de server block, que em hospedagem gerenciada você não controla |
+
+Guias de integração costumam mandar resolver duas coisas por `.htaccess`:
+o CORS no WordPress e um 403 no site estático. **Nenhuma das duas é
+necessária se você fizer as escolhas certas antes:**
+
+- **CORS não se aplica.** A API só é consultada durante o build, por Node.
+  Não há navegador na história. A regra de CORS no WordPress é inofensiva e
+  inútil aqui — e em nginx nem é lida.
+- **O 403 some com `trailingSlash: true`.** Sem ele, o Next gera
+  `peliculas.html` ao lado da pasta `peliculas/` e alguns servidores não
+  sabem qual servir. Com ele, gera `peliculas/index.html`, que funciona em
+  qualquer servidor estático sem configuração. Prefira isto a manter um
+  `.htaccess` que só funciona em metade dos provedores.
+
+### 3. Qual protocolo de transferência existe — e se o certificado serve
+
+A action de deploy mais usada (`SamKirkland/FTP-Deploy-Action`) fala **FTP e
+FTPS apenas**. **SFTP não é suportado** — é protocolo sobre SSH, outra
+coisa. Se o provedor só oferece SFTP, troque por rsync sobre SSH e reescreva
+esse step.
+
+Quando há FTPS, o problema seguinte é o certificado:
+
+| Cenário | Certificado | FTPS valida? |
+|---|---|---|
+| Compartilhada ✔ | curinga do provedor (`*.provedor.com`) | **não**, pelo domínio do cliente nem pelo IP |
+| Compartilhada, pelo hostname do servidor | o mesmo curinga | sim, se você souber o hostname |
+| VPS com domínio próprio ✔ | Let's Encrypt do seu domínio | sim |
+
+Em hospedagem compartilhada o nome utilizável está no painel, em
+*Informações gerais → Nome do servidor*. Não tente adivinhar pelo DNS
+reverso: aqui o PTR devolveu um hostname do provedor que resolvia para a
+Cloudflare, não para o servidor de FTP — conectar por ele simplesmente não
+chegava a lugar nenhum.
+
+Para descobrir qual certificado o servidor apresenta:
+
+```bash
+openssl s_client -connect SERVIDOR:21 -starttls ftp </dev/null 2>/dev/null \
+  | openssl x509 -noout -subject -ext subjectAltName
+```
+
+Se o certificado não cobrir o nome pelo qual você consegue conectar, a
+escolha é entre FTP em texto puro e não fazer deploy automático. Decida
+conscientemente, registre a decisão no workflow, e troque a senha quando
+entregar o painel ao cliente.
+
+### 4. Que cache existe na frente do site
+
+"Subi o arquivo e o site mostra o antigo" quase sempre é cache, não build.
+
+| Camada | Onde aparece | Como limpar |
+|---|---|---|
+| LiteSpeed (LSCache) | muita hospedagem compartilhada | painel → Cache Manager |
+| Cloudflare | quando o DNS passa por lá | Purge Cache no painel |
+| Cache de página do WP | irrelevante aqui | o frontend do WP está fechado |
+
+Limpe antes de investigar o build. E confira que o `Cache-Control` do HTML
+não está em horas — em site estático, o HTML deve expirar rápido e só os
+assets com hash em `_next/static/` podem ser cacheados agressivamente.
+
+### E do lado do WordPress
+
+O provedor do WordPress importa menos, mas dois pontos pegam:
+
+- **WAF bloqueando o runner.** Hospedagens bloqueiam rajadas vindas de IPs
+  de datacenter, e o runner do GitHub é um. Foi o que derrubou um build aqui
+  ✔: a API ficou inalcançável por três minutos depois de várias execuções
+  seguidas. É o motivo das retentativas com espera longa.
+- **REST API fechada.** Alguns WordPress gerenciados exigem autenticação ou
+  bloqueiam a REST API por padrão. Teste `/wp-json/wp/v2/pages` **anônimo**
+  na Fase 1, antes de escrever qualquer código.
+
+---
+
 ## Armadilhas
 
 Ler antes de "melhorar" qualquer coisa. Cada uma custou horas.

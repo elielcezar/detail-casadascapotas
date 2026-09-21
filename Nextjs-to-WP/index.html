@@ -344,6 +344,46 @@
   .file b { font-family: var(--mono); font-size: 12.5px; font-weight: 500; color: var(--flow); display: block; overflow-wrap: anywhere; }
   .file span { display: block; margin-top: 5px; font-size: .88rem; }
 
+  /* ---------- variação por hospedagem ---------- */
+
+  .vars { display: grid; gap: 18px; }
+  .var {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 18px 20px 16px;
+  }
+  .var-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  .var-head h3 { margin: 0; }
+  .risk {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 3px;
+    background: var(--trap-dim);
+    color: var(--trap);
+    white-space: nowrap;
+  }
+  .var > p { margin: 0 0 12px; font-size: .93rem; color: var(--muted); max-width: none; }
+  .var table { min-width: 380px; font-size: .89rem; }
+  .var th, .var td { padding: 8px 12px 8px 0; }
+  .var td:last-child, .var th:last-child { padding-right: 0; }
+  .ok   { color: var(--safe); font-weight: 600; }
+  .nope { color: var(--trap); font-weight: 600; }
+  .seen {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--safe);
+    background: var(--safe-dim);
+    border-radius: 2px;
+    padding: 1px 4px;
+    margin-left: 5px;
+    white-space: nowrap;
+  }
+  .legend { font-size: .86rem; color: var(--muted); margin: 0 0 26px; }
+
   @media (max-width: 560px) {
     .phase { grid-template-columns: 40px 1fr; gap: 14px; }
     .phase .idx { font-size: 1.2rem; }
@@ -641,6 +681,117 @@
           <span class="gate">Altere no admin, rebuilde, confira o HTML gerado</span>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>O que muda conforme a hospedagem</h2>
+    <p class="sub">
+      Quatro coisas variam de provedor para provedor. Três delas são
+      destrutivas quando você erra — e todas se conferem na Fase 0, não na
+      hora do deploy.
+    </p>
+    <p class="legend">
+      <span class="seen">visto</span> marca o que foi verificado nesta
+      implantação. O resto é comportamento conhecido dos painéis: liste o
+      servidor antes de configurar, em vez de confiar na tabela.
+    </p>
+
+    <div class="vars">
+      <article class="var">
+        <div class="var-head">
+          <h3>1. Onde a conta de FTP cai</h3>
+          <span class="risk">apaga arquivos</span>
+        </div>
+        <p>
+          A action apaga do servidor tudo que não existe no build. Diretório
+          de destino errado significa apagar o que estiver por perto — em
+          cPanel, as contas de e-mail e os certificados do cliente.
+        </p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Painel</th><th>Onde cai</th><th>O que mais mora lá</th></tr></thead>
+            <tbody>
+              <tr><td>cPanel<span class="seen">visto</span></td><td><code>/home/usuario/</code></td><td>mail, ssl, logs, etc, public_html</td></tr>
+              <tr><td>hPanel</td><td><code>/</code></td><td>public_html, domains</td></tr>
+              <tr><td>Plesk</td><td><code>/</code></td><td>httpdocs, logs, anon_ftp</td></tr>
+              <tr><td>VPS próprio<span class="seen">visto</span></td><td>onde você definir</td><td>o que você tiver posto</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:12px">
+          Em cPanel com domínio adicional, o site fica numa subpasta com o
+          nome do domínio — <strong>não</strong> em <code>public_html/</code>.
+          Foi o caso aqui.
+        </p>
+      </article>
+
+      <article class="var">
+        <div class="var-head">
+          <h3>2. <code>.htaccess</code> funciona ou é ignorado</h3>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Servidor</th><th><code>.htaccess</code></th><th>Consequência</th></tr></thead>
+            <tbody>
+              <tr><td>Apache<span class="seen">visto</span></td><td class="ok">lê</td><td>rewrite e CORS funcionam</td></tr>
+              <tr><td>LiteSpeed</td><td class="ok">lê</td><td>idem, mais o cache próprio</td></tr>
+              <tr><td>nginx<span class="seen">visto</span></td><td class="nope">ignora, em silêncio</td><td>precisa de server block, que você talvez não controle</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:12px">
+          Guias mandam resolver duas coisas por <code>.htaccess</code>: CORS no
+          WordPress e um 403 no site estático. <strong>Nenhuma das duas é
+          necessária.</strong> CORS não se aplica — a API só é lida no build,
+          por Node. E o 403 some com <code>trailingSlash: true</code>, que faz
+          o Next gerar <code>rota/index.html</code> em vez de
+          <code>rota.html</code> ao lado da pasta. Funciona em qualquer
+          servidor, sem configuração.
+        </p>
+      </article>
+
+      <article class="var">
+        <div class="var-head">
+          <h3>3. Protocolo, e se o certificado serve</h3>
+          <span class="risk">credencial exposta</span>
+        </div>
+        <p>
+          A action de deploy mais usada fala <strong>FTP e FTPS apenas</strong>.
+          SFTP é protocolo sobre SSH e não é suportado — se o provedor só
+          oferece SFTP, troque por rsync sobre SSH.
+        </p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Cenário</th><th>Certificado</th><th>FTPS valida?</th></tr></thead>
+            <tbody>
+              <tr><td>Compartilhada, pelo domínio do cliente<span class="seen">visto</span></td><td>curinga do provedor</td><td class="nope">não</td></tr>
+              <tr><td>Compartilhada, pelo hostname do servidor</td><td>o mesmo curinga</td><td class="ok">sim</td></tr>
+              <tr><td>VPS com domínio próprio<span class="seen">visto</span></td><td>Let's Encrypt seu</td><td class="ok">sim</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:12px">
+          O hostname utilizável está no painel, em <em>Informações gerais</em>.
+          Não adivinhe pelo DNS reverso: aqui o PTR devolveu um nome do
+          provedor que resolvia para a Cloudflare, não para o servidor de FTP.
+          Sem um nome que o certificado cubra, a escolha é entre FTP em texto
+          puro e não ter deploy — decida e registre no workflow.
+        </p>
+      </article>
+
+      <article class="var">
+        <div class="var-head">
+          <h3>4. Que cache existe na frente</h3>
+        </div>
+        <p>
+          “Subi o arquivo e vejo o antigo” quase sempre é cache, não build.
+          LiteSpeed em hospedagem compartilhada e Cloudflare quando o DNS
+          passa por lá. Limpe antes de investigar o build — e confira que o
+          <code>Cache-Control</code> do HTML não está em horas. Em site
+          estático só os assets com hash podem ser cacheados agressivamente.
+        </p>
+      </article>
     </div>
   </section>
 
