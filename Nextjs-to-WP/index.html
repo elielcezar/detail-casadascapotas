@@ -1,0 +1,829 @@
+<title>Next.js para WordPress</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --paper:   #e9edf0;
+    --surface: #fafbfc;
+    --raised:  #ffffff;
+    --ink:     #0d1922;
+    --muted:   #5a6a77;
+    --line:    #c5d0d8;
+    --flow:    #12507e;
+    --flow-dim:#dbe6ef;
+    --trap:    #9c4218;
+    --trap-dim:#f4e3da;
+    --safe:    #1c6149;
+    --safe-dim:#dcebe4;
+    --shadow:  0 1px 2px rgba(13,25,34,.08), 0 8px 24px -16px rgba(13,25,34,.3);
+
+    --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --body:    "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+    --mono:    "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:   #0d1922;
+      --surface: #131f29;
+      --raised:  #1a2833;
+      --ink:     #dde6ec;
+      --muted:   #8b9daa;
+      --line:    #2b3b48;
+      --flow:    #6cb0e4;
+      --flow-dim:#172c3d;
+      --trap:    #e2946a;
+      --trap-dim:#33231a;
+      --safe:    #63c39a;
+      --safe-dim:#163026;
+      --shadow:  0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:   #0d1922;
+    --surface: #131f29;
+    --raised:  #1a2833;
+    --ink:     #dde6ec;
+    --muted:   #8b9daa;
+    --line:    #2b3b48;
+    --flow:    #6cb0e4;
+    --flow-dim:#172c3d;
+    --trap:    #e2946a;
+    --trap-dim:#33231a;
+    --safe:    #63c39a;
+    --safe-dim:#163026;
+    --shadow:  0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .wrap {
+    max-width: 860px;
+    margin-inline: auto;
+    padding-inline: 20px;
+    padding-block: 0;
+  }
+
+  /* ---------- cabeçalho ---------- */
+
+  .masthead {
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+    padding-block: 52px 36px;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--flow);
+    margin: 0 0 18px;
+  }
+  h1 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(2.1rem, 7vw, 3.4rem);
+    line-height: 1.04;
+    letter-spacing: -.022em;
+    margin: 0 0 20px;
+    text-wrap: balance;
+  }
+  h1 .arrow { color: var(--flow); font-weight: 500; }
+  .lede {
+    font-size: clamp(1.02rem, 2.4vw, 1.2rem);
+    color: var(--muted);
+    max-width: 58ch;
+    margin: 0;
+  }
+
+  .facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 36px;
+    margin-top: 34px;
+    padding-top: 26px;
+    border-top: 1px solid var(--line);
+  }
+  .fact { min-width: 96px; }
+  .fact b {
+    display: block;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+  .fact span {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ---------- seções ---------- */
+
+  section { padding-block: 52px; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: 0; }
+
+  h2 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(1.45rem, 4vw, 1.95rem);
+    line-height: 1.16;
+    letter-spacing: -.016em;
+    margin: 0 0 6px;
+    text-wrap: balance;
+  }
+  .sub {
+    color: var(--muted);
+    margin: 0 0 30px;
+    max-width: 62ch;
+  }
+  h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin: 0 0 6px;
+  }
+  p { max-width: 68ch; }
+  a { color: var(--flow); }
+
+  code {
+    font-family: var(--mono);
+    font-size: .88em;
+    background: var(--flow-dim);
+    color: var(--ink);
+    padding: .1em .38em;
+    border-radius: 3px;
+  }
+
+  /* ---------- esquema ---------- */
+
+  .schematic {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 24px 20px 18px;
+    overflow-x: auto;
+  }
+  .schematic svg { display: block; min-width: 520px; margin-inline: auto; }
+  .schematic figcaption {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    line-height: 1.6;
+    min-width: 0;
+  }
+  figure { margin: 0; }
+
+  .note-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 20px;
+    margin-top: 28px;
+  }
+  .note-row h3 { color: var(--flow); }
+  .note-row p { margin: 0; font-size: .94rem; color: var(--muted); }
+
+  /* ---------- tabela ---------- */
+
+  .table-scroll { overflow-x: auto; margin-block: 26px; }
+  table { border-collapse: collapse; width: 100%; min-width: 460px; font-size: .94rem; }
+  th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  thead th {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    border-bottom-width: 2px;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  .verdict { font-weight: 600; white-space: nowrap; }
+  .yes { color: var(--safe); }
+  .no  { color: var(--trap); }
+
+  /* ---------- regras do overlay ---------- */
+
+  .rules { display: grid; gap: 2px; background: var(--line); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+  .rule { background: var(--surface); padding: 20px; display: grid; grid-template-columns: 34px 1fr; gap: 16px; align-items: start; }
+  .rule .n {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--flow);
+    padding-top: 2px;
+    font-variant-numeric: tabular-nums;
+  }
+  .rule p { margin: 0; font-size: .95rem; color: var(--muted); }
+  .rule p + p { margin-top: 8px; }
+
+  .quote {
+    border-left: 3px solid var(--flow);
+    background: var(--flow-dim);
+    padding: 18px 20px;
+    margin: 0 0 28px;
+    border-radius: 0 4px 4px 0;
+  }
+  .quote p { margin: 0; font-size: 1.02rem; max-width: 60ch; }
+  .quote p + p { margin-top: 6px; }
+
+  /* ---------- fases ---------- */
+
+  .phases { display: grid; gap: 0; margin-top: 8px; }
+  .phase {
+    display: grid;
+    grid-template-columns: 58px 1fr;
+    gap: 20px;
+    padding-block: 22px;
+    border-bottom: 1px solid var(--line);
+  }
+  .phase:last-child { border-bottom: 0; }
+  .phase .idx {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--flow);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.2;
+  }
+  .phase p { margin: 0; color: var(--muted); font-size: .95rem; }
+  .phase .gate {
+    display: inline-block;
+    margin-top: 10px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: .04em;
+    color: var(--safe);
+    background: var(--safe-dim);
+    border-radius: 3px;
+    padding: 3px 8px;
+  }
+
+  /* ---------- armadilhas ---------- */
+
+  .traps { display: grid; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr)); gap: 16px; }
+  .trap {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--trap);
+    border-radius: 0 4px 4px 0;
+    padding: 18px 18px 16px;
+  }
+  .trap h3 { color: var(--trap); font-size: .98rem; line-height: 1.35; }
+  .trap p { margin: 8px 0 0; font-size: .91rem; color: var(--muted); max-width: none; }
+  .trap .tell {
+    display: block;
+    margin-top: 12px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--ink);
+    background: var(--trap-dim);
+    border-radius: 3px;
+    padding: 7px 9px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  /* ---------- checklist ---------- */
+
+  .checks { list-style: none; padding: 0; margin: 0; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+  .checks li {
+    background: var(--surface);
+    padding: 13px 16px 13px 44px;
+    position: relative;
+    font-size: .94rem;
+  }
+  .checks li::before {
+    content: "";
+    position: absolute;
+    left: 16px; top: 16px;
+    width: 14px; height: 14px;
+    border: 1.5px solid var(--muted);
+    border-radius: 3px;
+  }
+  .checks li.key { font-weight: 600; }
+  .checks li.key::before { border-color: var(--safe); background: var(--safe); }
+  .checks li.key::after {
+    content: "";
+    position: absolute;
+    left: 21px; top: 19px;
+    width: 4px; height: 8px;
+    border: solid var(--surface);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  /* ---------- rodapé ---------- */
+
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    padding-block: 34px 44px;
+    font-size: .92rem;
+    color: var(--muted);
+  }
+  footer p { max-width: 62ch; }
+  .files { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-top: 22px; }
+  .file { border: 1px solid var(--line); border-radius: 4px; padding: 14px 16px; background: var(--raised); }
+  .file b { font-family: var(--mono); font-size: 12.5px; font-weight: 500; color: var(--flow); display: block; overflow-wrap: anywhere; }
+  .file span { display: block; margin-top: 5px; font-size: .88rem; }
+
+  @media (max-width: 560px) {
+    .phase { grid-template-columns: 40px 1fr; gap: 14px; }
+    .phase .idx { font-size: 1.2rem; }
+    .rule { grid-template-columns: 26px 1fr; gap: 12px; padding: 16px; }
+  }
+</style>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Material de treinamento · Equipe</p>
+    <h1>Next.js <span class="arrow">→</span> WordPress</h1>
+    <p class="lede">
+      Como dar um painel de conteúdo ao cliente sem abrir mão de um site
+      estático. Escrito a partir de uma integração real, em produção — os
+      números abaixo são os dela.
+    </p>
+    <div class="facts">
+      <div class="fact"><b>172</b><span>imagens migradas</span></div>
+      <div class="fact"><b>33</b><span>posts criados</span></div>
+      <div class="fact"><b>6</b><span>fases</span></div>
+      <div class="fact"><b>12</b><span>armadilhas</span></div>
+      <div class="fact"><b>3–5</b><span>min até o ar</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <h2>O WordPress vira só um painel</h2>
+    <p class="sub">
+      Ele não serve nenhuma página ao público. O Next.js lê o conteúdo durante
+      o build e publica HTML estático. Quando o cliente clica em “Publicar”,
+      um webhook dispara um novo build.
+    </p>
+
+    <figure class="schematic">
+      <svg viewBox="0 0 700 260" role="img" aria-label="O WordPress alimenta o build do Next.js pela REST API e dispara o deploy por webhook; o resultado vai por FTP para a hospedagem estática, que é quem o visitante acessa.">
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--flow)"></path>
+          </marker>
+        </defs>
+
+        <rect x="8" y="30" width="196" height="122" rx="4" fill="var(--raised)" stroke="var(--line)"></rect>
+        <text x="20" y="22" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--muted)">admin.dominio</text>
+        <text x="20" y="56" font-family="Archivo, sans-serif" font-size="15" font-weight="600" fill="var(--ink)">WordPress</text>
+        <text x="20" y="80" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="var(--muted)">plugin headless</text>
+        <text x="20" y="100" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="var(--muted)">CPTs + campos ACF</text>
+        <text x="20" y="120" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="var(--muted)">plugin deploy-trigger</text>
+        <text x="20" y="140" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="var(--muted)">frontend fechado</text>
+
+        <rect x="252" y="30" width="196" height="122" rx="4" fill="var(--raised)" stroke="var(--line)"></rect>
+        <text x="264" y="22" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--muted)">GitHub Actions</text>
+        <text x="264" y="56" font-family="Archivo, sans-serif" font-size="15" font-weight="600" fill="var(--ink)">Build do Next</text>
+        <text x="264" y="80" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="var(--muted)">wordpress.ts — busca</text>
+        <text x="264" y="100" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="var(--muted)">content.ts — overlay</text>
+        <text x="264" y="120" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="var(--muted)">data/*.ts — padrões</text>
+        <text x="264" y="140" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="var(--muted)">output: export</text>
+
+        <rect x="496" y="30" width="196" height="122" rx="4" fill="var(--raised)" stroke="var(--line)"></rect>
+        <text x="508" y="22" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--muted)">dominio.com.br</text>
+        <text x="508" y="56" font-family="Archivo, sans-serif" font-size="15" font-weight="600" fill="var(--ink)">HTML estático</text>
+        <text x="508" y="80" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="var(--muted)">sem PHP</text>
+        <text x="508" y="100" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="var(--muted)">sem banco de dados</text>
+        <text x="508" y="120" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="var(--muted)">é o que o visitante vê</text>
+
+        <line x1="206" y1="74" x2="246" y2="74" stroke="var(--flow)" stroke-width="1.5" marker-end="url(#ah)"></line>
+        <text x="209" y="66" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--flow)">REST</text>
+
+        <line x1="206" y1="116" x2="246" y2="116" stroke="var(--flow)" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#ah)"></line>
+        <text x="203" y="134" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--flow)">webhook</text>
+
+        <line x1="450" y1="91" x2="490" y2="91" stroke="var(--flow)" stroke-width="1.5" marker-end="url(#ah)"></line>
+        <text x="456" y="83" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--flow)">FTP</text>
+
+        <line x1="8" y1="196" x2="692" y2="196" stroke="var(--line)" stroke-width="1"></line>
+        <text x="8" y="220" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--muted)">tudo acima acontece no build — nunca no navegador do visitante</text>
+        <text x="8" y="242" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--trap)">se o WordPress cair, o site continua no ar. o que para é publicar.</text>
+      </svg>
+      <figcaption>
+        Como a API só é consultada durante o build, CORS não participa desta
+        integração — é restrição de navegador, e não há navegador envolvido.
+      </figcaption>
+    </figure>
+
+    <div class="note-row">
+      <div>
+        <h3>Sem servidor em produção</h3>
+        <p>Nada de PHP nem banco de dados na frente do visitante. A superfície de ataque do site publicado é a de uma pasta de arquivos.</p>
+      </div>
+      <div>
+        <h3>O WordPress mora onde quiser</h3>
+        <p>Outro servidor, outro provedor, outro domínio. Ele só precisa responder HTTP no momento do build.</p>
+      </div>
+      <div>
+        <h3>Queda não derruba o site</h3>
+        <p>Se a API não responde, o build falha e nada é publicado. O site no ar fica exatamente como estava.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>A decisão que vem primeiro</h2>
+    <p class="sub">
+      Antes de escrever uma linha, decida o que vai para o WordPress. É a
+      decisão mais cara de reverter — e a que mais gente erra, porque a
+      tentação é mandar tudo.
+    </p>
+
+    <p>
+      Conteúdo muito estruturado — tabelas técnicas, variantes de cor, flags de
+      layout — vira repeater dentro de repeater no ACF. O resultado é uma
+      interface <strong>pior que editar o arquivo TypeScript</strong>, que o
+      cliente não entende e quebra sem perceber.
+    </p>
+    <p>
+      O critério não é “dá para fazer”. É <strong>com que frequência
+      muda</strong>.
+    </p>
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Muda</th><th>Exemplos</th><th>Vai para o WordPress?</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Toda semana</td><td>galeria de trabalhos, novidades</td><td class="verdict yes">sim</td></tr>
+          <tr><td>Todo mês</td><td>equipe, textos de seção</td><td class="verdict yes">sim</td></tr>
+          <tr><td>Raro, mas urgente</td><td>telefone, WhatsApp, horário</td><td class="verdict yes">sim, é barato</td></tr>
+          <tr><td>Uma vez por ano</td><td>tabelas técnicas de fabricante</td><td class="verdict no">não</td></tr>
+          <tr><td>Quase nunca</td><td>ordem das seções, âncoras, layout</td><td class="verdict no">não</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      A pergunta que resolve os casos duvidosos: <strong>se o cliente preencher
+      isso errado, o site fica feio ou quebra?</strong> Se quebra, fica no
+      código.
+    </p>
+  </section>
+
+  <section>
+    <h2>O padrão de overlay</h2>
+    <p class="sub">
+      É o conceito central. Sem ele, “migrar para o WordPress” vira um salto
+      sem rede.
+    </p>
+
+    <blockquote class="quote">
+      <p><code>src/data/*.ts</code> define <strong>estrutura e valores padrão</strong>.</p>
+      <p>O WordPress fornece <strong>override</strong> apenas dos campos editáveis.</p>
+      <p>O casamento é por um <code>id</code> estável.</p>
+    </blockquote>
+
+    <div class="rules">
+      <div class="rule">
+        <div class="n">01</div>
+        <div>
+          <h3>Falha de rede quebra o build. De propósito.</h3>
+          <p>
+            Nunca devolva lista vazia quando a API falhar. Em site estático, um
+            build que passa com dados vazios <strong>publica páginas vazias e
+            apaga o conteúdo do ar</strong>. Build quebrado se resolve em
+            minutos; deploy vazio, não.
+          </p>
+          <p>
+            Não é teórico: durante esta implantação o WordPress ficou
+            inalcançável por três minutos no meio de um deploy real. O build
+            abortou, o deploy não aconteceu, o site ficou intacto.
+          </p>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="n">02</div>
+        <div>
+          <h3>Campo vazio usa o padrão do código.</h3>
+          <p>
+            Diferente de falha. É o que permite migrar uma seção por vez sem que
+            as outras sumam, e o que protege o site quando alguém esvazia um
+            campo por engano.
+          </p>
+          <p>
+            Diga ao cliente com estas palavras: <em>apagar o texto no painel não
+            apaga do site — volta o texto original</em>.
+          </p>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="n">03</div>
+        <div>
+          <h3>Todo item editável precisa de um <code>id</code> estável.</h3>
+          <p>
+            E obrigatório no TypeScript, não opcional — assim o compilador acusa
+            qualquer item que você esqueceu. Ao ligar 17 cards ao painel, foi o
+            que garantiu que nenhum ficasse de fora. Um card esquecido cairia no
+            texto padrão para sempre, em silêncio.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>As seis fases</h2>
+    <p class="sub">
+      A ordem não é sugestão. Faça o WordPress inteiro antes de tocar no
+      Next.js — sem CPTs e ACF prontos, o build falha e você perde horas
+      diagnosticando o lado errado.
+    </p>
+
+    <div class="phases">
+      <div class="phase">
+        <div class="idx">0</div>
+        <div>
+          <h3>Pré-requisitos</h3>
+          <p>
+            Domínio, hospedagem, credenciais de deploy, licença ACF PRO
+            (Repeater e Gallery são pagos) e — principalmente — <strong>quais
+            pastas do servidor não podem ser apagadas</strong>.
+          </p>
+          <span class="gate">Confira se o domínio de SEO no código é o real, e não um placeholder</span>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="idx">1</div>
+        <div>
+          <h3>WordPress</h3>
+          <p>
+            Subdomínio dedicado, permalinks “bonitos”, CPTs registrados
+            <strong>em código</strong> num mu-plugin, grupos ACF exportados como
+            JSON e versionados. Marque <em>Show in REST</em> em todo grupo.
+          </p>
+          <span class="gate">Cada endpoint responde JSON no navegador antes de seguir</span>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="idx">2</div>
+        <div>
+          <h3>Camada de dados</h3>
+          <p>
+            Dois arquivos com papéis separados: um fala com a API, o outro
+            decide o que sobrescreve o quê. User-Agent próprio, retentativas
+            com espera crescente, nenhuma opção de cache no fetch.
+          </p>
+          <span class="gate">Origem das imagens sai de variável de ambiente, não fixa no código</span>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="idx">3</div>
+        <div>
+          <h3>Seed</h3>
+          <p>
+            Script que lê os arquivos de dados e cria tudo via REST. Idempotente,
+            com pausa entre uploads e um modo de simulação. Aqui foram 172
+            imagens e 33 posts em seis minutos — à mão seria um dia.
+          </p>
+          <span class="gate">Rodar duas vezes não duplica nada</span>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="idx">4</div>
+        <div>
+          <h3>Componentes</h3>
+          <p>
+            Um por vez, do menos arriscado ao mais: galeria, equipe, contatos,
+            cards, home. Componente de cliente não busca no build — recebe por
+            prop de um componente de servidor.
+          </p>
+          <span class="gate">Cada etapa é um commit que passa no build sozinho</span>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="idx">5</div>
+        <div>
+          <h3>Deploy</h3>
+          <p>
+            Workflow com fila de concorrência, timeout alto e lista de exclusão
+            completa — a action <strong>apaga do servidor o que não existe no
+            build</strong>.
+          </p>
+          <span class="gate">Primeira execução em simulação, e o log precisa dizer “Deleting: 0 B”</span>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="idx">6</div>
+        <div>
+          <h3>Validação</h3>
+          <p>
+            Não confie no build passar. Se o valor no WordPress é igual ao
+            padrão do código, um build verde não prova nada — pode estar lendo
+            do código o tempo todo.
+          </p>
+          <span class="gate">Altere no admin, rebuilde, confira o HTML gerado</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Armadilhas</h2>
+    <p class="sub">
+      Ler antes de “melhorar” qualquer coisa. Cada uma custou horas, e as três
+      primeiras enganam porque não produzem erro nenhum.
+    </p>
+
+    <div class="traps">
+      <article class="trap">
+        <h3>O cache de fetch do Next publica conteúdo velho</h3>
+        <p>
+          O diretório de cache guarda as respostas do WordPress <em>entre
+          builds</em>. O build roda, reporta sucesso e gera o site com o
+          conteúdo anterior. No CI o diretório nasce vazio, então produção
+          escapa por acidente — até alguém cachear <code>.next/</code> para
+          “acelerar o build”.
+        </p>
+        <span class="tell">Sintoma: build verde, site desatualizado<br>Correção: apagar o cache num script prebuild</span>
+      </article>
+
+      <article class="trap">
+        <h3>Retentativas brigam com o timeout de página</h3>
+        <p>
+          A escada de espera soma cerca de 52 segundos, mas o Next mata a
+          geração de cada página aos 60 e recomeça. A última retentativa — a
+          mais importante, porque é a que atravessa o bloqueio — nunca chega ao
+          fim.
+        </p>
+        <span class="tell">Aumente staticPageGenerationTimeout.<br>Não encurte a espera: ela é o mecanismo.</span>
+      </article>
+
+      <article class="trap">
+        <h3>403 no webhook quase nunca é o token</h3>
+        <p>
+          O plugin de deploy vem com o repositório do projeto anterior como
+          valor padrão. Com um token restrito ao repositório novo, o disparo vai
+          para o lugar errado e o GitHub devolve um erro que parece de
+          credencial.
+        </p>
+        <span class="tell">Teste o mesmo token nos dois repositórios antes de regerar nada</span>
+      </article>
+
+      <article class="trap">
+        <h3>A conta de FTP cai no home, não na raiz do site</h3>
+        <p>
+          Apontar o deploy para a barra faz a action apagar as pastas de
+          e-mail, de certificados e de logs da hospedagem — do cliente, não
+          suas.
+        </p>
+        <span class="tell">Confira o diretório de destino antes do primeiro deploy automático</span>
+      </article>
+
+      <article class="trap">
+        <h3><code>.well-known/</code> precisa estar na exclusão</h3>
+        <p>
+          É onde o Let's Encrypt valida a renovação do certificado. Apagar
+          derruba o HTTPS algumas semanas depois — muito tempo depois de você
+          ter esquecido do deploy.
+        </p>
+        <span class="tell">A falha chega tarde demais para ser associada à causa</span>
+      </article>
+
+      <article class="trap">
+        <h3>Campo obrigatório no ACF bloqueia update parcial</h3>
+        <p>
+          Um POST com um campo só é rejeitado exigindo todos os obrigatórios do
+          grupo. O admin não sofre porque envia o formulário inteiro; quem
+          quebra é script de seed e automação.
+        </p>
+        <span class="tell">400 rest_invalid_param — a mensagem nomeia o campo</span>
+      </article>
+
+      <article class="trap">
+        <h3>Repeater vazio volta como <code>false</code></h3>
+        <p>
+          Não como lista vazia. Normalize antes de iterar, ou o primeiro
+          <code>.map()</code> derruba o build na primeira seção que o cliente
+          ainda não preencheu.
+        </p>
+        <span class="tell">Aparece só quando alguém esvazia um campo — nunca no seu teste</span>
+      </article>
+
+      <article class="trap">
+        <h3>Certificado FTPS não cobre o domínio do cliente</h3>
+        <p>
+          Em hospedagem compartilhada o certificado é do provedor. Conectar
+          pelo domínio do cliente ou pelo IP falha na validação. O nome
+          utilizável está no painel da hospedagem.
+        </p>
+        <span class="tell">Sem ele: FTP em texto puro ou nada. Decida e registre no workflow.</span>
+      </article>
+
+      <article class="trap">
+        <h3>Um salvamento dispara vários hooks</h3>
+        <p>
+          O editor de blocos salva mais de uma vez, e um post publicado aciona
+          dois hooks diferentes. Sem debounce no plugin, uma edição vira quatro
+          deploys concorrentes.
+        </p>
+        <span class="tell">Que então se derrubam no FTP, um ao outro</span>
+      </article>
+
+      <article class="trap">
+        <h3>Ordenar por <code>menu_order</code> exige suporte declarado</h3>
+        <p>
+          O CPT precisa declarar <code>page-attributes</code>. Sem isso a REST
+          API rejeita o parâmetro e o build cai — mas só nos tipos que o site
+          ordena.
+        </p>
+        <span class="tell">400 em orderby=menu_order</span>
+      </article>
+
+      <article class="trap">
+        <h3><code>cache: "no-store"</code> gera páginas 404</h3>
+        <p>
+          Com export estático, o Next entende que a rota é dinâmica e não
+          consegue pré-renderizar. Sem opções de cache, o fetch roda uma vez no
+          build — que é exatamente o desejado.
+        </p>
+        <span class="tell">A correção parece uma regressão, mas é o comportamento correto</span>
+      </article>
+
+      <article class="trap">
+        <h3>O WordPress devolve entidades HTML</h3>
+        <p>
+          Títulos chegam com aspas curvas e traços codificados. Decodifique todo
+          texto que não for renderizado como HTML, ou eles aparecem crus na
+          página.
+        </p>
+        <span class="tell">&amp;#8220; no lugar das aspas</span>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2>Antes de entregar</h2>
+    <p class="sub">
+      As três marcadas são as que provam a integração. O resto confirma que
+      nada quebrou no caminho.
+    </p>
+
+    <ul class="checks">
+      <li class="key">Alterar um valor no admin muda o HTML gerado</li>
+      <li class="key">Build apontado para host inexistente falha, em vez de publicar vazio</li>
+      <li class="key">Deploy em simulação reporta <code>Deleting: 0 B</code></li>
+      <li>A chave <code>acf</code> vem com a forma que o TypeScript espera</li>
+      <li><code>orderby=menu_order</code> responde 200 nos CPTs ordenados</li>
+      <li>Um trecho real do conteúdo aparece no HTML gerado</li>
+      <li>O que existe no servidor e não vem do build está na lista de exclusão</li>
+      <li>Publicar no WordPress dispara o workflow sozinho</li>
+      <li>A mudança aparece no site em 3 a 5 minutos</li>
+      <li>Pastas externas continuam no servidor depois do deploy</li>
+      <li>Cache do servidor limpo e testado em aba anônima</li>
+      <li>Senha de FTP e token trocados ao entregar o painel</li>
+      <li>Cliente avisado: renomear página é seguro, excluir e recriar quebra</li>
+    </ul>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>
+      Este é o resumo visual. O passo a passo, o código e o detalhe de cada
+      armadilha estão no README, e as duas skills automatizam a execução e o
+      diagnóstico.
+    </p>
+    <div class="files">
+      <div class="file">
+        <b>README.md</b>
+        <span>O guia completo: fases, código e checklist</span>
+      </div>
+      <div class="file">
+        <b>skills/nextjs-wp-integracao</b>
+        <span>Executar a integração num projeto novo</span>
+      </div>
+      <div class="file">
+        <b>skills/nextjs-wp-diagnostico</b>
+        <span>Ir do sintoma à causa quando algo quebra</span>
+      </div>
+    </div>
+  </div>
+</footer>
