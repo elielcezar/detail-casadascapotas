@@ -120,17 +120,34 @@ async function uploadImage(src: string, alt: string): Promise<number> {
   return created.id;
 }
 
-/** Cria um post do CPT se ainda não existir um com o mesmo título. */
+/**
+ * Cria o post se ainda não existir, ou atualiza o que existe.
+ *
+ * `matchAcf` é o nome de um campo ACF que identifica o post de forma
+ * estável. Use-o sempre que o título for editável no admin: procurar pelo
+ * título faria um card renomeado pelo cliente virar um post duplicado na
+ * próxima execução.
+ */
 async function ensurePost(
   type: string,
   title: string,
   acf: Record<string, unknown>,
-  menuOrder?: number
+  menuOrder?: number,
+  matchAcf?: string
 ): Promise<number> {
-  const found = await wp(`/${type}?per_page=100&_fields=id,title&search=${encodeURIComponent(title)}`);
-  const hit = Array.isArray(found)
-    ? found.find((p: any) => p.title.rendered.trim() === title.trim())
-    : null;
+  let hit: any = null;
+
+  if (matchAcf) {
+    const todos = await wp(`/${type}?per_page=100&acf_format=standard&_fields=id,acf`);
+    hit = Array.isArray(todos)
+      ? todos.find((p: any) => p.acf?.[matchAcf] === acf[matchAcf])
+      : null;
+  } else {
+    const found = await wp(`/${type}?per_page=100&_fields=id,title&search=${encodeURIComponent(title)}`);
+    hit = Array.isArray(found)
+      ? found.find((p: any) => p.title.rendered.trim() === title.trim())
+      : null;
+  }
 
   const body: Record<string, unknown> = { title, status: "publish", acf };
   if (menuOrder !== undefined) body.menu_order = menuOrder;
@@ -186,6 +203,7 @@ async function seedCards() {
   for (const card of cards) {
     await ensurePost("card_catalogo", card.title, {
       id_card: card.id,
+      subtitulo: card.subtitle ?? "",
       descricao: card.description ?? "",
       beneficios: (card.benefits ?? []).map((item) => ({ item })),
       // Os cards de limpeza guardam todo o conteúdo em `groups`, não em
@@ -195,8 +213,9 @@ async function seedCards() {
         itens: (g.items ?? []).join("\n"),
       })),
       nota: card.note ?? "",
+      cta_label: card.cta?.label ?? "",
       mensagem_cta: card.cta?.message ?? "",
-    });
+    }, undefined, "id_card");
   }
 }
 

@@ -150,8 +150,9 @@ export async function overlayCatalog(sections: CatalogSection[]): Promise<Catalo
   return sections.map((section) => ({
     ...section,
     cards: section.cards.map((card) => {
-      const wp = byId.get(card.id);
-      if (!wp) return card;
+      const post = byId.get(card.id);
+      if (!post) return card;
+      const wp = post.acf;
 
       const beneficios = (Array.isArray(wp.beneficios) ? wp.beneficios : [])
         .map((linha) => linha?.item?.trim())
@@ -164,14 +165,24 @@ export async function overlayCatalog(sections: CatalogSection[]): Promise<Catalo
         .map((g) => ({ title: g?.titulo?.trim() ?? "", items: linesToList(g?.itens) }))
         .filter((g) => g.title.length > 0 && g.items.length > 0);
 
+      // O nome do card é o título do post — é o campo que o cliente edita no
+      // topo da tela, e o que ele espera ver mudar no site.
+      const titulo = stripHtml(post.title.rendered);
+
       return {
         ...card,
+        title: titulo || card.title,
+        subtitle: wp.subtitulo?.trim() || card.subtitle,
         description: wp.descricao?.trim() || card.description,
         benefits: beneficios.length > 0 ? beneficios : card.benefits,
         groups: grupos.length > 0 ? grupos : card.groups,
         note: wp.nota?.trim() || card.note,
         cta: card.cta
-          ? { ...card.cta, message: wp.mensagem_cta?.trim() || card.cta.message }
+          ? {
+              ...card.cta,
+              label: wp.cta_label?.trim() || card.cta.label,
+              message: wp.mensagem_cta?.trim() || card.cta.message,
+            }
           : card.cta,
       };
     }),

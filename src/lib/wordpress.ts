@@ -245,13 +245,17 @@ export async function getTeamMembers(): Promise<WordPressTeamMember[]> {
  */
 export interface WordPressCatalogCard {
   id: number;
+  /** Título do post — é o nome do card que o cliente vê e edita no admin. */
+  title: { rendered: string };
   acf: {
     id_card: string;
+    subtitulo: string;
     descricao: string;
     beneficios: { item: string }[];
     /** Listas com titulo proprio; `itens` vem com um por linha. */
     grupos: { titulo: string; itens: string }[];
     nota: string;
+    cta_label: string;
     mensagem_cta: string;
   };
 }
@@ -261,11 +265,16 @@ export async function getCatalogCards(): Promise<WordPressCatalogCard[]> {
   return res.json();
 }
 
-/** Indexa os cards por `id_card`, que é como o overlay os procura. */
+/**
+ * Indexa os cards por `id_card`, que é como o overlay os procura.
+ *
+ * Devolve o post inteiro, não só o `acf`: o nome do card é o título do
+ * post, e o cliente edita por ali.
+ */
 export function indexCatalogCards(
   cards: WordPressCatalogCard[]
-): Map<string, WordPressCatalogCard["acf"]> {
-  return new Map(cards.map((card) => [card.acf.id_card, card.acf]));
+): Map<string, WordPressCatalogCard> {
+  return new Map(cards.map((card) => [card.acf.id_card, card]));
 }
 
 /* -------------------------------------------------------------------------

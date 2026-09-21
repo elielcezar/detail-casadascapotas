@@ -160,6 +160,25 @@
         "append": ""
       },
       {
+        "key": "field_detail_card_subtitulo",
+        "label": "Subtítulo",
+        "name": "subtitulo",
+        "type": "text",
+        "instructions": "Linha menor abaixo do nome do card. Ex.: Linha de Entrada. O nome do card e o titulo la em cima, nao um campo aqui.",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
         "key": "field_detail_card_descricao",
         "label": "Descrição",
         "name": "descricao",
@@ -302,6 +321,25 @@
         "new_lines": ""
       },
       {
+        "key": "field_detail_card_cta_label",
+        "label": "Texto do botão",
+        "name": "cta_label",
+        "type": "text",
+        "instructions": "O que aparece escrito no botao. Se voce renomear o card acima, lembre de ajustar aqui tambem.",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "Ex.: Agendar Limpeza Clássica",
+        "prepend": "",
+        "append": ""
+      },
+      {
         "key": "field_detail_card_mensagem_cta",
         "label": "Mensagem do WhatsApp",
         "name": "mensagem_cta",
@@ -310,7 +348,7 @@
         "required": 0,
         "conditional_logic": 0,
         "wrapper": {
-          "width": "",
+          "width": "50",
           "class": "",
           "id": ""
         },
