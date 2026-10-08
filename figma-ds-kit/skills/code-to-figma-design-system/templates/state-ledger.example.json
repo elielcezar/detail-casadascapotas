@@ -1,0 +1,29 @@
+{
+ "fileKey": "xTm2yfF5CJtA2iIigP4yBl",
+ "step": "phase3/components",
+ "pages": { "Cover": "0:1", "Case": "44:56", "Foundations": "1:2", "Components": "1:3", "Screens": "1:4" },
+ "collections": {
+  "Primitives": "VariableCollectionId:3:2",
+  "Semantic": "VariableCollectionId:5:24",
+  "Spacing": "VariableCollectionId:5:63",
+  "Radius": "VariableCollectionId:5:86",
+  "Responsive": "VariableCollectionId:5:92"
+ },
+ "modes": { "Responsive/Desktop": "5:3", "Responsive/Mobile": "5:4" },
+ "docsRoot": "7:2",
+ "sections": { "Icons": "11:2", "Button": "12:4", "Atoms": "15:6", "Assets": "16:102", "Cards": "17:23", "Blocks": "22:297" },
+ "icons": { "Check": "11:13", "ChevronLeft": "11:16", "WhatsApp": "11:103" },
+ "componentSets": {
+  "Button": { "id": "12:29", "props": { "Label": "Label#12:0", "Show icon": "Show icon#12:7", "Icon": "Icon#12:14" } },
+  "SectionTitle": "13:63",
+  "Header": "22:383"
+ },
+ "images": { "logo.png": "4f2b36d777040d653442793dad2b8d9357f5e417" },
+ "screens": { "Home — Desktop 1440": "33:3", "Home — Mobile 390": "41:932" },
+ "reference": { "homeDesktopCapture": "27:2" },
+ "notes": [
+  "use_figma com erro = rollback total",
+  "tokens extras criados na Fase 3: space/6,7,14,16,35,45; button/padding-*"
+ ],
+ "completed": ["phase0", "phase1", "phase2/variables", "phase2/styles", "phase2/docs"]
+}
